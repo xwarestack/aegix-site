@@ -38,7 +38,7 @@
 
 		<style>
 			:root {
-				--ink: #04060a;
+				--ink: #010101;
 				--fg: #eef2f7;
 				--muted-fg: #9fabba;
 				--subtle-fg: #76818f;
@@ -86,18 +86,14 @@
 				position: absolute;
 				left: 50%;
 				top: 100%;
-				transform: translate(calc(-50% + 3vw), -58%);
-				width: 118vw;
+				transform: translate(calc(-50% + 1.9vw), -75%);
+				width: 76vw;
 				max-width: none;
 				pointer-events: none;
-				/* The frame's own black is not quite the page's, so any edge of it draws
-				   a seam. Fade all three that can show. */
-				-webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%),
-					linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-				-webkit-mask-composite: source-in;
-				mask-image: linear-gradient(180deg, transparent 0%, #000 20%),
-					linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-				mask-composite: intersect;
+				/* Only the top needs fading now: the page and the photograph share one
+				   black, so the frame's other edges cannot be seen. */
+				-webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%);
+				mask-image: linear-gradient(180deg, transparent 0%, #000 16%);
 			}
 
 			/* Soft darkening where the horizon meets the copy, and again at the very
@@ -109,18 +105,37 @@
 				inset: 0;
 				background: linear-gradient(
 					180deg,
-					rgb(4 6 10 / 0.5) 0%,
-					rgb(4 6 10 / 0.25) 45%,
-					rgb(4 6 10 / 0) 70%,
-					rgb(4 6 10 / 0.55) 92%,
-					rgb(4 6 10 / 0.78) 100%
+					rgb(1 1 1 / 0.45) 0%,
+					rgb(1 1 1 / 0.2) 45%,
+					rgb(1 1 1 / 0) 70%,
+					rgb(1 1 1 / 0.5) 92%,
+					rgb(1 1 1 / 0.75) 100%
 				);
 			}
 
 			@media (max-width: 61.99rem) {
 				.sky img {
-					width: 260vw;
-					transform: translate(calc(-50% + 6.6vw), -48%);
+					width: 150vw;
+					transform: translate(calc(-50% + 3.8vw), -74%);
+				}
+			}
+
+			/* A landscape phone has no room for a planet below the copy, so it drops
+			   almost entirely under the fold and the scrim goes up. Left alone, the
+			   lit limb ran straight through the tagline. */
+			@media (max-height: 34rem) {
+				.sky img {
+					width: 85vw;
+					transform: translate(calc(-50% + 2.1vw), -40%);
+				}
+
+				.sky::after {
+					background: linear-gradient(
+						180deg,
+						rgb(1 1 1 / 0.78) 0%,
+						rgb(1 1 1 / 0.55) 55%,
+						rgb(1 1 1 / 0.7) 100%
+					);
 				}
 			}
 
