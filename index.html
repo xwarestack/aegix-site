@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Aegix</title>
+		<meta
+			name="description"
+			content="Aegix is FMEA software built on the AIAG-VDA method — the failure chain end to end, prioritised by Action Priority."
+		/>
+		<meta name="robots" content="noindex" />
+		<meta name="color-scheme" content="dark" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Aegix" />
+		<meta property="og:site_name" content="Aegix" />
+		<meta
+			property="og:description"
+			content="FMEA software built on the AIAG-VDA method."
+		/>
+		<meta property="og:url" content="https://aegix.eu/" />
+		<meta property="og:image" content="https://aegix.eu/hero-earth.jpg" />
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preload" as="image" href="hero-earth.jpg" fetchpriority="high" />
+
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230052CC'/%3E%3Ctext x='16' y='23' font-family='Segoe UI,Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E"
+		/>
+
+		<style>
+			:root {
+				--ink: #04060a;
+				--fg: #eef2f7;
+				--muted-fg: #9fabba;
+				--subtle-fg: #76818f;
+				--border-faint: #1b232c;
+				--brand: #4c9aff;
+				--brand-hover: #7ab4ff;
+				--brand-ink: #06101f;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				-webkit-text-size-adjust: 100%;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				background: var(--ink);
+				color: var(--fg);
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					'Helvetica Neue', Arial, sans-serif;
+				font-size: 16px;
+				line-height: 1.6;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			/* ── The photograph ───────────────────────────────────────────
+			   Earth sits right of centre so the left half stays the near-black
+			   it already is in the frame; the scrim only guarantees it at
+			   narrow widths, where cover crops the subject toward the text. */
+			.sky {
+				position: fixed;
+				inset: 0;
+				z-index: -1;
+				overflow: hidden;
+				background-color: var(--ink);
+			}
+
+			.sky img {
+				position: absolute;
+				left: 50%;
+				top: 100%;
+				transform: translate(calc(-50% + 3vw), -58%);
+				width: 118vw;
+				max-width: none;
+				pointer-events: none;
+				/* The frame's own black is not quite the page's, so any edge of it draws
+				   a seam. Fade all three that can show. */
+				-webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%),
+					linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+				-webkit-mask-composite: source-in;
+				mask-image: linear-gradient(180deg, transparent 0%, #000 20%),
+					linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+				mask-composite: intersect;
+			}
+
+			/* Soft darkening where the horizon meets the copy, and again at the very
+			   bottom: the lit limb runs straight through the footer at wide sizes and
+			   swallowed the address. */
+			.sky::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					180deg,
+					rgb(4 6 10 / 0.5) 0%,
+					rgb(4 6 10 / 0.25) 45%,
+					rgb(4 6 10 / 0) 70%,
+					rgb(4 6 10 / 0.55) 92%,
+					rgb(4 6 10 / 0.78) 100%
+				);
+			}
+
+			@media (max-width: 61.99rem) {
+				.sky img {
+					width: 260vw;
+					transform: translate(calc(-50% + 6.6vw), -48%);
+				}
+			}
+
+			.shell {
+				width: 100%;
+				max-width: 68rem;
+				margin: 0 auto;
+				padding: 0 16px;
+			}
+
+			/* ── Hero ─────────────────────────────────────────────────── */
+			main {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				padding: 64px 0;
+			}
+
+			.hero {
+				max-width: 44rem;
+				margin: 0 auto;
+				text-align: center;
+			}
+
+			/* Caps earn their place on one line only: the name, spaced out. */
+			.eyebrow {
+				margin: 0 0 22px;
+				font-size: 12px;
+				font-weight: 700;
+				letter-spacing: 0.22em;
+				text-transform: uppercase;
+				color: var(--brand);
+			}
+
+			h1 {
+				margin: 0;
+				font-size: clamp(2.3rem, 1.3rem + 4vw, 4rem);
+				line-height: 1.04;
+				font-weight: 700;
+				letter-spacing: -0.038em;
+				text-wrap: balance;
+			}
+
+			h1 em {
+				font-style: normal;
+				color: var(--brand);
+			}
+
+			.claim {
+				margin: 22px auto 0;
+				font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
+				line-height: 1.4;
+				font-weight: 600;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--muted-fg);
+			}
+
+			.actions {
+				margin-top: 38px;
+			}
+
+			.btn {
+				display: inline-flex;
+				align-items: center;
+				height: 44px;
+				padding: 0 20px;
+				border-radius: 8px;
+				font-size: 15px;
+				font-weight: 600;
+				text-decoration: none;
+				background: var(--brand);
+				color: var(--brand-ink);
+				transition: background-color 0.15s ease;
+			}
+
+			.btn:hover {
+				background: var(--brand-hover);
+			}
+
+			a:focus-visible,
+			.btn:focus-visible {
+				outline: 2px solid var(--brand);
+				outline-offset: 3px;
+			}
+
+			/* ── Footer ───────────────────────────────────────────────── */
+			footer {
+				padding: 18px 0 26px;
+			}
+
+			.foot {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 8px 20px;
+				font-size: 12.5px;
+				color: var(--subtle-fg);
+			}
+
+			.foot-links {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+			}
+
+			footer a {
+				color: var(--muted-fg);
+				text-decoration: none;
+				font-weight: 500;
+			}
+
+			footer a:hover {
+				color: var(--fg);
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="sky" aria-hidden="true">
+			<img src="hero-earth.jpg" alt="" />
+		</div>
+
+		<main>
+			<div class="shell">
+				<div class="hero">
+					<p class="eyebrow">Aegix &middot; FMEA Platform</p>
+
+					<h1>FMEA, powered by AI, <em>validated by engineers</em>.</h1>
+
+					<p class="claim">Faster. Smarter. Consistent.</p>
+
+					<div class="actions">
+						<!-- TODO: point this at a mailbox that exists before going live. -->
+						<a class="btn" href="mailto:hello@aegix.eu">Contact us</a>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer>
+			<div class="shell foot">
+				<span>&copy; 2026 XWARE</span>
+				<span class="foot-links">
+					<a href="https://app.aegix.eu">Sign in</a>
+					<a href="mailto:hello@aegix.eu">hello@aegix.eu</a>
+				</span>
+			</div>
+		</footer>
+	</body>
+</html>
