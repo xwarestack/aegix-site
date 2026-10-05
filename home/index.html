@@ -127,8 +127,6 @@
 			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
 			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: 0.875rem; color: var(--subtle-fg); }
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
-			.shot-lede { margin: 0 auto 12px; max-width: 64ch; text-align: center; font-size: 0.8125rem;
-				font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); }
 
 			/* View switcher. It mirrors the control inside the product, because the
 			   point is that these are three views of one worksheet, not three
@@ -316,7 +314,6 @@
 							<img src="shots/view-all.png" width="2960" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
 						</div>
 					</figure>
-					<p class="shot-cap">Every column the handbook asks for, in one table.</p>
 				</div>
 				<div class="view-panel" id="panel-structure" role="tabpanel" aria-labelledby="tab-structure" hidden>
 					<figure class="frame" style="margin:0">
@@ -328,7 +325,6 @@
 							<img src="shots/view-structure.png" width="4320" height="1215" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
 						</div>
 					</figure>
-					<p class="shot-cap">The reasoning on its own — what fails, where, and why.</p>
 				</div>
 				<div class="view-panel" id="panel-ratings" role="tabpanel" aria-labelledby="tab-ratings" hidden>
 					<figure class="frame" style="margin:0">
@@ -340,9 +336,7 @@
 							<img src="shots/view-ratings.png" width="3040" height="1620" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
 						</div>
 					</figure>
-					<p class="shot-cap">The numbers, next to the reasoning that produced them.</p>
 				</div>
-				<p class="shot-cap" style="margin-top:4px">One worksheet, three ways to read it — the same three views the product gives the engineer.</p>
 			</div>
 		</section>
 
@@ -467,7 +461,7 @@
 						     alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
 					</div>
 				</figure>
-				<p class="shot-cap">The structure behind the worksheet, and what the worksheet points at. The banner says where it came from — <b>generated from three documents, then worked on by engineers</b> — and each function carries its own requirement and failure-mode counts.</p>
+				<p class="shot-cap">The DFMEA structure for the thermal management system, with the selected function’s requirement and failure modes.</p>
 			</div>
 		</section>
 
@@ -494,7 +488,7 @@
 						     alt="The Aegix analytics screen: high Action Priority without an action, overdue actions, safety-critical count and High AP coverage across the top; below them a severity-by-occurrence matrix, the Action Priority distribution, risk by worksheet, and the highest-priority risks listed in order." />
 					</div>
 				</figure>
-				<p class="shot-cap">The questions an audit asks, answered on one screen — including the one that matters most: <b>does every High have an action?</b></p>
+				<p class="shot-cap">Action priority across every worksheet, with high-AP coverage and overdue actions.</p>
 			</div>
 		</section>
 
@@ -577,7 +571,7 @@
 						     alt="The Aegix action list for a project: each action shows whether it is a prevention action or a detection action, the risk it came from, who owns it, its priority, target date and status, with the group header counting open, overdue and high-priority work." />
 					</div>
 				</figure>
-				<p class="shot-cap">Actions carry the risk they came from and what they are for — <b>a prevention action lowers occurrence, a detection action lowers detection</b> — which is what makes a re-rating defensible.</p>
+				<p class="shot-cap">Each action is linked to the risk it came from, and classified as prevention or detection.</p>
 			</div>
 		</section>
 
