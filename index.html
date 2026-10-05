@@ -238,64 +238,46 @@
 				color: var(--fg);
 				text-decoration: underline;
 			}
-			/* Consent notice. Refusing is a button, not a buried link: under the
-			   ePrivacy Directive declining must be as easy as accepting. */
+
+
+			/* A line, not a banner. Both choices are real buttons and weigh the
+			   same: refusing has to be as easy as agreeing. */
 			.consent {
-				position: fixed;
-				left: 16px;
-				right: 16px;
-				bottom: 16px;
-				z-index: 10;
-				margin: 0 auto;
-				max-width: 46rem;
+				margin: -6px auto 18px;
+				padding: 0 16px;
 				display: flex;
 				flex-wrap: wrap;
-				align-items: center;
-				justify-content: space-between;
-				gap: 12px 20px;
-				padding: 14px 16px;
-				border: 1px solid var(--border-faint);
-				border-radius: 10px;
-				background: rgb(14 18 25 / 0.94);
-				font-size: 13.5px;
+				align-items: baseline;
+				justify-content: center;
+				gap: 4px 10px;
+				font-size: 12px;
 				line-height: 1.5;
-				color: var(--muted-fg);
+				color: #5b6673;
 			}
 
 			.consent p {
 				margin: 0;
-				max-width: 48ch;
 			}
 
 			.consent-actions {
 				display: flex;
-				gap: 8px;
+				gap: 10px;
 			}
 
 			.consent button {
 				font: inherit;
 				font-weight: 600;
-				height: 34px;
-				padding: 0 14px;
-				border-radius: 7px;
+				padding: 0;
+				border: 0;
+				background: none;
 				cursor: pointer;
-				border: 1px solid var(--border-faint);
-				background: transparent;
-				color: var(--fg);
+				color: var(--subtle-fg);
+				text-decoration: underline;
+				text-underline-offset: 3px;
 			}
 
 			.consent button:hover {
-				border-color: var(--muted-fg);
-			}
-
-			.consent button.accept {
-				background: var(--brand);
-				border-color: transparent;
-				color: var(--brand-ink);
-			}
-
-			.consent button.accept:hover {
-				background: var(--brand-hover);
+				color: var(--fg);
 			}
 
 		</style>
@@ -332,11 +314,11 @@
 				</span>
 			</div>
 		</footer>
+
+
+
 		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
-			<p>
-				We use Microsoft Clarity to understand how this page is used. Nothing is
-				loaded or stored until you agree.
-			</p>
+			<p>We use analytics to understand how this page is used.</p>
 			<div class="consent-actions">
 				<button type="button" id="consent-decline">Decline</button>
 				<button type="button" id="consent-accept" class="accept">Accept</button>
@@ -344,8 +326,8 @@
 		</div>
 
 		<script>
-			// Clarity is not loaded until it is accepted: no cookie, no request to
-			// Microsoft, nothing recorded. A tag loaded "paused" still calls home.
+			// Nothing is injected until Accept: no cookie, no request, nothing
+			// recorded. A tag loaded "paused" still calls home.
 			(function () {
 				var KEY = 'aegix-analytics-consent';
 				var banner = document.getElementById('consent');
@@ -354,7 +336,7 @@
 					stored = localStorage.getItem(KEY);
 				} catch (e) {}
 
-				function startClarity() {
+				function start() {
 					(function (c, l, a, r, i, t, y) {
 						c[a] =
 							c[a] ||
@@ -376,24 +358,21 @@
 				}
 
 				if (stored === 'granted') {
-					startClarity();
-					return;
+					start();
+				} else if (stored !== 'denied') {
+					banner.hidden = false;
+					document.getElementById('consent-accept').addEventListener('click', function () {
+						remember('granted');
+						banner.hidden = true;
+						start();
+					});
+					document.getElementById('consent-decline').addEventListener('click', function () {
+						remember('denied');
+						banner.hidden = true;
+					});
 				}
-				if (stored === 'denied') {
-					return;
-				}
-
-				banner.hidden = false;
-				document.getElementById('consent-accept').addEventListener('click', function () {
-					remember('granted');
-					banner.hidden = true;
-					startClarity();
-				});
-				document.getElementById('consent-decline').addEventListener('click', function () {
-					remember('denied');
-					banner.hidden = true;
-				});
 			})();
 		</script>
+
 	</body>
 </html>
