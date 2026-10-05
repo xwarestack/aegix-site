@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Aegix — FMEA Platform</title>
+		<title>Aegix — Engineering intelligence for FMEA</title>
 		<meta
 			name="description"
-			content="Aegix builds the AIAG-VDA failure chain end to end — structure, functions, failures, ratings, actions — and keeps it linked as the product changes."
+			content="Aegix uses AI to turn requirements, specifications, existing FMEAs and engineering knowledge into structured, traceable risk analysis."
 		/>
 		<!-- Draft. Unlinked and not indexed until it replaces the holding page. -->
 		<meta name="robots" content="noindex, nofollow" />
@@ -23,12 +23,10 @@
 		/>
 
 		<style>
-			/* Tokens taken from the application (frontend/src/index.css) so the site
-			   and the product read as one thing. */
 			:root {
 				--bg: #ffffff;
 				--bg-soft: #f6f7f9;
-				--surface: #ffffff;
+				--ink: #0d1117;
 				--fg: #161d2b;
 				--muted-fg: #4a5060;
 				--subtle-fg: #6b7280;
@@ -37,575 +35,175 @@
 				--brand: #0052cc;
 				--brand-hover: #0747a6;
 				--brand-faint: #eaf1fd;
-				--high: #b3261e;
-				--high-bg: #fdeceb;
-				--med: #8a5a00;
-				--med-bg: #fdf3e0;
-				--low: #1b5e3f;
-				--low-bg: #e7f4ed;
 				--radius: 12px;
-				--shadow-sm: 0 1px 2px rgb(22 29 43 / 0.06);
-				--shadow-lg: 0 1px 2px rgb(22 29 43 / 0.05), 0 18px 44px -18px rgb(22 29 43 / 0.18);
 			}
 
-			* {
-				box-sizing: border-box;
-			}
-
-			html {
-				-webkit-text-size-adjust: 100%;
-				scroll-behavior: smooth;
-			}
+			* { box-sizing: border-box; }
+			html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 			body {
 				margin: 0;
 				background: var(--bg);
 				color: var(--fg);
-				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-					'Helvetica Neue', Arial, sans-serif;
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 				font-size: 16px;
 				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;
 			}
 
-			.shell {
-				width: 100%;
-				max-width: 70rem;
-				margin: 0 auto;
-				padding: 0 20px;
-			}
+			.shell { width: 100%; max-width: 70rem; margin: 0 auto; padding: 0 20px; }
+			.narrow { max-width: 52rem; }
 
-			section {
-				padding: 84px 0;
-			}
+			section { padding: 78px 0; }
+			.alt { background: var(--bg-soft); border-block: 1px solid var(--border-faint); }
+			.dark { background: var(--ink); color: #fff; }
+			.dark h2, .dark h3 { color: #fff; }
+			.dark .lede { color: #aeb6c2; }
+			.dark .eyebrow { color: #7fb0ff; }
+			.dark .node { background: #161c25; border-color: #272e39; color: #e6eaf0; }
+			.dark .link { border-color: #242b35; }
+			.dark .link-val { color: #aeb6c2; }
+			.dark .kicker { color: #fff; }
 
-			.alt {
-				background: var(--bg-soft);
-				border-block: 1px solid var(--border-faint);
-			}
-
-			h1,
-			h2,
-			h3 {
-				letter-spacing: -0.025em;
-				text-wrap: balance;
-				margin: 0;
-			}
-
-			h2 {
-				font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.3rem);
-				line-height: 1.15;
-			}
-
-			h3 {
-				font-size: 1.0625rem;
-				line-height: 1.35;
-			}
-
-			p {
-				margin: 0;
-			}
-
-			a {
-				color: var(--brand);
-			}
+			h1, h2, h3 { letter-spacing: -0.025em; text-wrap: balance; margin: 0; }
+			h2 { font-size: clamp(1.55rem, 1.15rem + 1.5vw, 2.25rem); line-height: 1.16; }
+			h3 { font-size: 1.0625rem; line-height: 1.35; }
+			p { margin: 0; }
+			a { color: var(--brand); }
 
 			.eyebrow {
-				font-size: 12px;
-				font-weight: 700;
-				letter-spacing: 0.18em;
-				text-transform: uppercase;
-				color: var(--brand);
-				margin: 0 0 14px;
+				font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em;
+				text-transform: uppercase; color: var(--brand); margin: 0 0 13px;
 			}
 
-			.lede {
-				margin-top: 16px;
-				max-width: 60ch;
-				font-size: 1.0625rem;
-				color: var(--muted-fg);
-			}
+			.lede { margin-top: 15px; max-width: 62ch; font-size: 1.0625rem; color: var(--muted-fg); }
+			.kicker { margin-top: 24px; font-size: 1.0625rem; font-weight: 600; color: var(--fg); max-width: 58ch; }
 
-			/* ── Header ─────────────────────────────────────────────── */
+			/* ── Header ───────────────────────────────── */
 			header {
-				position: sticky;
-				top: 0;
-				z-index: 20;
-				background: rgb(255 255 255 / 0.9);
-				backdrop-filter: blur(8px);
+				position: sticky; top: 0; z-index: 30;
+				background: rgb(255 255 255 / 0.92); backdrop-filter: blur(8px);
 				border-bottom: 1px solid var(--border-faint);
 			}
+			.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+			.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+			.mark { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 17px; font-weight: 700; }
+			.brand small { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle-fg); line-height: 1; margin-top: 2px; }
+			nav { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: 500; }
+			nav a { color: var(--muted-fg); text-decoration: none; }
+			nav a:hover { color: var(--fg); }
+			@media (max-width: 58rem) { nav .hide-sm { display: none; } }
 
-			.bar {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 16px;
-				height: 62px;
-			}
-
-			.brand {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				font-weight: 700;
-				font-size: 17px;
-				letter-spacing: -0.02em;
-				color: var(--fg);
-				text-decoration: none;
-			}
-
-			.mark {
-				width: 30px;
-				height: 30px;
-				border-radius: 8px;
-				background: var(--brand);
-				color: #fff;
-				display: grid;
-				place-items: center;
-				font-size: 17px;
-				font-weight: 700;
-			}
-
-			.brand small {
-				display: block;
-				font-size: 11px;
-				font-weight: 600;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-				color: var(--subtle-fg);
-				line-height: 1;
-				margin-top: 2px;
-			}
-
-			nav {
-				display: flex;
-				align-items: center;
-				gap: 22px;
-				font-size: 14px;
-				font-weight: 500;
-			}
-
-			nav a {
-				color: var(--muted-fg);
-				text-decoration: none;
-			}
-
-			nav a:hover {
-				color: var(--fg);
-			}
-
-			@media (max-width: 54rem) {
-				nav .hide-sm {
-					display: none;
-				}
-			}
-
-			/* ── Buttons ────────────────────────────────────────────── */
+			/* ── Buttons ──────────────────────────────── */
 			.btn {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				gap: 8px;
-				height: 40px;
-				padding: 0 18px;
-				border-radius: 8px;
-				font-size: 14.5px;
-				font-weight: 600;
-				text-decoration: none;
-				border: 1px solid transparent;
-				white-space: nowrap;
-				transition: background-color 0.15s ease, border-color 0.15s ease;
+				display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+				height: 40px; padding: 0 18px; border-radius: 8px;
+				font-size: 14.5px; font-weight: 600; text-decoration: none;
+				border: 1px solid transparent; white-space: nowrap;
+				transition: background-color .15s ease, border-color .15s ease;
+			}
+			.btn-primary { background: var(--brand); color: #fff; }
+			.btn-primary:hover { background: var(--brand-hover); }
+			.btn-ghost { border-color: var(--border); color: var(--fg); background: #fff; }
+			.btn-ghost:hover { border-color: var(--muted-fg); }
+			a:focus-visible, .btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+			.actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+			/* ── Hero ─────────────────────────────────── */
+			.hero { padding: 76px 0 62px; }
+			.hero h1 { font-size: clamp(2rem, 1.25rem + 2.6vw, 3.15rem); line-height: 1.07; max-width: 20ch; }
+			.hero h1 em { font-style: normal; color: var(--brand); }
+			.hero .sub { margin-top: 20px; max-width: 58ch; font-size: 1.125rem; color: var(--muted-fg); }
+
+			.chips { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+			.chip {
+				font-size: 12.5px; font-weight: 600; color: var(--muted-fg);
+				border: 1px solid var(--border); background: #fff;
+				padding: 5px 11px; border-radius: 999px;
 			}
 
-			.btn-primary {
-				background: var(--brand);
-				color: #fff;
-			}
+			/* ── Flow diagrams ────────────────────────── */
+			.flow { margin-top: 40px; display: grid; gap: 14px; align-items: center; }
+			@media (min-width: 62rem) { .flow { grid-template-columns: 1fr auto auto auto 1fr; gap: 18px; } }
 
-			.btn-primary:hover {
-				background: var(--brand-hover);
+			.stack { display: flex; flex-direction: column; gap: 8px; }
+			.node {
+				border: 1px solid var(--border); background: #fff; border-radius: 9px;
+				padding: 9px 13px; font-size: 13.5px; font-weight: 600; color: var(--fg);
 			}
-
-			.btn-ghost {
-				border-color: var(--border);
-				color: var(--fg);
-				background: var(--surface);
+			.hub {
+				background: var(--brand); color: #fff; text-align: center;
+				padding: 14px 24px; border-radius: 10px;
+				font-size: 15px; font-weight: 700;
 			}
+			.arrow { display: grid; place-items: center; color: var(--subtle-fg); font-size: 20px; line-height: 1; }
+			@media (max-width: 61.99rem) { .arrow { transform: rotate(90deg); } }
 
-			.btn-ghost:hover {
-				border-color: var(--muted-fg);
-			}
+			/* ── Chain ────────────────────────────────── */
+			.chain { margin-top: 36px; }
+			.link { display: grid; grid-template-columns: 136px 1fr; gap: 18px; padding: 14px 0; border-top: 1px solid var(--border-faint); align-items: baseline; }
+			.link:first-child { border-top: 0; }
+			.link-key { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); }
+			.link-val { font-size: 15px; color: var(--muted-fg); }
+			@media (max-width: 40rem) { .link { grid-template-columns: 1fr; gap: 3px; } }
 
-			a:focus-visible,
-			.btn:focus-visible {
-				outline: 2px solid var(--brand);
-				outline-offset: 3px;
-			}
-
-			/* ── Hero ───────────────────────────────────────────────── */
-			.hero {
-				padding: 72px 0 64px;
-			}
-
-			.hero-grid {
-				display: grid;
-				gap: 48px;
-				align-items: center;
-			}
-
-			@media (min-width: 62rem) {
-				.hero-grid {
-					grid-template-columns: 1.02fr 0.98fr;
-					gap: 56px;
-				}
-			}
-
-			.hero h1 {
-				font-size: clamp(2rem, 1.3rem + 2.4vw, 3.1rem);
-				line-height: 1.08;
-			}
-
-			.hero h1 em {
-				font-style: normal;
-				color: var(--brand);
-			}
-
-			.hero-actions {
-				margin-top: 28px;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 10px;
-			}
-
-			.trust {
-				margin-top: 24px;
-				display: flex;
-				flex-wrap: wrap;
-				gap: 8px 18px;
-				font-size: 13px;
-				color: var(--subtle-fg);
-			}
-
-			.trust span {
-				display: inline-flex;
-				align-items: center;
-				gap: 7px;
-			}
-
-			.tick {
-				width: 14px;
-				height: 14px;
-				flex: none;
-			}
-
-			/* ── The form-sheet row ─────────────────────────────────── */
-			.sheet {
-				background: var(--surface);
-				border: 1px solid var(--border);
-				border-radius: var(--radius);
-				box-shadow: var(--shadow-lg);
-				overflow: hidden;
-			}
-
-			.sheet-head {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 12px;
-				padding: 10px 14px;
-				border-bottom: 1px solid var(--border-faint);
-				background: var(--bg-soft);
-			}
-
-			.sheet-title {
-				font-size: 10.5px;
-				font-weight: 700;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-				color: var(--subtle-fg);
-			}
-
-			.step {
-				display: grid;
-				grid-template-columns: 116px 1fr;
-				gap: 14px;
-				align-items: baseline;
-				padding: 10px 14px;
-			}
-
-			.step + .step {
-				border-top: 1px solid var(--border-faint);
-			}
-
-			.step-key {
-				font-size: 10px;
-				font-weight: 700;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				color: var(--subtle-fg);
-				white-space: nowrap;
-			}
-
-			.step-val {
-				font-size: 14px;
-				font-weight: 500;
-				min-width: 0;
-			}
-
-			.ratings {
-				display: flex;
-				border-top: 1px solid var(--border-faint);
-				background: var(--bg-soft);
-			}
-
-			.rating {
-				flex: 1;
-				padding: 10px 8px;
-				text-align: center;
-			}
-
-			.rating + .rating {
-				border-left: 1px solid var(--border-faint);
-			}
-
-			.rating-key {
-				display: block;
-				font-size: 10px;
-				font-weight: 700;
-				letter-spacing: 0.08em;
-				color: var(--subtle-fg);
-			}
-
-			.rating-val {
-				display: block;
-				margin-top: 1px;
-				font-size: 18px;
-				font-weight: 700;
-				font-variant-numeric: tabular-nums;
-			}
-
-			.rating.ap {
-				flex: 1.3;
-				background: var(--high-bg);
-			}
-
-			.rating.ap .rating-key,
-			.rating.ap .rating-val {
-				color: var(--high);
-			}
-
-			.rating.ap.after {
-				background: var(--low-bg);
-			}
-
-			.rating.ap.after .rating-key,
-			.rating.ap.after .rating-val {
-				color: var(--low);
-			}
-
-			.sheet-note {
-				padding: 10px 14px;
-				border-top: 1px solid var(--border-faint);
-				font-size: 12.5px;
-				color: var(--subtle-fg);
-			}
-
-			/* ── Steps ──────────────────────────────────────────────── */
-			.steps {
-				margin-top: 44px;
-				display: grid;
-				gap: 20px;
-			}
-
-			@media (min-width: 52rem) {
-				.steps {
-					grid-template-columns: repeat(3, 1fr);
-					gap: 24px;
-				}
-			}
-
-			.card {
-				background: var(--surface);
-				border: 1px solid var(--border);
-				border-radius: var(--radius);
-				padding: 22px;
-			}
-
-			.num {
-				width: 26px;
-				height: 26px;
-				border-radius: 7px;
-				background: var(--brand-faint);
-				color: var(--brand);
-				display: grid;
-				place-items: center;
-				font-size: 13px;
-				font-weight: 700;
-				margin-bottom: 14px;
-			}
-
-			.card p {
-				margin-top: 8px;
-				font-size: 14.5px;
-				color: var(--muted-fg);
-			}
-
-			/* ── Capability grid ────────────────────────────────────── */
-			.grid {
-				margin-top: 44px;
-				display: grid;
-				gap: 24px 32px;
-			}
-
+			/* ── Grids ────────────────────────────────── */
+			.grid { margin-top: 40px; display: grid; gap: 22px 30px; }
 			@media (min-width: 46rem) {
-				.grid {
-					grid-template-columns: repeat(2, 1fr);
-				}
+				.grid.three, .grid.four, .grid.five { grid-template-columns: repeat(2, 1fr); }
+			}
+			@media (min-width: 66rem) {
+				.grid.three { grid-template-columns: repeat(3, 1fr); }
+				.grid.four { grid-template-columns: repeat(4, 1fr); }
+				.grid.five { grid-template-columns: repeat(5, 1fr); }
 			}
 
-			@media (min-width: 68rem) {
-				.grid {
-					grid-template-columns: repeat(3, 1fr);
-				}
-			}
+			.card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+			.card p { margin-top: 7px; font-size: 14px; color: var(--muted-fg); }
+			.feat h3 { display: flex; align-items: center; gap: 9px; }
+			.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); flex: none; }
+			.feat p { margin-top: 7px; font-size: 14.5px; color: var(--muted-fg); }
+			.num { width: 26px; height: 26px; border-radius: 7px; background: var(--brand-faint); color: var(--brand); display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-bottom: 13px; }
 
-			.feat h3 {
-				display: flex;
-				align-items: center;
-				gap: 9px;
+			/* ── Pipeline ─────────────────────────────── */
+			.pipeline {
+				margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+				padding: 15px 18px; border: 1px solid var(--border); border-radius: var(--radius);
+				background: var(--bg-soft); font-size: 13.5px; font-weight: 600;
 			}
+			.dark .pipeline { background: #161c25; border-color: #272e39; color: #e6eaf0; }
+			.pipeline .sep { color: var(--subtle-fg); font-weight: 400; }
 
-			.dot {
-				width: 7px;
-				height: 7px;
-				border-radius: 50%;
-				background: var(--brand);
-				flex: none;
-			}
+			/* ── Table ────────────────────────────────── */
+			.table-wrap { margin-top: 36px; overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+			table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 34rem; }
+			th, td { text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--border-faint); vertical-align: top; }
+			thead th { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle-fg); background: var(--bg-soft); }
+			thead th:last-child { color: var(--brand); }
+			tbody tr:last-child td { border-bottom: 0; }
+			td:first-child { color: var(--subtle-fg); }
+			td:last-child { font-weight: 600; }
 
-			.feat p {
-				margin-top: 8px;
-				font-size: 14.5px;
-				color: var(--muted-fg);
-			}
+			/* ── CTA band ─────────────────────────────── */
+			.cta { background: var(--ink); color: #fff; border-radius: 16px; padding: 48px 32px; text-align: center; }
+			.cta h2 { color: #fff; }
+			.cta .lede { margin: 14px auto 0; max-width: 52ch; color: #aeb6c2; }
+			.cta .actions { justify-content: center; }
+			.cta .btn-ghost { background: transparent; border-color: #39414d; color: #fff; }
+			.cta .btn-ghost:hover { border-color: #6b7483; }
+			.fine { margin-top: 22px; font-size: 13px; color: #78818f; }
 
-			/* ── Seven steps table ──────────────────────────────────── */
-			.table-wrap {
-				margin-top: 36px;
-				overflow-x: auto;
-				border: 1px solid var(--border);
-				border-radius: var(--radius);
-				background: var(--surface);
-			}
+			/* ── Footer ───────────────────────────────── */
+			footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: 13.5px; color: var(--subtle-fg); }
+			.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+			.foot a { color: var(--muted-fg); text-decoration: none; }
+			.foot a:hover { color: var(--fg); }
+			.foot-links { display: flex; flex-wrap: wrap; gap: 18px; }
 
-			table {
-				width: 100%;
-				border-collapse: collapse;
-				font-size: 14px;
-				min-width: 36rem;
-			}
-
-			th,
-			td {
-				text-align: left;
-				padding: 11px 16px;
-				border-bottom: 1px solid var(--border-faint);
-				vertical-align: top;
-			}
-
-			thead th {
-				font-size: 10.5px;
-				font-weight: 700;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				color: var(--subtle-fg);
-				background: var(--bg-soft);
-			}
-
-			tbody tr:last-child td {
-				border-bottom: 0;
-			}
-
-			td:first-child {
-				font-weight: 600;
-				white-space: nowrap;
-			}
-
-			td:last-child {
-				color: var(--muted-fg);
-			}
-
-			/* ── CTA band ───────────────────────────────────────────── */
-			.cta {
-				background: var(--fg);
-				color: #fff;
-				border-radius: 16px;
-				padding: 44px 32px;
-				text-align: center;
-			}
-
-			.cta h2 {
-				color: #fff;
-			}
-
-			.cta p {
-				margin: 14px auto 0;
-				max-width: 46ch;
-				color: #b9c1cc;
-			}
-
-			.cta .hero-actions {
-				justify-content: center;
-			}
-
-			.cta .btn-ghost {
-				background: transparent;
-				border-color: #3b424d;
-				color: #fff;
-			}
-
-			.cta .btn-ghost:hover {
-				border-color: #6b7483;
-			}
-
-			/* ── Footer ─────────────────────────────────────────────── */
-			footer {
-				border-top: 1px solid var(--border-faint);
-				padding: 36px 0;
-				font-size: 13.5px;
-				color: var(--subtle-fg);
-			}
-
-			.foot {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				justify-content: space-between;
-				gap: 16px 24px;
-			}
-
-			.foot a {
-				color: var(--muted-fg);
-				text-decoration: none;
-			}
-
-			.foot a:hover {
-				color: var(--fg);
-			}
-
-			.foot-links {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 18px;
-			}
-
-			.funder {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				font-size: 12.5px;
-				color: var(--subtle-fg);
+			.tag {
+				display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+				text-transform: uppercase; color: #7fb0ff; border: 1px solid #2f3947;
+				padding: 4px 10px; border-radius: 999px; margin-bottom: 16px;
 			}
 		</style>
 	</head>
@@ -618,360 +216,398 @@
 					<span>Aegix<small>FMEA Platform</small></span>
 				</a>
 				<nav>
-					<a class="hide-sm" href="#how">How it works</a>
-					<a class="hide-sm" href="#capabilities">Capabilities</a>
-					<a class="hide-sm" href="#method">The method</a>
-					<a class="hide-sm" href="#connected">Integrations</a>
+					<a class="hide-sm" href="#approach">Approach</a>
+					<a class="hide-sm" href="#platform">Platform</a>
+					<a class="hide-sm" href="#ecosystem">Ecosystem</a>
+					<a class="hide-sm" href="#industries">Industries</a>
 					<a href="https://app.aegix.eu">Sign in</a>
-					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Book a demo</a>
+					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
 				</nav>
 			</div>
 		</header>
 
-		<!-- ── Hero ───────────────────────────────────────────────── -->
 		<section class="hero">
-			<div class="shell hero-grid">
-				<div>
-					<p class="eyebrow">AIAG-VDA FMEA</p>
-					<h1>FMEA, powered by AI, <em>validated by engineers</em>.</h1>
-					<p class="lede">
-						Aegix builds the failure chain the way the handbook defines it — structure,
-						functions, failure modes, effects, causes — and keeps it linked as the
-						product changes. AI drafts it from the documents you already have. The
-						engineering judgement stays yours.
-					</p>
+			<div class="shell">
+				<p class="eyebrow">Engineering intelligence for FMEA</p>
+				<h1>Your engineering data already contains the knowledge you need to <em>understand risk</em>.</h1>
+				<p class="sub">
+					Aegix uses AI to turn requirements, specifications, existing FMEAs and
+					engineering knowledge into structured, traceable risk analysis.
+				</p>
+				<p class="kicker">Less time building the FMEA. More time thinking about the risk.</p>
 
-					<div class="hero-actions">
-						<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Book a demo</a>
-						<a class="btn btn-ghost" href="#how">See how it works</a>
-					</div>
-
-					<div class="trust">
-						<span>
-							<svg class="tick" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="#0052CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							Action Priority, not RPN
-						</span>
-						<span>
-							<svg class="tick" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="#0052CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							DFMEA and PFMEA
-						</span>
-						<span>
-							<svg class="tick" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5" stroke="#0052CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							In the browser, no install
-						</span>
-					</div>
+				<div class="actions">
+					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
+					<a class="btn btn-ghost" href="#platform">See Aegix in action</a>
 				</div>
 
-				<figure style="margin: 0; min-width: 0">
-					<div class="sheet">
-						<div class="sheet-head">
-							<span class="sheet-title">Failure chain</span>
-							<span class="sheet-title">DFMEA &middot; A.1</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Next higher</span>
-							<span class="step-val">Water heating system</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Focus element</span>
-							<span class="step-val">Heating assembly</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Function</span>
-							<span class="step-val">Heat water to 96&nbsp;°C within 3 minutes</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Failure mode</span>
-							<span class="step-val">Target temperature not reached</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Effect</span>
-							<span class="step-val">Brew aborted, unit returned</span>
-						</div>
-						<div class="step">
-							<span class="step-key">Cause</span>
-							<span class="step-val">Heating element open circuit</span>
-						</div>
-						<div class="ratings">
-							<div class="rating"><span class="rating-key">S</span><span class="rating-val">8</span></div>
-							<div class="rating"><span class="rating-key">O</span><span class="rating-val">6</span></div>
-							<div class="rating"><span class="rating-key">D</span><span class="rating-val">7</span></div>
-							<div class="rating ap"><span class="rating-key">AP</span><span class="rating-val">High</span></div>
-						</div>
-						<div class="ratings">
-							<div class="rating"><span class="rating-key">NEW S</span><span class="rating-val">8</span></div>
-							<div class="rating"><span class="rating-key">NEW O</span><span class="rating-val">3</span></div>
-							<div class="rating"><span class="rating-key">NEW D</span><span class="rating-val">3</span></div>
-							<div class="rating ap after"><span class="rating-key">NEW AP</span><span class="rating-val">Low</span></div>
-						</div>
-						<p class="sheet-note">
-							One row, before and after the action. Severity 8 / occurrence 6 /
-							detection 7 is High on the AIAG-VDA table; re-rated 8 / 3 / 3 it is Low.
-						</p>
-					</div>
-				</figure>
+				<div class="chips">
+					<span class="chip">AI-assisted</span>
+					<span class="chip">AIAG &amp; VDA</span>
+					<span class="chip">Requirements traceability</span>
+					<span class="chip">ALM integration</span>
+					<span class="chip">Human-in-the-loop</span>
+				</div>
 			</div>
 		</section>
 
-		<!-- ── How it works ───────────────────────────────────────── -->
-		<section id="how" class="alt">
+		<section id="approach" class="alt">
 			<div class="shell">
-				<p class="eyebrow">How it works</p>
-				<h2>Three moves, in the order the handbook puts them.</h2>
+				<h2>FMEA shouldn't start with a blank table.</h2>
 				<p class="lede">
-					The method is not the hard part. Keeping it intact while the product changes
-					is.
+					The information needed for an FMEA already exists. It is spread across system
+					specifications, requirements, architecture documents, design descriptions,
+					previous FMEAs, test documentation and ALM systems. Engineers then spend hours
+					finding that information, interpreting it and transferring it into another
+					structure.
 				</p>
 
-				<div class="steps">
+				<div class="flow">
+					<div class="stack">
+						<span class="node">Specifications</span>
+						<span class="node">Requirements</span>
+						<span class="node">Existing FMEAs</span>
+						<span class="node">Engineering documentation</span>
+						<span class="node">ALM data</span>
+					</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="hub">Aegix</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="stack">
+						<span class="node">Functions</span>
+						<span class="node">Failure modes</span>
+						<span class="node">Causes &amp; effects</span>
+						<span class="node">Controls &amp; risks</span>
+						<span class="node">Actions</span>
+					</div>
+				</div>
+
+				<p class="kicker">A structured starting point instead of a blank page.</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="shell narrow">
+				<p class="eyebrow">Human-in-the-loop</p>
+				<h2>AI can suggest. Engineers decide.</h2>
+				<p class="lede">
+					Aegix is not designed to replace engineering judgement. It is designed to
+					amplify it. AI can identify relevant information, propose relationships,
+					suggest potential failure modes and surface areas that may deserve attention.
+					Engineers review, challenge, modify and approve the analysis.
+				</p>
+
+				<div class="pipeline">
+					<span>AI identifies</span><span class="sep">&rarr;</span>
+					<span>Engineer evaluates</span><span class="sep">&rarr;</span>
+					<span>Team validates</span><span class="sep">&rarr;</span>
+					<span>Engineering decision</span>
+				</div>
+
+				<p class="kicker">AI-assisted engineering, not autonomous safety decision-making.</p>
+			</div>
+		</section>
+
+		<section class="alt">
+			<div class="shell narrow">
+				<p class="eyebrow">Traceability</p>
+				<h2>Connect the reasoning behind the FMEA.</h2>
+				<p class="lede">
+					An FMEA is more than a table of failure modes. It is a chain of engineering
+					reasoning — and Aegix keeps the links, not just the rows.
+				</p>
+
+				<div class="chain">
+					<div class="link"><span class="link-key">Requirement</span><span class="link-val">The system must maintain safe operating conditions.</span></div>
+					<div class="link"><span class="link-key">Function</span><span class="link-val">Maintain operating conditions within defined limits.</span></div>
+					<div class="link"><span class="link-key">Failure mode</span><span class="link-val">Operating condition exceeds the specified limit.</span></div>
+					<div class="link"><span class="link-key">Cause</span><span class="link-val">Temperature sensing failure.</span></div>
+					<div class="link"><span class="link-key">Effect</span><span class="link-val">Incorrect thermal control.</span></div>
+					<div class="link"><span class="link-key">Risk</span><span class="link-val">Potential degradation or safety consequence.</span></div>
+					<div class="link"><span class="link-key">Mitigation</span><span class="link-val">Diagnostic monitoring and protective strategy.</span></div>
+					<div class="link"><span class="link-key">Verification</span><span class="link-val">Test, requirement and evidence.</span></div>
+				</div>
+
+				<p class="kicker">The FMEA becomes part of the engineering lifecycle, not a document produced in isolation.</p>
+			</div>
+		</section>
+
+		<section id="platform">
+			<div class="shell">
+				<p class="eyebrow">How it works</p>
+				<h2>Understand. Structure. Reason. Trace.</h2>
+				<p class="lede">Aegix combines AI with a structured engineering model.</p>
+
+				<div class="grid four">
 					<div class="card">
 						<div class="num">1</div>
-						<h3>Structure</h3>
-						<p>
-							Build the system once — next higher element, focus element, next lower
-							level — as a tree, a list or a diagram. Every element, function and
-							failure gets its own identifier you can quote in a review.
-						</p>
+						<h3>Understand</h3>
+						<p>Extract relevant engineering information from requirements, specifications, documents and existing analyses.</p>
 					</div>
 					<div class="card">
 						<div class="num">2</div>
-						<h3>Analyse</h3>
-						<p>
-							Functions, failure modes, effects and causes, each attached to the level
-							it belongs to. Severity, occurrence and detection in the handbook's
-							column order, with Action Priority computed from the 2019 table.
-						</p>
+						<h3>Structure</h3>
+						<p>Turn unstructured information into engineering concepts and relationships — functions, failure modes, causes, effects, controls, requirements, actions.</p>
 					</div>
 					<div class="card">
 						<div class="num">3</div>
-						<h3>Optimise</h3>
-						<p>
-							Actions with an owner, a type and a target date. Re-rate when they land,
-							and the row carries both assessments — so the improvement is evidence,
-							not an assertion.
-						</p>
+						<h3>Reason</h3>
+						<p>Assist engineers in identifying potential failure modes, relationships and gaps in the analysis.</p>
 					</div>
+					<div class="card">
+						<div class="num">4</div>
+						<h3>Trace</h3>
+						<p>Connect risk analysis back to its engineering sources, and forward to mitigation, implementation and verification.</p>
+					</div>
+				</div>
+
+				<p class="kicker">Not generated text — structured engineering knowledge that can be reviewed, challenged and traced.</p>
+			</div>
+		</section>
+
+		<section class="alt">
+			<div class="shell">
+				<p class="eyebrow">Technology</p>
+				<h2>Built for engineering data, not AI prompts.</h2>
+
+				<div class="grid three">
+					<div class="feat"><h3><span class="dot"></span>Knowledge extraction</h3><p>AI processes requirements, specifications, FMEAs and engineering documentation to identify relevant concepts and relationships.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Structured representation</h3><p>Information becomes a connected model that can support FMEA and risk analysis, rather than remaining unstructured text.</p></div>
+					<div class="feat"><h3><span class="dot"></span>AI-assisted reasoning</h3><p>AI operates inside engineering context, generating suggestions and relationships for engineers to review.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Traceability</h3><p>Suggestions stay connected to the engineering information they came from.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Human-in-the-loop validation</h3><p>Engineers remain responsible for reviewing and approving the resulting analysis.</p></div>
+				</div>
+
+				<div class="pipeline">
+					<span>Engineering data</span><span class="sep">&rarr;</span>
+					<span>Knowledge extraction</span><span class="sep">&rarr;</span>
+					<span>Structured model</span><span class="sep">&rarr;</span>
+					<span>AI assistance</span><span class="sep">&rarr;</span>
+					<span>Engineer validation</span><span class="sep">&rarr;</span>
+					<span>Risk analysis</span>
 				</div>
 			</div>
 		</section>
 
-		<!-- ── Capabilities ───────────────────────────────────────── -->
-		<section id="capabilities">
+		<section id="ecosystem">
 			<div class="shell">
-				<p class="eyebrow">Capabilities</p>
-				<h2>Built for the way an FMEA actually gets reviewed.</h2>
-
-				<div class="grid">
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>The chain cannot break</h3>
-						<p>
-							A failure mode is the failure of a function, so Aegix will not let one
-							exist without it. The structure is modelled, not typed into cells —
-							which is what keeps a 400-row worksheet reviewable.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Action Priority, by the book</h3>
-						<p>
-							AP from the AIAG-VDA table decides what gets worked on, not a multiplied
-							RPN the handbook retired in 2019. High AP without an action is a number
-							you can see on one screen.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>AI does the typing, not the engineering</h3>
-						<p>
-							It reads the specification nobody wants to transcribe and proposes the
-							elements, functions and failure modes inside it. Where your data is
-							already structured it is not used at all, and you can switch it off
-							entirely without losing a feature.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Versions, phases, baselines</h3>
-						<p>
-							A version per design phase and a baseline you can freeze at a release.
-							Work continues on the draft without disturbing what was signed off.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>It tells you when it goes stale</h3>
-						<p>
-							Change the structure under a risk and the row says so, instead of
-							quietly pointing at something that moved. Stale FMEAs are found at
-							audits; this one raises its hand.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>One view across projects</h3>
-						<p>
-							Risk profile, Action Priority distribution, High AP coverage and overdue
-							actions — per worksheet, per project or across the programme, with the
-							worksheet one click away.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- ── Method fidelity ────────────────────────────────────── -->
-		<section id="method" class="alt">
-			<div class="shell">
-				<p class="eyebrow">The method</p>
-				<h2>The seven steps, and what Aegix does at each.</h2>
+				<p class="eyebrow">Integrations</p>
+				<h2>Your FMEA belongs in the engineering ecosystem.</h2>
 				<p class="lede">
-					If your auditor opens the handbook beside the screen, the two should agree.
+					Aegix is designed to work alongside the tools your engineering teams already
+					use — connecting requirements, risk and development.
 				</p>
+
+				<div class="flow">
+					<div class="stack">
+						<span class="node">Polarion</span>
+						<span class="node">Codebeamer</span>
+						<span class="node">Jira</span>
+						<span class="node">Requirements systems</span>
+						<span class="node">Verification &amp; validation</span>
+					</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="hub">Aegix</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="stack">
+						<span class="node">FMEA</span>
+						<span class="node">Risk analysis</span>
+						<span class="node">Actions</span>
+						<span class="node">Traceability</span>
+					</div>
+				</div>
+
+				<p class="kicker">Not another isolated repository — risk analysis connected to the engineering lifecycle.</p>
+			</div>
+		</section>
+
+		<section class="alt">
+			<div class="shell narrow">
+				<p class="eyebrow">Method</p>
+				<h2>The methodology stays. The manual work doesn't.</h2>
+				<p class="lede">
+					Aegix supports the AIAG &amp; VDA FMEA methodology while using AI to reduce the
+					repetitive work around it. Your engineering team still controls functions,
+					failure modes, effects, causes, controls, risk evaluation, actions,
+					responsibilities, reviews and approval.
+				</p>
+				<p class="kicker">Modern AI assistance. Established engineering discipline.</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="shell">
+				<p class="eyebrow">Knowledge reuse</p>
+				<h2>Don't start from zero.</h2>
+				<p class="lede">
+					Every FMEA contains engineering knowledge that took experienced engineers time
+					to create — and it usually stays trapped in previous projects, spreadsheets,
+					documents and individual teams.
+				</p>
+
+				<div class="flow">
+					<div class="stack">
+						<span class="node">Project A &middot; engineering knowledge</span>
+						<span class="node">Failure modes</span>
+						<span class="node">Known causes</span>
+						<span class="node">Existing controls</span>
+					</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="hub">Aegix</div>
+					<div class="arrow" aria-hidden="true">&rarr;</div>
+					<div class="stack">
+						<span class="node">Project B &middot; new context</span>
+						<span class="node">Relevant knowledge</span>
+						<span class="node">Potential failure modes</span>
+						<span class="node">Reusable controls</span>
+					</div>
+				</div>
+
+				<p class="kicker">Your previous engineering work becomes an asset for the next project.</p>
+			</div>
+		</section>
+
+		<section class="alt">
+			<div class="shell">
+				<p class="eyebrow">The difference</p>
+				<h2>Less manual work. More engineering thinking.</h2>
 
 				<div class="table-wrap">
 					<table>
-						<thead>
-							<tr>
-								<th>Step</th>
-								<th>In Aegix</th>
-							</tr>
-						</thead>
+						<thead><tr><th>Traditional FMEA</th><th>With Aegix</th></tr></thead>
 						<tbody>
-							<tr>
-								<td>1 &middot; Planning &amp; preparation</td>
-								<td>Project scope, FMEA type, team and the template that sets the rating scales.</td>
-							</tr>
-							<tr>
-								<td>2 &middot; Structure analysis</td>
-								<td>The system tree across three levels, as a tree, a list or a diagram.</td>
-							</tr>
-							<tr>
-								<td>3 &middot; Function analysis</td>
-								<td>Functions and requirements attached to the element that performs them.</td>
-							</tr>
-							<tr>
-								<td>4 &middot; Failure analysis</td>
-								<td>Effect, mode and cause across the three levels — enforced, not conventional.</td>
-							</tr>
-							<tr>
-								<td>5 &middot; Risk analysis</td>
-								<td>Prevention and detection controls, S / O / D, and Action Priority.</td>
-							</tr>
-							<tr>
-								<td>6 &middot; Optimisation</td>
-								<td>Actions, owners, target dates, evidence — then revised ratings and a revised AP.</td>
-							</tr>
-							<tr>
-								<td>7 &middot; Results documentation</td>
-								<td>Baselines per release, Excel export, and an audit trail on every row.</td>
-							</tr>
+							<tr><td>Search through documents</td><td>Extract relevant engineering information</td></tr>
+							<tr><td>Start from a blank table</td><td>Start from existing engineering knowledge</td></tr>
+							<tr><td>Manually transfer information</td><td>AI-assisted structuring</td></tr>
+							<tr><td>Discover gaps during reviews</td><td>Surface potential gaps earlier</td></tr>
+							<tr><td>FMEA isolated from engineering</td><td>Connected to requirements and ALM</td></tr>
+							<tr><td>Knowledge stays in projects</td><td>Knowledge becomes reusable</td></tr>
 						</tbody>
 					</table>
 				</div>
+
+				<p class="kicker">The objective isn't to produce an FMEA faster. It's to give engineers more time to think about the risk.</p>
 			</div>
 		</section>
 
-		<!-- ── Start from what you have ───────────────────────────── -->
-		<section id="start">
+		<section id="industries">
 			<div class="shell">
-				<p class="eyebrow">Getting started</p>
-				<h2>The structure exists before the FMEA does.</h2>
-				<p class="lede">
-					It is in a requirements tool, or in a specification somebody wrote in Word.
-					Aegix takes it from either — and the difference decides whether AI is involved
-					at all.
-				</p>
+				<p class="eyebrow">Who it's for</p>
+				<h2>Designed for complex engineering.</h2>
+				<p class="lede">For organisations developing complex and safety-critical products.</p>
 
-				<div class="grid">
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Structured — imported, not inferred</h3>
-						<p>
-							Requirements already modelled in your ALM come across as themselves:
-							a direct import, deterministic and repeatable. Nothing is guessed,
-							because nothing needs to be.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Unstructured — read, then proposed</h3>
-						<p>
-							Specifications, offline requirements, the documents that were never
-							going to be machine-readable: AI reads them and proposes the elements,
-							functions and failure modes it finds. You accept, edit or reject each.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Hybrid, or neither</h3>
-						<p>
-							Import the parts that are structured, extract the parts that are not,
-							and type the rest. Or build the whole tree by hand — everything
-							downstream behaves identically either way.
-						</p>
-					</div>
+				<div class="grid five">
+					<div class="card"><h3>Automotive</h3><p>Functional safety, electrification, software-intensive systems and complex E/E architectures.</p></div>
+					<div class="card"><h3>Railway</h3><p>System complexity, safety requirements and long engineering lifecycles.</p></div>
+					<div class="card"><h3>Aerospace &amp; defence</h3><p>High-consequence systems where traceability and engineering judgement matter.</p></div>
+					<div class="card"><h3>Medical devices</h3><p>Structured risk analysis connected to product and verification information.</p></div>
+					<div class="card"><h3>Industrial systems</h3><p>Complex products where engineering knowledge spans multiple disciplines and tools.</p></div>
 				</div>
 			</div>
 		</section>
 
-		<!-- ── Connected ──────────────────────────────────────────── -->
-		<section id="connected" class="alt">
+		<section class="alt">
 			<div class="shell">
-				<p class="eyebrow">Connected</p>
-				<h2>An FMEA nobody reads is a document. One that moves work is a control.</h2>
-				<p class="lede">
-					Results go back where the programme lives, and the actions land in the tracker
-					your engineers already open every morning.
-				</p>
+				<p class="eyebrow">Where it fits</p>
+				<h2>Engineering discipline first.</h2>
 
-				<div class="grid">
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Back into the ALM</h3>
-						<p>
-							Push the analysis out to the requirements tool it came from, so the
-							failure modes sit beside the requirements they threaten rather than in
-							a file nobody opens.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Actions in your tracker</h3>
-						<p>
-							Optimisation actions synchronise with the issue tracker, so an FMEA
-							action is the same object the team is already working — not a second
-							list that quietly goes stale.
-						</p>
-					</div>
-					<div class="feat">
-						<h3><span class="dot" aria-hidden="true"></span>Reports and analytics out</h3>
-						<p>
-							Export the worksheet in the form sheet's own column order, and the
-							analytics with it, for the customer or auditor who wants a file.
-						</p>
-					</div>
+				<div class="grid five">
+					<div class="feat"><h3><span class="dot"></span>Functional safety</h3><p>Connect FMEA with the broader safety engineering process.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Systems engineering</h3><p>Work with functions, architectures, interfaces and dependencies.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Requirements engineering</h3><p>Maintain relationships between requirements and risk analysis.</p></div>
+					<div class="feat"><h3><span class="dot"></span>Verification &amp; validation</h3><p>Connect mitigations and controls with verification evidence.</p></div>
+					<div class="feat"><h3><span class="dot"></span>ALM</h3><p>Bring FMEA closer to the engineering systems where development happens.</p></div>
 				</div>
 			</div>
 		</section>
 
-		<!-- ── CTA ────────────────────────────────────────────────── -->
+		<section>
+			<div class="shell narrow">
+				<p class="eyebrow">Accountability</p>
+				<h2>AI you can challenge.</h2>
+				<p class="lede">
+					Engineering AI should not simply give you an answer. It should give you
+					something you can examine.
+				</p>
+
+				<div class="pipeline">
+					<span>Review</span><span class="sep">&middot;</span>
+					<span>Challenge</span><span class="sep">&middot;</span>
+					<span>Modify</span><span class="sep">&middot;</span>
+					<span>Trace</span><span class="sep">&middot;</span>
+					<span>Approve</span>
+				</div>
+
+				<p class="kicker">AI accelerates the work. Engineers remain accountable for the result.</p>
+			</div>
+		</section>
+
+		<section class="dark">
+			<div class="shell narrow">
+				<span class="tag">Where this is going</span>
+				<h2>From AI-assisted FMEA to engineering intelligence.</h2>
+				<p class="lede">
+					FMEA is only the beginning. The same engineering intelligence can eventually be
+					applied continuously across the product lifecycle.
+				</p>
+
+				<div class="chain">
+					<div class="link"><span class="link-key">A requirement</span><span class="link-val">changes.</span></div>
+					<div class="link"><span class="link-key">Aegix</span><span class="link-val">identifies the affected function.</span></div>
+					<div class="link"><span class="link-key">Failure modes</span><span class="link-val">related to it are identified.</span></div>
+					<div class="link"><span class="link-key">Mitigations</span><span class="link-val">already in place are reviewed.</span></div>
+					<div class="link"><span class="link-key">Risk impact</span><span class="link-val">is surfaced.</span></div>
+					<div class="link"><span class="link-key">The engineer</span><span class="link-val">decides what needs to change.</span></div>
+				</div>
+
+				<p class="kicker">From analysing risk periodically, to continuously understanding how engineering changes affect risk.</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="shell narrow">
+				<p class="eyebrow">Who builds it</p>
+				<h2>Built by engineers who understand the problem.</h2>
+				<p class="lede">
+					Aegix is developed by XWARE, an engineering company focused on complex software
+					and cyber-physical systems. Our work spans functional safety, cybersecurity,
+					systems engineering, requirements and ALM, verification and validation, and
+					AI-assisted engineering.
+				</p>
+				<p class="kicker">Aegix comes from real engineering challenges, not from applying generic AI to an engineering buzzword.</p>
+			</div>
+		</section>
+
 		<section>
 			<div class="shell">
 				<div class="cta">
-					<h2>See it on your own product.</h2>
-					<p>
-						Bring a system you know and we will build the first worksheet with you —
-						structure, a handful of failure modes, and the actions that follow.
+					<h2>Bring your engineering data.</h2>
+					<p class="lede">
+						Give us a specification, a requirements set or an existing FMEA. We'll show
+						you how Aegix extracts the engineering knowledge, structures the analysis
+						and helps your team identify what deserves attention.
 					</p>
-					<div class="hero-actions">
-						<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Book a demo</a>
-						<a class="btn btn-ghost" href="mailto:hello@aegix.eu">hello@aegix.eu</a>
+					<div class="actions">
+						<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
+						<a class="btn btn-ghost" href="mailto:hello@aegix.eu?subject=Talk%20to%20an%20engineer">Talk to an engineer</a>
 					</div>
+					<p class="fine">
+						No generic AI pitch. No obligation to replace your existing ALM. Bring your
+						own engineering data.
+					</p>
 				</div>
 			</div>
 		</section>
 
 		<footer>
 			<div class="shell foot">
-				<span>&copy; 2026 XWARE &middot; Aegix is a product of XWARE</span>
-				<span class="funder">
-					<!-- TODO: replace with the innoviris.brussels mark. -->
-					Funded by innoviris.brussels
-				</span>
+				<span>&copy; 2026 XWARE &middot; Aegix turns engineering knowledge into structured, traceable risk analysis.</span>
+				<!-- TODO: replace with the innoviris.brussels mark. -->
+				<span>Funded by innoviris.brussels</span>
 				<span class="foot-links">
 					<a href="https://app.aegix.eu">Sign in</a>
 					<a href="mailto:hello@aegix.eu">Contact</a>
-					<a href="#">Privacy</a>
+					<a href="#">Legal</a>
 				</span>
 			</div>
 		</footer>
