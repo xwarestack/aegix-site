@@ -30,24 +30,6 @@
 		/>
 		<link rel="preload" as="image" href="hero-earth.jpg" fetchpriority="high" />
 
-		<!-- Microsoft Clarity. Note: this records sessions and sets cookies, which
-		     is non-essential tracking under the ePrivacy Directive — EU visitors
-		     should consent before it runs. Clarity supports a consent-gated mode:
-		     load it paused and call clarity('consent') once the visitor agrees. -->
-		<script type="text/javascript">
-			(function (c, l, a, r, i, t, y) {
-				c[a] =
-					c[a] ||
-					function () {
-						(c[a].q = c[a].q || []).push(arguments);
-					};
-				t = l.createElement(r);
-				t.async = 1;
-				t.src = 'https://www.clarity.ms/tag/' + i;
-				y = l.getElementsByTagName(r)[0];
-				y.parentNode.insertBefore(t, y);
-			})(window, document, 'clarity', 'script', 'yt1vdwre6g');
-		</script>
 
 		<link
 			rel="icon"
@@ -256,6 +238,66 @@
 				color: var(--fg);
 				text-decoration: underline;
 			}
+			/* Consent notice. Refusing is a button, not a buried link: under the
+			   ePrivacy Directive declining must be as easy as accepting. */
+			.consent {
+				position: fixed;
+				left: 16px;
+				right: 16px;
+				bottom: 16px;
+				z-index: 10;
+				margin: 0 auto;
+				max-width: 46rem;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px 20px;
+				padding: 14px 16px;
+				border: 1px solid var(--border-faint);
+				border-radius: 10px;
+				background: rgb(14 18 25 / 0.94);
+				font-size: 13.5px;
+				line-height: 1.5;
+				color: var(--muted-fg);
+			}
+
+			.consent p {
+				margin: 0;
+				max-width: 48ch;
+			}
+
+			.consent-actions {
+				display: flex;
+				gap: 8px;
+			}
+
+			.consent button {
+				font: inherit;
+				font-weight: 600;
+				height: 34px;
+				padding: 0 14px;
+				border-radius: 7px;
+				cursor: pointer;
+				border: 1px solid var(--border-faint);
+				background: transparent;
+				color: var(--fg);
+			}
+
+			.consent button:hover {
+				border-color: var(--muted-fg);
+			}
+
+			.consent button.accept {
+				background: var(--brand);
+				border-color: transparent;
+				color: var(--brand-ink);
+			}
+
+			.consent button.accept:hover {
+				background: var(--brand-hover);
+			}
+
 		</style>
 	</head>
 
@@ -290,5 +332,68 @@
 				</span>
 			</div>
 		</footer>
+		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
+			<p>
+				We use Microsoft Clarity to understand how this page is used. Nothing is
+				loaded or stored until you agree.
+			</p>
+			<div class="consent-actions">
+				<button type="button" id="consent-decline">Decline</button>
+				<button type="button" id="consent-accept" class="accept">Accept</button>
+			</div>
+		</div>
+
+		<script>
+			// Clarity is not loaded until it is accepted: no cookie, no request to
+			// Microsoft, nothing recorded. A tag loaded "paused" still calls home.
+			(function () {
+				var KEY = 'aegix-analytics-consent';
+				var banner = document.getElementById('consent');
+				var stored = null;
+				try {
+					stored = localStorage.getItem(KEY);
+				} catch (e) {}
+
+				function startClarity() {
+					(function (c, l, a, r, i, t, y) {
+						c[a] =
+							c[a] ||
+							function () {
+								(c[a].q = c[a].q || []).push(arguments);
+							};
+						t = l.createElement(r);
+						t.async = 1;
+						t.src = 'https://www.clarity.ms/tag/' + i;
+						y = l.getElementsByTagName(r)[0];
+						y.parentNode.insertBefore(t, y);
+					})(window, document, 'clarity', 'script', 'yt1vdwre6g');
+				}
+
+				function remember(value) {
+					try {
+						localStorage.setItem(KEY, value);
+					} catch (e) {}
+				}
+
+				if (stored === 'granted') {
+					startClarity();
+					return;
+				}
+				if (stored === 'denied') {
+					return;
+				}
+
+				banner.hidden = false;
+				document.getElementById('consent-accept').addEventListener('click', function () {
+					remember('granted');
+					banner.hidden = true;
+					startClarity();
+				});
+				document.getElementById('consent-decline').addEventListener('click', function () {
+					remember('denied');
+					banner.hidden = true;
+				});
+			})();
+		</script>
 	</body>
 </html>
