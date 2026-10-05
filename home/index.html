@@ -502,6 +502,7 @@
 					<div class="feat"><h3>AI-assisted reasoning</h3><p>AI operates inside engineering context, generating suggestions and relationships for engineers to review.</p></div>
 					<div class="feat"><h3>Traceability</h3><p>Suggestions stay connected to the engineering information they came from.</p></div>
 					<div class="feat"><h3>Human-in-the-loop validation</h3><p>Engineers remain responsible for reviewing and approving the resulting analysis.</p></div>
+					<div class="feat"><h3>Where it runs</h3><p>Aegix runs in our cloud, or on your own infrastructure if your engineering data cannot leave it.</p></div>
 				</div>
 				<div class="pipeline">
 					<span class="pill">Engineering data</span><span class="sep">&rarr;</span>
@@ -520,18 +521,18 @@
 				<p class="eyebrow">Integrations</p>
 				<h2>Your FMEA belongs in the engineering ecosystem.</h2>
 				<p class="lede">
-					Aegix works alongside the tools your engineering teams already use —
-					connecting requirements, risk and development, in both directions.
-				</p>
+					Aegix reads requirements from <b>Polarion</b> and writes back to it, and takes
+					the rest as files: specifications, existing FMEAs, drawings and control
+					plans in; Excel worksheets, PDF reports and action lists out.</p>
 
 				<div class="flow-wrap">
 					<svg class="flow-svg" viewBox="0 0 980 260" role="img" aria-label="Aegix reads from and writes back to engineering tools">
-						<text class="lbl-sm" x="0" y="14">Engineering lifecycle</text>
+						<text class="lbl-sm" x="0" y="14">What goes in</text>
 						<rect class="box" x="0" y="30" width="236" height="36" rx="8"/><text class="lbl" x="16" y="53">Polarion</text>
-						<rect class="box" x="0" y="74" width="236" height="36" rx="8"/><text class="lbl" x="16" y="97">Codebeamer</text>
-						<rect class="box" x="0" y="118" width="236" height="36" rx="8"/><text class="lbl" x="16" y="141">Jira</text>
-						<rect class="box" x="0" y="162" width="236" height="36" rx="8"/><text class="lbl" x="16" y="185">Requirements systems</text>
-						<rect class="box" x="0" y="206" width="236" height="36" rx="8"/><text class="lbl" x="16" y="229">Verification &amp; validation</text>
+						<rect class="box" x="0" y="74" width="236" height="36" rx="8"/><text class="lbl" x="16" y="97">Requirements documents</text>
+						<rect class="box" x="0" y="118" width="236" height="36" rx="8"/><text class="lbl" x="16" y="141">Specifications</text>
+						<rect class="box" x="0" y="162" width="236" height="36" rx="8"/><text class="lbl" x="16" y="185">Existing FMEAs</text>
+						<rect class="box" x="0" y="206" width="236" height="36" rx="8"/><text class="lbl" x="16" y="229">Drawings &amp; control plans</text>
 
 						<path class="line" d="M236 48 C 300 48, 320 120, 380 120"/>
 						<path class="line" d="M236 92 C 300 92, 330 120, 380 120"/>
@@ -548,11 +549,11 @@
 						<path class="line" d="M580 120 C 640 120, 670 136, 720 136"/>
 						<path class="line" d="M580 120 C 640 120, 660 180, 720 180"/>
 
-						<text class="lbl-sm" x="720" y="14">Risk, connected</text>
+						<text class="lbl-sm" x="720" y="14">What comes out</text>
 						<rect class="box" x="720" y="30" width="236" height="36" rx="8"/><text class="lbl" x="736" y="53">FMEA</text>
 						<rect class="box" x="720" y="74" width="236" height="36" rx="8"/><text class="lbl" x="736" y="97">Risk analysis</text>
 						<rect class="box" x="720" y="118" width="236" height="36" rx="8"/><text class="lbl" x="736" y="141">Actions</text>
-						<rect class="box" x="720" y="162" width="236" height="36" rx="8"/><text class="lbl" x="736" y="185">Traceability</text>
+						<rect class="box" x="720" y="162" width="236" height="36" rx="8"/><text class="lbl" x="736" y="185">Excel &amp; PDF export</text>
 					</svg>
 				</div>
 
@@ -563,14 +564,14 @@
 				<figure class="frame" style="margin:0">
 					<div class="frame-bar">
 						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-						<span class="frame-path">app.aegix.eu / actions</span>
+						<span class="frame-path">app.aegix.eu / connected-sources</span>
 					</div>
 					<div class="frame-body">
-						<img src="shots/actions.png" width="2880" height="1310"
-						     alt="The Aegix action list for a project: each action shows whether it is a prevention action or a detection action, the risk it came from, who owns it, its priority, target date and status, with the group header counting open, overdue and high-priority work." />
+						<img src="shots/polarion.png" width="2880" height="1640"
+						     alt="A Polarion connection inside Aegix. The connector shows as connected with its server address and the linked Polarion project, and the panel below browses that project’s system requirements — each with its Polarion id, title, type and status, and a tick against the ones already pulled into the analysis." />
 					</div>
 				</figure>
-				<p class="shot-cap">Each action is linked to the risk it came from, and classified as prevention or detection.</p>
+				<p class="shot-cap">Browsing the linked Polarion project. A tick marks the requirements already pulled into the analysis.</p>
 			</div>
 		</section>
 
