@@ -127,6 +127,8 @@
 			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
 			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: 0.875rem; color: var(--subtle-fg); }
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
+			.shot-lede { margin: 0 auto 12px; max-width: 64ch; text-align: center; font-size: 0.8125rem;
+				font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); }
 			.shot.bleed-r { padding-right: 0; }
 			.shot.bleed-r .frame { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
 
@@ -293,7 +295,22 @@
 						     alt="A complete AIAG-VDA DFMEA worksheet in Aegix. Five column groups run left to right: structure analysis naming the next higher level, the focus element and the next lower level; function analysis; failure analysis with the effect, the mode and the cause; the severity, occurrence and detection ratings with the resulting action priority; and optimisation, with the linked actions and the re-rated values." />
 					</div>
 				</figure>
-				<p class="shot-cap">The whole seven-step worksheet on one screen: <b>structure</b>, <b>function</b>, <b>failure</b>, the <b>S · O · D</b> ratings and the Action Priority they produce, then <b>optimisation</b> — every row carrying the artifact code of the element and function it came from.</p>
+				<p class="shot-cap">Every column the handbook asks for, in one table — <b>structure</b>, <b>function</b>, <b>failure</b>, the <b>S · O · D</b> ratings and the Action Priority they produce, then <b>optimisation</b>.</p>
+			</div>
+
+			<div class="shot" style="margin-top:40px">
+				<p class="shot-lede">The same worksheet, focused</p>
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
+					</div>
+					<div class="frame-body">
+						<img src="shots/identification.png" width="3040" height="1620"
+						     alt="The same Aegix worksheet in its ratings view. Each row collapses the structure and failure columns into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each on its own line with a coloured tag — leaving the severity, occurrence and detection ratings, the action priority, the linked actions and the re-rated values beside it." />
+					</div>
+				</figure>
+				<p class="shot-cap">One worksheet, two ways to read it. Here the chain is stacked in a single cell — <b>element, function, effect, mode, cause</b> — so the ratings and the actions sit next to the reasoning that produced them.</p>
 			</div>
 		</section>
 
@@ -415,7 +432,7 @@
 					</div>
 					<div class="frame-body">
 						<img src="shots/structure.png" width="3520" height="2190"
-						     alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the ALM item that requirement came from, and the six failure modes found for it." />
+						     alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
 					</div>
 				</figure>
 				<p class="shot-cap">The structure behind the worksheet, and what the worksheet points at. The banner says where it came from — <b>generated from three documents, then worked on by engineers</b> — and each function carries its own requirement and failure-mode counts.</p>
