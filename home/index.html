@@ -129,6 +129,22 @@
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
 			.shot-lede { margin: 0 auto 12px; max-width: 64ch; text-align: center; font-size: 0.8125rem;
 				font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); }
+
+			/* View switcher. It mirrors the control inside the product, because the
+			   point is that these are three views of one worksheet, not three
+			   products. The panels stay in the DOM so switching never reflows the
+			   page from scratch; `hidden` needs the explicit rule because a later
+			   `display` would otherwise beat the UA stylesheet. */
+			.views { display: flex; justify-content: center; gap: 4px; margin: 0 auto 16px; flex-wrap: wrap; }
+			.views button {
+				font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--muted-fg);
+				background: transparent; border: 1px solid transparent; border-radius: 8px;
+				padding: 7px 14px; cursor: pointer;
+			}
+			.views button:hover { color: var(--fg); background: var(--bg-soft); }
+			.views button[aria-selected="true"] { color: var(--brand); background: #eaf1fd; border-color: #cfe0fb; }
+			.views button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+			.view-panel[hidden] { display: none; }
 			.shot.bleed-r { padding-right: 0; }
 			.shot.bleed-r .frame { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
 
@@ -285,32 +301,48 @@
 			</div>
 
 			<div class="shot" style="margin-top:56px">
-				<figure class="frame" style="margin:0">
-					<div class="frame-bar">
-						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-						<span class="frame-path">app.aegix.eu / worksheet</span>
-					</div>
-					<div class="frame-body">
-						<img src="shots/worksheet.png" width="2960" height="625"
-						     alt="A complete AIAG-VDA DFMEA worksheet in Aegix. Five column groups run left to right: structure analysis naming the next higher level, the focus element and the next lower level; function analysis; failure analysis with the effect, the mode and the cause; the severity, occurrence and detection ratings with the resulting action priority; and optimisation, with the linked actions and the re-rated values." />
-					</div>
-				</figure>
-				<p class="shot-cap">Every column the handbook asks for, in one table — <b>structure</b>, <b>function</b>, <b>failure</b>, the <b>S · O · D</b> ratings and the Action Priority they produce, then <b>optimisation</b>.</p>
-			</div>
-
-			<div class="shot" style="margin-top:40px">
-				<p class="shot-lede">The same worksheet, focused</p>
-				<figure class="frame" style="margin:0">
-					<div class="frame-bar">
-						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-						<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
-					</div>
-					<div class="frame-body">
-						<img src="shots/identification.png" width="3040" height="1620"
-						     alt="The same Aegix worksheet in its ratings view. Each row collapses the structure and failure columns into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each on its own line with a coloured tag — leaving the severity, occurrence and detection ratings, the action priority, the linked actions and the re-rated values beside it." />
-					</div>
-				</figure>
-				<p class="shot-cap">One worksheet, two ways to read it. Here the chain is stacked in a single cell — <b>element, function, effect, mode, cause</b> — so the ratings and the actions sit next to the reasoning that produced them.</p>
+				<div class="views" role="tablist" aria-label="Worksheet views">
+					<button type="button" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true" tabindex="0">All</button>
+					<button type="button" role="tab" id="tab-structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1">Structure &amp; Failure</button>
+					<button type="button" role="tab" id="tab-ratings" aria-controls="panel-ratings" aria-selected="false" tabindex="-1">Ratings &amp; Actions</button>
+				</div>
+				<div class="view-panel" id="panel-all" role="tabpanel" aria-labelledby="tab-all">
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-all.png" width="2960" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
+						</div>
+					</figure>
+					<p class="shot-cap">Every column the handbook asks for, in one table.</p>
+				</div>
+				<div class="view-panel" id="panel-structure" role="tabpanel" aria-labelledby="tab-structure" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet · structure &amp; failure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-structure.png" width="4320" height="1215" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
+						</div>
+					</figure>
+					<p class="shot-cap">The reasoning on its own — what fails, where, and why.</p>
+				</div>
+				<div class="view-panel" id="panel-ratings" role="tabpanel" aria-labelledby="tab-ratings" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-ratings.png" width="3040" height="1620" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The numbers, next to the reasoning that produced them.</p>
+				</div>
+				<p class="shot-cap" style="margin-top:4px">One worksheet, three ways to read it — the same three views the product gives the engineer.</p>
 			</div>
 		</section>
 
@@ -749,5 +781,39 @@
 				</span>
 			</div>
 		</footer>
-	</body>
+	
+	<script>
+		// Tab switching for the worksheet views, with the arrow-key behaviour a
+		// tablist is expected to have. No library: three buttons and a hidden
+		// attribute do not need one.
+		(function () {
+			var list = document.querySelector('.views');
+			if (!list) return;
+			var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+			function select(tab, focus) {
+				tabs.forEach(function (t) {
+					var on = t === tab;
+					t.setAttribute('aria-selected', on ? 'true' : 'false');
+					t.tabIndex = on ? 0 : -1;
+					var panel = document.getElementById(t.getAttribute('aria-controls'));
+					if (panel) panel.hidden = !on;
+				});
+				if (focus) tab.focus();
+			}
+			list.addEventListener('click', function (e) {
+				var tab = e.target.closest('[role="tab"]');
+				if (tab) select(tab, false);
+			});
+			list.addEventListener('keydown', function (e) {
+				var i = tabs.indexOf(document.activeElement);
+				if (i < 0) return;
+				if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+					e.preventDefault();
+					select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+				} else if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
+				else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+			});
+		})();
+	</script>
+</body>
 </html>
