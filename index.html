@@ -180,16 +180,16 @@
 			}
 
 			.actions {
-				margin-top: 38px;
+				margin-top: 30px;
 			}
 
 			.btn {
 				display: inline-flex;
 				align-items: center;
-				height: 44px;
-				padding: 0 20px;
-				border-radius: 8px;
-				font-size: 15px;
+				height: 36px;
+				padding: 0 16px;
+				border-radius: 7px;
+				font-size: 13.5px;
 				font-weight: 600;
 				text-decoration: none;
 				background: var(--brand);
@@ -253,6 +253,13 @@
 				font-size: 12px;
 				line-height: 1.5;
 				color: #5b6673;
+			}
+
+			/* display:flex in an author sheet beats the browser's own
+			   [hidden] { display: none }, so hiding it needs saying explicitly —
+			   without this, Accept set the attribute and nothing moved. */
+			.consent[hidden] {
+				display: none;
 			}
 
 			.consent p {
