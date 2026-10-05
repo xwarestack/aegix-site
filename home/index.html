@@ -99,6 +99,13 @@
 			.hero h1 { font-size: clamp(2rem, 1.2rem + 2.7vw, 3.1rem); line-height: 1.07; }
 			.hero h1 em { font-style: normal; color: var(--brand); }
 			.hero .sub { margin-top: 20px; max-width: 54ch; font-size: 1.125rem; color: var(--muted-fg); }
+			/* The hero copy is centred because the product shot under it is wider than
+			   the text column; left-aligned copy over a wider image reads as a
+			   misalignment rather than a composition. */
+			.hero .shell { text-align: center; }
+			.hero h1 { margin-inline: auto; max-width: 21ch; }
+			.hero .sub, .hero .kicker { margin-inline: auto; }
+			.hero .actions, .hero .chips { justify-content: center; }
 			.chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 7px; }
 			.chip { font-size: 12px; font-weight: 600; color: var(--muted-fg); border: 1px solid var(--border); background: #fff; padding: 5px 11px; border-radius: 999px; }
 
@@ -112,6 +119,25 @@
 			.frame-dots i { width: 9px; height: 9px; border-radius: 50%; background: #d3d8df; display: block; }
 			.frame-path { font-family: var(--mono); font-size: 11px; color: var(--subtle-fg); }
 			.frame-body { padding: 0; }
+			.frame-body img { display: block; width: 100%; height: auto; }
+
+			/* A screenshot of the app is only worth showing if its own type stays
+			   readable, which the 71rem text column cannot do. These sit wider than
+			   the prose and fall back to the viewport on a laptop. */
+			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
+			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: 0.875rem; color: var(--subtle-fg); }
+			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
+			.shot.bleed-r { padding-right: 0; }
+			.shot.bleed-r .frame { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
+
+			/* A dense table shrunk to phone width is a grey smear, not a screenshot.
+			   Below the breakpoint the frame keeps the image at a readable size and
+			   pans inside its own box, so the page itself never scrolls sideways. */
+			@media (max-width: 60rem) {
+				.shot { padding: 0 16px; }
+				.frame-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+				.frame-body img { width: 860px; max-width: none; }
+			}
 
 			.ws-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border-faint); }
 			.ws-id { font-family: var(--mono); font-size: 11.5px; color: var(--brand); font-weight: 500; }
@@ -227,7 +253,7 @@
 					<a class="hide-sm" href="#platform">Platform</a>
 					<a class="hide-sm" href="#ecosystem">Ecosystem</a>
 					<a class="hide-sm" href="#industries">Industries</a>
-					<a href="https://app.aegix.eu">Sign in</a>
+					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
 					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
 				</nav>
 			</div>
@@ -235,59 +261,39 @@
 
 		<!-- ── Hero ─────────────────────────────────── -->
 		<section class="hero">
-			<div class="shell hero-grid">
-				<div>
-					<p class="eyebrow">Engineering intelligence for FMEA</p>
-					<h1>Your engineering data already contains the knowledge you need to <em>understand risk</em>.</h1>
-					<p class="sub">
-						Aegix uses AI to turn requirements, specifications, existing FMEAs and
-						engineering knowledge into structured, traceable risk analysis.
-					</p>
-					<p class="kicker">Less time building the FMEA. More time thinking about the risk.</p>
-					<div class="actions">
-						<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
-						<a class="btn btn-ghost" href="#platform">See Aegix in action</a>
-					</div>
-					<div class="chips">
-						<span class="chip">AI-assisted</span>
-						<span class="chip">AIAG &amp; VDA</span>
-						<span class="chip">Requirements traceability</span>
-						<span class="chip">ALM integration</span>
-						<span class="chip">Human-in-the-loop</span>
-					</div>
+			<div class="shell">
+				<p class="eyebrow">Engineering intelligence for FMEA</p>
+				<h1>Your engineering data already contains the knowledge you need to <em>understand risk</em>.</h1>
+				<p class="sub">
+					Aegix uses AI to turn requirements, specifications, existing FMEAs and
+					engineering knowledge into structured, traceable risk analysis.
+				</p>
+				<p class="kicker">Less time building the FMEA. More time thinking about the risk.</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
+					<a class="btn btn-ghost" href="#platform">See Aegix in action</a>
 				</div>
+				<div class="chips">
+					<span class="chip">AI-assisted</span>
+					<span class="chip">AIAG &amp; VDA</span>
+					<span class="chip">Requirements traceability</span>
+					<span class="chip">ALM integration</span>
+					<span class="chip">Human-in-the-loop</span>
+				</div>
+			</div>
 
+			<div class="shot" style="margin-top:56px">
 				<figure class="frame" style="margin:0">
 					<div class="frame-bar">
 						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
 						<span class="frame-path">app.aegix.eu / worksheet</span>
 					</div>
 					<div class="frame-body">
-						<div class="ws-head">
-							<span class="ws-id">RSK-0042</span>
-							<span class="ws-tag">DFMEA &middot; v A.1 &middot; draft</span>
-						</div>
-						<div class="row"><span class="row-k">Next higher</span><span class="row-v"><span class="code">SYS-001</span>Thermal management system</span></div>
-						<div class="row"><span class="row-k">Focus element</span><span class="row-v"><span class="code">SUB-015</span>Temperature sensing</span></div>
-						<div class="row"><span class="row-k">Function</span><span class="row-v"><span class="code">FUNC-21</span>Maintain conditions within defined limits</span></div>
-						<div class="row"><span class="row-k">Failure mode</span><span class="row-v"><span class="code">FM-200</span>Operating condition exceeds limit</span></div>
-						<div class="row"><span class="row-k">Cause</span><span class="row-v"><span class="code">FC-118</span>Temperature sensing failure</span></div>
-						<div class="row"><span class="row-k">Effect</span><span class="row-v"><span class="code">FE-402</span>Incorrect thermal control</span></div>
-						<div class="scores">
-							<div class="score"><b>S</b><span>8</span></div>
-							<div class="score"><b>O</b><span>6</span></div>
-							<div class="score"><b>D</b><span>7</span></div>
-							<div class="score ap"><b>AP</b><span>High</span></div>
-						</div>
-						<div class="scores">
-							<div class="score"><b>NEW S</b><span>8</span></div>
-							<div class="score"><b>NEW O</b><span>3</span></div>
-							<div class="score"><b>NEW D</b><span>3</span></div>
-							<div class="score ap ok"><b>NEW AP</b><span>Low</span></div>
-						</div>
-						<p class="ws-foot">One row, before and after the action — with every element traceable to where it came from.</p>
+						<img src="shots/worksheet.png" width="2880" height="1620"
+						     alt="An Aegix DFMEA worksheet for a thermal management system. Each row carries the failure chain — element, function, failure effect, failure mode, failure cause — then severity, occurrence and detection, the resulting Action Priority, the linked actions, and the re-rated values after those actions." />
 					</div>
 				</figure>
+				<p class="shot-cap">One worksheet, read left to right: <b>the failure chain</b>, then <b>S &middot; O &middot; D</b> and the Action Priority they produce, then <b>the actions</b>, then what the ratings become once those actions land.</p>
 			</div>
 		</section>
 
@@ -400,41 +406,46 @@
 				</div>
 				<p class="kicker">Not generated text — structured engineering knowledge that can be reviewed, challenged and traced.</p>
 			</div>
+
+			<div class="shot" style="margin-top:48px">
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / dfmea-structure</span>
+					</div>
+					<div class="frame-body">
+						<img src="shots/structure.png" width="2880" height="1630"
+						     alt="The DFMEA structure of a thermal management system in Aegix, listed as a chain: the system, its function, the requirement that function must meet, then each subsystem and component with their own functions, requirements and failure modes. Every row names its parent." />
+					</div>
+				</figure>
+				<p class="shot-cap">The structure behind the worksheet. A requirement sits under the function it constrains, a failure mode under the function it threatens — so <b>every row knows where it came from</b>.</p>
+			</div>
 		</section>
 
-		<!-- ── Risk, seen ───────────────────────────── -->
+		<!-- ── Risk, seen ─────────────────────── -->
 		<section class="alt">
-			<div class="shell split rev">
-				<div class="matrix">
-					<div class="mx" aria-hidden="true">
-						<i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#b3261e"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i>
-						<i style="background:#e8f5ee"></i><i style="background:#fdf3e0"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#fdecea"></i><i style="background:#b3261e"></i>
+			<div class="shell narrow" style="text-align:center">
+				<p class="eyebrow">Seeing the whole programme</p>
+				<h2>Risk you can see, not risk you have to read.</h2>
+				<p class="lede" style="margin-left:auto;margin-right:auto">
+					Action Priority distribution, High AP coverage, overdue actions and the
+					risk profile — per worksheet, per project, or across the programme, with
+					the analysis one click away from the number.
+				</p>
+			</div>
+
+			<div class="shot" style="margin-top:44px">
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / analytics</span>
 					</div>
-					<div class="mx-legend">
-						<span><em style="background:#e8f5ee"></em>Low</span>
-						<span><em style="background:#fdf3e0"></em>Medium</span>
-						<span><em style="background:#fdecea"></em>High</span>
-						<span style="margin-left:auto">Severity &times; Occurrence</span>
+					<div class="frame-body">
+						<img src="shots/analytics.png" width="2880" height="1640"
+						     alt="The Aegix analytics screen: high Action Priority without an action, overdue actions, safety-critical count and High AP coverage across the top; below them a severity-by-occurrence matrix, the Action Priority distribution, risk by worksheet, and the highest-priority risks listed in order." />
 					</div>
-				</div>
-				<div>
-					<p class="eyebrow">Seeing the whole programme</p>
-					<h2>Risk you can see, not risk you have to read.</h2>
-					<p class="lede">
-						Action Priority distribution, High AP coverage, overdue actions and the
-						risk profile — per worksheet, per project, or across the programme, with
-						the analysis one click away from the number.
-					</p>
-					<p class="kicker">The questions an audit asks, answered on one screen.</p>
-				</div>
+				</figure>
+				<p class="shot-cap">The questions an audit asks, answered on one screen — including the one that matters most: <b>does every High have an action?</b></p>
 			</div>
 		</section>
 
@@ -504,6 +515,20 @@
 				</div>
 
 				<p class="kicker">Not another isolated repository — risk analysis connected to the engineering lifecycle.</p>
+			</div>
+
+			<div class="shot" style="margin-top:48px">
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / actions</span>
+					</div>
+					<div class="frame-body">
+						<img src="shots/actions.png" width="2880" height="1310"
+						     alt="The Aegix action list for a project: each action shows whether it is a prevention action or a detection action, the risk it came from, who owns it, its priority, target date and status, with the group header counting open, overdue and high-priority work." />
+					</div>
+				</figure>
+				<p class="shot-cap">Actions carry the risk they came from and what they are for — <b>a prevention action lowers occurrence, a detection action lowers detection</b> — which is what makes a re-rating defensible.</p>
 			</div>
 		</section>
 
