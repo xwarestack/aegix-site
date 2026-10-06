@@ -832,7 +832,7 @@
 					<h2>Start a conversation.</h2>
 					<p class="lede">
 						Ask a question, arrange a demo, or tell us what you would want to try
-						Aegix on. We typically respond within 24–48 hours.
+						Aegix on.
 					</p>
 					<form class="form" id="demo-form" novalidate>
 						<!-- Honeypot: a bot fills this, a person never sees it and a copy never catches it. -->
@@ -848,7 +848,7 @@
 								<input id="f-company" name="company" type="text" maxlength="160" required autocomplete="organization" aria-describedby="e-company" />
 								<p class="err" id="e-company">Which organisation is this for?</p></div>
 							<div class="field"><label for="f-subject">Subject</label>
-								<input id="f-subject" name="subject" type="text" maxlength="160" required placeholder="How can we help?" aria-describedby="e-subject" />
+								<input id="f-subject" name="subject" type="text" maxlength="160" required aria-describedby="e-subject" />
 								<p class="err" id="e-subject">A few words on what this is about.</p></div>
 							<div class="field wide"><label for="f-message">Message</label>
 								<textarea id="f-message" name="message" maxlength="3000" required aria-describedby="e-message"></textarea>
@@ -857,7 +857,7 @@
 						<div class="actions">
 							<button class="btn btn-primary" type="submit" id="f-submit">Send message</button>
 						</div>
-						<p class="form-note">We read these ourselves. You can also write to <a href="mailto:hello@aegix.eu">hello@aegix.eu</a>.</p>
+						<p class="form-note">Or write to <a href="mailto:hello@aegix.eu">hello@aegix.eu</a>.</p>
 						<p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
 					</form>
 				</div>
@@ -866,13 +866,12 @@
 
 		<footer>
 			<div class="shell foot">
-				<span>&copy; 2026 XWARE &middot; Aegix turns engineering knowledge into structured, traceable risk analysis.</span>
+				<span>&copy; 2026 XWARE</span>
 				<!-- TODO: replace with the innoviris.brussels mark. -->
 				<span>Funded by innoviris.brussels</span>
 				<span class="foot-links">
 					<a href="https://app.aegix.eu">Sign in</a>
-					<a href="mailto:hello@aegix.eu">Contact</a>
-					<a href="#">Legal</a>
+					<a href="mailto:hello@aegix.eu">hello@aegix.eu</a>
 				</span>
 			</div>
 		</footer>
