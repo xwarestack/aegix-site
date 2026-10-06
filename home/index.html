@@ -352,6 +352,16 @@
 				footer .foot-links a { display: inline-flex; align-items: center; min-height: 44px; }
 				.form-note a { display: inline-block; padding-block: 6px; }
 			}
+
+			/* The narrowest phones. The bar carries a wordmark, a CTA and the menu
+			   button; together they overran a 320px iPhone SE by 4px. Tightening the
+			   gutter and the button padding buys that back without dropping anything
+			   out of the bar. */
+			@media (max-width: 22.5rem) {
+				.shell { padding: 0 14px; }
+				nav { gap: 8px; }
+				.btn { padding: 0 12px; }
+			}
 		</style>
 	</head>
 
