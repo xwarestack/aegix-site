@@ -3,329 +3,1035 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Aegix</title>
+		<title>Aegix — Engineering intelligence for FMEA</title>
 		<meta
 			name="description"
-			content="Aegix is FMEA software built on the AIAG-VDA method — the failure chain end to end, prioritised by Action Priority."
+			content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions."
 		/>
-		<meta name="robots" content="noindex" />
-		<meta name="color-scheme" content="dark" />
+		<link rel="canonical" href="https://aegix.eu/" />
 
+		<!-- A link to this page is the first thing most people will see of it,
+		     so the card is part of the page, not an afterthought. -->
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Aegix" />
 		<meta property="og:site_name" content="Aegix" />
-		<meta
-			property="og:description"
-			content="FMEA software built on the AIAG-VDA method."
-		/>
+		<meta property="og:locale" content="en_GB" />
 		<meta property="og:url" content="https://aegix.eu/" />
-		<meta property="og:image" content="https://aegix.eu/hero-earth.jpg" />
+		<meta property="og:title" content="Aegix — Engineering intelligence for FMEA" />
+		<meta property="og:description" content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions." />
+		<meta property="og:image" content="https://aegix.eu/og.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="The Aegix FMEA worksheet, showing the failure chain with ratings and action priority." />
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Aegix — Engineering intelligence for FMEA" />
+		<meta name="twitter:description" content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions." />
+		<meta name="twitter:image" content="https://aegix.eu/og.png" />
+
+		<!-- Structured data. The Organization block mirrors the one published at
+		     xware-engineering.com and shares its @id, so search engines and
+		     assistants resolve one entity instead of two. No offers and no
+		     aggregateRating: there is no public pricing and there are no reviews,
+		     and inventing either is a manual action waiting to happen. -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Organization",
+					"@id": "https://xware-engineering.com/#organization",
+					"name": "XWARE",
+					"url": "https://xware-engineering.com",
+					"logo": "https://xware-engineering.com/images/xware-logo.jpg",
+					"description": "Engineering consultancy for safety-critical systems",
+					"foundingDate": "2021",
+					"email": "hello@aegix.eu",
+					"address": [
+						{ "@type": "PostalAddress", "addressLocality": "Brussels", "addressCountry": "Belgium" },
+						{ "@type": "PostalAddress", "addressLocality": "Ia\u0219i", "addressCountry": "Romania" }
+					],
+					"sameAs": [
+						"https://www.linkedin.com/company/xware-technology",
+						"https://github.com/xwarestack"
+					]
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://aegix.eu/#website",
+					"url": "https://aegix.eu/",
+					"name": "Aegix",
+					"inLanguage": "en",
+					"publisher": { "@id": "https://xware-engineering.com/#organization" }
+				},
+				{
+					"@type": "SoftwareApplication",
+					"@id": "https://aegix.eu/#aegix",
+					"name": "Aegix",
+					"alternateName": "Aegix FMEA",
+					"applicationCategory": "BusinessApplication",
+					"applicationSubCategory": "FMEA software",
+					"operatingSystem": "Web browser",
+					"url": "https://aegix.eu/",
+					"description": "Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions.",
+					"inLanguage": "en",
+					"image": "https://aegix.eu/og.png",
+					"publisher": { "@id": "https://xware-engineering.com/#organization" },
+					"author": { "@id": "https://xware-engineering.com/#organization" },
+					"isAccessibleForFree": false,
+					"featureList": [
+						"Design FMEA (DFMEA)",
+						"Process FMEA (PFMEA)",
+						"AIAG-VDA seven-step method",
+						"Action Priority rating",
+						"Structure, function and failure analysis",
+						"Requirements traceability",
+						"Polarion ALM integration",
+						"AI-assisted generation with human review",
+						"Configurable FMEA templates"
+					],
+					"funder": {
+						"@type": "Organization",
+						"name": "Innoviris",
+						"url": "https://innoviris.brussels"
+					}
+				}
+			]
+		}
+		</script>
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="preload" as="image" href="hero-earth.jpg" fetchpriority="high" />
-
-
 		<link
 			rel="icon"
-			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230052CC'/%3E%3Ctext x='16' y='23' font-family='Segoe UI,Helvetica,Arial,sans-serif' font-size='20' font-weight='700' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230052CC'/%3E%3Crect x='14' y='7' width='4' height='18' rx='2' fill='white'/%3E%3C/svg%3E"
 		/>
 
 		<style>
 			:root {
-				--ink: #010101;
-				--fg: #eef2f7;
-				--muted-fg: #9fabba;
-				--subtle-fg: #76818f;
-				--border-faint: #1b232c;
-				--brand: #4c9aff;
-				--brand-hover: #7ab4ff;
-				--brand-ink: #06101f;
+				--bg: #ffffff;
+				--bg-soft: #f7f8fa;
+				--ink: #0b1016;
+				--fg: #161d2b;
+				--muted-fg: #4a5060;
+				--subtle-fg: #6b7280;
+				--border: #d9dde4;
+				--border-faint: #eaedf1;
+				--brand: #0052cc;
+				--brand-hover: #0747a6;
+				--brand-faint: #eaf1fd;
+				--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+				/* Type scale. Six steps and two fluid heads; every font-size on the
+				   page resolves to one of these. rem throughout, so a reader who has
+				   raised their browser font size scales with it -- px sizes do not.
+				   0.75rem (12px) is the floor, matching the product's design system. */
+				--t-xs: 0.75rem;     /* 12px - eyebrows, labels, chips, table heads */
+				--t-sm: 0.8125rem;   /* 13px - captions, errors, footer, consent */
+				--t-md: 0.875rem;    /* 14px - nav, buttons, tabs, card and table body */
+				--t-lg: 0.9375rem;   /* 15px - form fields, chain values */
+				--t-xl: 1.0625rem;   /* 17px - ledes, kickers, h3, wordmark */
+				--t-2xl: 1.25rem;    /* 20px - hero sub only */
+				--t-h2: clamp(1.6rem, 1.15rem + 1.6vw, 2.35rem);
+				--t-h1: clamp(2rem, 1.2rem + 2.7vw, 3.1rem);
 			}
 
-			* {
-				box-sizing: border-box;
-			}
-
-			html {
-				-webkit-text-size-adjust: 100%;
-			}
-
+			* { box-sizing: border-box; }
+			html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 			body {
-				margin: 0;
-				min-height: 100vh;
-				display: flex;
-				flex-direction: column;
-				background: var(--ink);
-				color: var(--fg);
-				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-					'Helvetica Neue', Arial, sans-serif;
-				font-size: 16px;
-				line-height: 1.6;
-				-webkit-font-smoothing: antialiased;
+				margin: 0; background: var(--bg); color: var(--fg);
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+				font-size: 1rem; line-height: 1.6; -webkit-font-smoothing: antialiased;
 			}
 
-			/* ── The photograph ───────────────────────────────────────────
-			   Earth sits right of centre so the left half stays the near-black
-			   it already is in the frame; the scrim only guarantees it at
-			   narrow widths, where cover crops the subject toward the text. */
-			.sky {
-				position: fixed;
-				inset: 0;
-				z-index: -1;
-				overflow: hidden;
-				background-color: var(--ink);
-			}
+			.shell { width: 100%; max-width: 71rem; margin: 0 auto; padding: 0 20px; }
+			.narrow { max-width: 50rem; }
+			section { padding: 92px 0; }
+			.alt { background: var(--bg-soft); border-block: 1px solid var(--border-faint); }
+			.dark { background: var(--ink); color: #fff; }
+			.dark h2 { color: #fff; }
+			.dark .lede, .dark p { color: #a7b0bd; }
+			.dark .eyebrow { color: #76acff; }
+			.dark .kicker { color: #fff; }
 
-			.sky img {
-				position: absolute;
-				left: 50%;
-				top: 100%;
-				transform: translate(calc(-50% + 1.9vw), -75%);
-				width: 76vw;
-				max-width: none;
+			h1, h2, h3 { letter-spacing: -0.026em; text-wrap: balance; margin: 0; }
+			h2 { font-size: var(--t-h2); line-height: 1.14; }
+			h3 { font-size: var(--t-xl); line-height: 1.35; }
+			p { margin: 0; }
+			a { color: var(--brand); }
+
+			.eyebrow { font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand); margin: 0 0 14px; }
+			.lede { margin-top: 16px; max-width: 60ch; font-size: var(--t-xl); color: var(--muted-fg); }
+			.kicker { margin-top: 26px; font-size: var(--t-xl); font-weight: 600; max-width: 56ch; letter-spacing: -0.01em; }
+
+			/* ── Header ───────────────────────────────── */
+			header { position: sticky; top: 0; z-index: 40; background: rgb(255 255 255 / 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-faint); }
+			.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+			.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: var(--t-xl); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+			.mark { width: 4px; height: 34px; border-radius: 999px; background: var(--brand); flex: none; }
+			.brand small { display: block; font-size: var(--t-xs); font-weight: 500; color: var(--subtle-fg); line-height: 1.2; margin-top: 2px; letter-spacing: 0; }
+			nav { display: flex; align-items: center; gap: 20px; font-size: var(--t-md); font-weight: 500; }
+			nav a { color: var(--muted-fg); text-decoration: none; }
+			nav a:hover { color: var(--fg); }
+			/* Below 60rem the section links collapse into a disclosure. They used
+			   to simply vanish, which also took "Sign in" with them -- a customer on
+			   a phone had no way into the app except a 16px link in the footer. */
+			.nav-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; padding: 0; background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--muted-fg); cursor: pointer; }
+			.nav-toggle:hover { border-color: var(--muted-fg); color: var(--fg); }
+			.nav-menu { border-top: 1px solid var(--border-faint); background: #fff; }
+			.nav-menu[hidden] { display: none; }
+			.nav-menu .shell { display: flex; flex-direction: column; padding-block: 4px 12px; }
+			.nav-menu a { display: flex; align-items: center; min-height: 48px; font-size: var(--t-md); font-weight: 500; color: var(--muted-fg); text-decoration: none; border-bottom: 1px solid var(--border-faint); }
+			.nav-menu a:last-child { border-bottom: 0; color: var(--brand); font-weight: 600; }
+			.nav-menu a:hover { color: var(--fg); }
+			.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+			@media (max-width: 60rem) {
+				nav .hide-sm { display: none; }
+				.nav-toggle { display: inline-flex; }
+			}
+			/* Never leave it open behind a desktop layout after a resize. */
+			@media (min-width: 60.0625rem) { .nav-menu { display: none; } }
+
+			.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 8px; font: inherit; font-size: var(--t-md); font-weight: 600; text-decoration: none; border: 1px solid transparent; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease; }
+			.btn-primary { background: var(--brand); color: #fff; }
+			.btn-primary:hover { background: var(--brand-hover); }
+			.btn-ghost { border-color: var(--border); color: var(--fg); background: #fff; }
+			.btn-ghost:hover { border-color: var(--muted-fg); }
+			a:focus-visible, .btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+			.actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+			/* ── Hero ─────────────────────────────────── */
+			.hero { padding: 72px 0 84px; position: relative; overflow: hidden; }
+			.hero::before {
+				content: ''; position: absolute; inset: -40% -10% auto -10%; height: 70%;
+				background: radial-gradient(60% 60% at 50% 50%, rgb(0 82 204 / 0.07), transparent 70%);
 				pointer-events: none;
-				/* Only the top needs fading now: the page and the photograph share one
-				   black, so the frame's other edges cannot be seen. */
-				-webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 16%);
-				mask-image: linear-gradient(180deg, transparent 0%, #000 16%);
+			}
+			.hero-grid { position: relative; display: grid; gap: 52px; align-items: center; }
+			@media (min-width: 64rem) { .hero-grid { grid-template-columns: 0.95fr 1.05fr; gap: 56px; } }
+			.hero h1 { font-size: var(--t-h1); line-height: 1.07; }
+			.hero h1 em { font-style: normal; color: var(--brand); }
+			.hero .sub { margin-top: 20px; max-width: 54ch; font-size: var(--t-2xl); color: var(--muted-fg); }
+			/* The hero copy is centred because the product shot under it is wider than
+			   the text column; left-aligned copy over a wider image reads as a
+			   misalignment rather than a composition. */
+			.hero .shell { text-align: center; }
+			.hero h1 { margin-inline: auto; max-width: 21ch; }
+			.hero .sub, .hero .kicker { margin-inline: auto; }
+			.hero .actions, .hero .chips { justify-content: center; }
+			.chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 7px; }
+			.chip { font-size: var(--t-xs); font-weight: 600; color: var(--muted-fg); border: 1px solid var(--border); background: #fff; padding: 5px 11px; border-radius: 999px; }
+
+			/* ── Product frame ────────────────────────── */
+			.frame {
+				border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff;
+				box-shadow: 0 1px 2px rgb(11 16 22 / .04), 0 30px 60px -24px rgb(11 16 22 / .25);
+			}
+			.frame-bar { display: flex; align-items: center; gap: 8px; padding: 9px 13px; background: var(--bg-soft); border-bottom: 1px solid var(--border-faint); }
+			.frame-dots { display: flex; gap: 5px; }
+			.frame-dots i { width: 9px; height: 9px; border-radius: 50%; background: #d3d8df; display: block; }
+			.frame-path { font-family: var(--mono); font-size: var(--t-xs); color: var(--subtle-fg); }
+			.frame-body { padding: 0; }
+			.frame-body img { display: block; width: 100%; height: auto; }
+
+			/* A screenshot of the app is only worth showing if its own type stays
+			   readable, which the 71rem text column cannot do. These sit wider than
+			   the prose and fall back to the viewport on a laptop. */
+			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
+			/* The three worksheet views share one capture width, so they render at
+			   one scale. Giving them a wider container than the prose keeps that
+			   shared scale readable on a large screen. */
+			.shot.wide { max-width: 120rem; }
+			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: var(--t-md); color: var(--subtle-fg); }
+			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
+
+			/* View switcher. It mirrors the control inside the product, because the
+			   point is that these are three views of one worksheet, not three
+			   products. The panels stay in the DOM so switching never reflows the
+			   page from scratch; `hidden` needs the explicit rule because a later
+			   `display` would otherwise beat the UA stylesheet. */
+			.views { display: flex; justify-content: center; gap: 4px; margin: 0 auto 16px; flex-wrap: wrap; }
+			.views button {
+				font: inherit; font-size: var(--t-md); font-weight: 600; color: var(--muted-fg);
+				background: transparent; border: 1px solid transparent; border-radius: 8px;
+				padding: 7px 14px; cursor: pointer;
+			}
+			.views button:hover { color: var(--fg); background: var(--bg-soft); }
+			.views button[aria-selected="true"] { color: var(--brand); background: #eaf1fd; border-color: #cfe0fb; }
+			.views button:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+			.view-panel[hidden] { display: none; }
+			.shot.bleed-r { padding-right: 0; }
+			.shot.bleed-r .frame { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
+
+			/* A dense table shrunk to phone width is a grey smear, not a screenshot.
+			   Below the breakpoint the frame keeps the image at a readable size and
+			   pans inside its own box, so the page itself never scrolls sideways. */
+			@media (max-width: 60rem) {
+				.shot { padding: 0 16px; }
+				.frame-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+				.frame-body img { width: 860px; max-width: none; }
 			}
 
-			/* Soft darkening where the horizon meets the copy, and again at the very
-			   bottom: the lit limb runs straight through the footer at wide sizes and
-			   swallowed the address. */
-			.sky::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(
-					180deg,
-					rgb(1 1 1 / 0.45) 0%,
-					rgb(1 1 1 / 0.2) 45%,
-					rgb(1 1 1 / 0) 70%,
-					rgb(1 1 1 / 0.5) 92%,
-					rgb(1 1 1 / 0.75) 100%
-				);
+			/* ── Flow (SVG) ───────────────────────────── */
+			.flow-wrap { margin-top: 44px; border: 1px solid var(--border); border-radius: 14px; background: #fff; padding: 26px 22px; overflow-x: auto; }
+			.alt .flow-wrap { background: #fff; }
+			.flow-svg { width: 100%; min-width: 46rem; height: auto; display: block; }
+			.flow-svg .lbl { font: 600 12.5px 'Inter', sans-serif; fill: #161d2b; }
+			.flow-svg .lbl-sm { font: 600 11px 'Inter', sans-serif; fill: #6b7280; letter-spacing: .08em; text-transform: uppercase; }
+			.flow-svg .hubtxt { font: 700 15px 'Inter', sans-serif; fill: #fff; }
+			.flow-svg .box { fill: #fff; stroke: #d9dde4; }
+			.flow-svg .line { stroke: #c3cad4; stroke-width: 1.5; fill: none; }
+
+			/* ── Spine (reasoning chain) ──────────────── */
+			.spine { margin-top: 42px; position: relative; padding-left: 30px; }
+			.spine::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, var(--brand), rgb(0 82 204 / .15)); border-radius: 2px; }
+			.sp { position: relative; padding: 13px 0; }
+			.sp::before { content: ''; position: absolute; left: -30px; top: 19px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--brand); }
+			.dark .sp::before { background: var(--ink); }
+			.sp-k { font-size: var(--t-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
+			.sp-v { margin-top: 2px; font-size: var(--t-lg); color: var(--muted-fg); }
+			.dark .sp-v { color: #a7b0bd; }
+			/* --brand is tuned for white; on --ink it lands at 2.8:1. Use the same
+			   lighter blue the .tag label already uses on this ground. */
+			.dark .sp-k { color: #76acff; }
+
+			/* ── Pipeline ─────────────────────────────── */
+			.pipeline { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 9px 11px; }
+			.pill { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: var(--t-sm); font-weight: 600; }
+			.dark .pill { background: #151b23; border-color: #262e39; color: #e6eaf0; }
+			.pipeline .sep { color: var(--subtle-fg); font-size: var(--t-sm); }
+
+			/* ── Grids ────────────────────────────────── */
+			.grid { margin-top: 42px; display: grid; gap: 24px 30px; }
+			@media (min-width: 46rem) { .grid.three, .grid.four, .grid.five { grid-template-columns: repeat(2, 1fr); } }
+			@media (min-width: 66rem) { .grid.three { grid-template-columns: repeat(3, 1fr); } .grid.four { grid-template-columns: repeat(4, 1fr); } .grid.five { grid-template-columns: repeat(5, 1fr); } }
+
+			.card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+			.card p { margin-top: 7px; font-size: var(--t-md); color: var(--muted-fg); }
+			.num { width: 28px; height: 28px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: var(--t-sm); font-weight: 700; margin-bottom: 14px; }
+			.feat { padding-left: 16px; border-left: 2px solid var(--brand-faint); }
+			.feat p { margin-top: 7px; font-size: var(--t-md); color: var(--muted-fg); }
+
+			/* ── Split section ────────────────────────── */
+			.split { display: grid; gap: 44px; align-items: center; }
+			@media (min-width: 64rem) { .split { grid-template-columns: 1fr 1fr; gap: 56px; } .split.rev > :first-child { order: 2; } }
+
+			/* ── Table ────────────────────────────────── */
+			.table-wrap { margin-top: 38px; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+			table { width: 100%; border-collapse: collapse; font-size: var(--t-md); min-width: 34rem; }
+			th, td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--border-faint); vertical-align: top; }
+			thead th { font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); background: var(--bg-soft); }
+			thead th:last-child { color: var(--brand); }
+			tbody tr:last-child td { border-bottom: 0; }
+			td:first-child { color: var(--subtle-fg); }
+			td:last-child { font-weight: 600; }
+
+			/* ── CTA ──────────────────────────────────── */
+			/* Credits band. Three relationships, all different: XWARE makes
+			   Aegix, Innoviris granted it, hub.brussels partners it. The
+			   sentence carries them so the marks need no captions -- the
+			   Innoviris lockup already reads "funded by". Full colour, full
+			   opacity: a funder's mark is a grant condition, not decoration.
+			   Stays on white: the XWARE JPEG has a #fdfdfd ground that
+			   vanishes on #ffffff but shows as a pale box on --bg-soft. */
+			.credits { border-top: 1px solid var(--border-faint); padding: 40px 0 44px; }
+			.credits p { margin: 0 auto; max-width: 62ch; text-align: center; text-wrap: balance; font-size: var(--t-sm); line-height: 1.65; color: var(--subtle-fg); }
+			.credits-logos { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px 62px; }
+			.credits-logos a { display: inline-flex; align-items: center; border-radius: 4px; }
+			.credits-logos img { display: block; width: auto; }
+			.credits-logos .l-xware { height: 30px; }
+			.credits-logos .l-innoviris { height: 58px; }
+			.credits-logos .l-software { height: 50px; }
+
+			.cta { background: var(--ink); color: #fff; border-radius: 18px; padding: 54px 34px; text-align: center; position: relative; overflow: hidden; }
+			.cta::before { content: ''; position: absolute; inset: auto -20% -60% -20%; height: 80%; background: radial-gradient(50% 60% at 50% 50%, rgb(0 82 204 / .35), transparent 70%); }
+			.cta > * { position: relative; }
+			.cta h2 { color: #fff; }
+			.cta .lede { margin: 16px auto 0; max-width: 52ch; color: #a7b0bd; }
+			.cta .actions { justify-content: center; }
+			.cta .btn-ghost { background: transparent; border-color: #39414d; color: #fff; }
+
+			/* Demo request form. It sits on the dark band, so the fields carry their
+			   own light surface rather than inheriting the section's text colour. */
+			.form { margin: 28px auto 0; max-width: 46rem; text-align: left; }
+			.form-grid { display: grid; gap: 14px; }
+			@media (min-width: 40rem) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .wide { grid-column: 1 / -1; } }
+			.field label { display: block; font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em;
+				text-transform: uppercase; color: #9aa4b2; margin-bottom: 6px; }
+			.field input, .field select, .field textarea {
+				width: 100%; font: inherit; font-size: var(--t-lg); color: var(--fg);
+				background: #fff; border: 1px solid #39414d; border-radius: 10px; padding: 11px 13px;
 			}
-
-			@media (max-width: 61.99rem) {
-				.sky img {
-					width: 150vw;
-					transform: translate(calc(-50% + 3.8vw), -74%);
-				}
+			.field textarea { min-height: 110px; resize: vertical; }
+			.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+				outline: 2px solid var(--brand); outline-offset: 1px; border-color: var(--brand);
 			}
+			.field input[aria-invalid="true"], .field select[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #ff8f8f; }
+			.field .err { display: none; margin-top: 5px; font-size: var(--t-sm); }
+			.field .err[data-show="1"] { display: block; color: #ffb3b3; }
+			.form .actions { justify-content: center; margin-top: 22px; }
+			.form-note { margin-top: 14px; text-align: center; font-size: var(--t-sm); color: #8b94a3; }
+			.form-note a { color: #cfe0fb; }
+			.form-status { margin-top: 18px; padding: 14px 16px; border-radius: 12px; font-size: var(--t-lg); }
+			.form-status[data-state="success"] { background: #0f3d2b; color: #a8e6c4; border: 1px solid #1c6b4a; }
+			.form-status[data-state="error"] { background: #4a1414; color: #ffc9c9; border: 1px solid #7d2626; }
 
-			/* A landscape phone has no room for a planet below the copy, so it drops
-			   almost entirely under the fold and the scrim goes up. Left alone, the
-			   lit limb ran straight through the tagline. */
-			@media (max-height: 34rem) {
-				.sky img {
-					width: 85vw;
-					transform: translate(calc(-50% + 2.1vw), -40%);
-				}
-
-				.sky::after {
-					background: linear-gradient(
-						180deg,
-						rgb(1 1 1 / 0.78) 0%,
-						rgb(1 1 1 / 0.55) 55%,
-						rgb(1 1 1 / 0.7) 100%
-					);
-				}
-			}
-
-			.shell {
-				width: 100%;
-				max-width: 68rem;
-				margin: 0 auto;
-				padding: 0 16px;
-			}
-
-			/* ── Hero ─────────────────────────────────────────────────── */
-			main {
-				flex: 1;
-				display: flex;
-				align-items: center;
-				padding: 64px 0;
-			}
-
-			.hero {
-				max-width: 42rem;
-				margin: 0 auto;
-				text-align: center;
-			}
-
-			/* Caps earn their place on one line only: the name, spaced out. */
-			.eyebrow {
-				margin: 0 0 22px;
-				font-size: 12px;
-				font-weight: 700;
-				letter-spacing: 0.22em;
-				text-transform: uppercase;
-				color: var(--brand);
-			}
-
-			h1 {
-				margin: 0;
-				font-size: clamp(1.75rem, 1rem + 1.8vw, 2.9rem);
-				line-height: 1.04;
-				font-weight: 700;
-				letter-spacing: -0.038em;
-				text-wrap: balance;
-			}
-
-			h1 em {
-				font-style: normal;
-				color: var(--brand);
-			}
-
-			.claim {
-				margin: 22px auto 0;
-				font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem);
-				line-height: 1.4;
-				font-weight: 600;
-				letter-spacing: 0.16em;
-				text-transform: uppercase;
-				color: var(--muted-fg);
-			}
-
-			.actions {
-				margin-top: 30px;
-			}
-
-			.btn {
-				display: inline-flex;
-				align-items: center;
-				height: 36px;
-				padding: 0 16px;
-				border-radius: 7px;
-				font-size: 13.5px;
-				font-weight: 600;
-				text-decoration: none;
-				background: var(--brand);
-				color: var(--brand-ink);
-				transition: background-color 0.15s ease;
-			}
-
-			.btn:hover {
-				background: var(--brand-hover);
-			}
-
-			a:focus-visible,
-			.btn:focus-visible {
-				outline: 2px solid var(--brand);
-				outline-offset: 3px;
-			}
-
-			/* ── Footer ───────────────────────────────────────────────── */
-			footer {
-				padding: 18px 0 26px;
-			}
-
-			.foot {
-				display: flex;
-				flex-wrap: wrap;
-				align-items: center;
-				justify-content: space-between;
-				gap: 8px 20px;
-				font-size: 12.5px;
-				color: var(--subtle-fg);
-			}
-
-			.foot-links {
-				display: flex;
-				align-items: center;
-				gap: 20px;
-			}
-
-			footer a {
-				color: var(--muted-fg);
-				text-decoration: none;
-				font-weight: 500;
-			}
-
-			footer a:hover {
-				color: var(--fg);
-				text-decoration: underline;
-			}
-
-
-			/* A line, not a banner. Both choices are real buttons and weigh the
-			   same: refusing has to be as easy as agreeing. */
+			/* Cookie notice, carried over from the holding page this replaces. A bar
+			   at the foot rather than a modal, and refusing is the same weight as
+			   agreeing. `[hidden]` is restated because the author `display: flex`
+			   would otherwise beat the browser's own rule and leave it on screen. */
 			.consent {
-				margin: -6px auto 18px;
-				padding: 0 16px;
-				display: flex;
-				flex-wrap: wrap;
-				align-items: baseline;
-				justify-content: center;
-				gap: 4px 10px;
-				font-size: 12px;
-				line-height: 1.5;
-				color: #5b6673;
+				position: fixed; inset: auto 0 0 0; z-index: 50;
+				display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center;
+				gap: 6px 14px; padding: 12px 20px;
+				background: var(--ink); color: #c6cdd8; font-size: var(--t-sm); line-height: 1.5;
 			}
-
-			/* display:flex in an author sheet beats the browser's own
-			   [hidden] { display: none }, so hiding it needs saying explicitly —
-			   without this, Accept set the attribute and nothing moved. */
-			.consent[hidden] {
-				display: none;
-			}
-
-			.consent p {
-				margin: 0;
-			}
-
-			.consent-actions {
-				display: flex;
-				gap: 10px;
-			}
-
+			.consent[hidden] { display: none; }
+			.consent p { margin: 0; }
+			.consent-actions { display: flex; gap: 14px; }
 			.consent button {
-				font: inherit;
-				font-weight: 600;
-				padding: 0;
-				border: 0;
-				background: none;
-				cursor: pointer;
-				color: var(--subtle-fg);
-				text-decoration: underline;
-				text-underline-offset: 3px;
+				font: inherit; font-weight: 600; padding: 0; border: 0; background: none;
+				cursor: pointer; color: #fff; text-decoration: underline; text-underline-offset: 3px;
+			}
+			.consent button:hover { color: var(--brand-weak, #cfe0fb); }
+			/* A brand-blue ring is invisible on a brand-blue button over --ink, and
+			   fails the 3:1 WCAG 2.2 asks of a focus indicator. White on dark, as
+			   the consent bar already does. */
+			.dark a:focus-visible, .dark .btn:focus-visible,
+			.cta a:focus-visible, .cta .btn:focus-visible,
+			.cta .field input:focus-visible, .cta .field textarea:focus-visible { outline-color: #fff; }
+			.consent button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+			.cta .btn-ghost:hover { border-color: #737c8a; }
+
+			footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: var(--t-sm); color: var(--subtle-fg); }
+			.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
+			.foot a { color: var(--muted-fg); text-decoration: none; }
+			.foot a:hover { color: var(--fg); }
+			.foot-links { display: flex; flex-wrap: wrap; gap: 18px; }
+
+			.tag { display: inline-block; font-size: var(--t-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #76acff; border: 1px solid #2b3542; padding: 4px 11px; border-radius: 999px; margin-bottom: 18px; }
+			/* Touch targets. This block sits last on purpose: .btn, .views button
+			   and the footer links are all defined further down than the nav
+			   media query, so an override placed up there loses the cascade at
+			   equal specificity. 44px is the floor; these sat at 40, 38 and 16. */
+			@media (max-width: 60rem) {
+				.btn { height: 44px; }
+				.views button { min-height: 44px; }
+				footer .foot-links a { display: inline-flex; align-items: center; min-height: 44px; }
+				.form-note a { display: inline-block; padding-block: 6px; }
 			}
 
-			.consent button:hover {
-				color: var(--fg);
+			/* The narrowest phones. The bar carries a wordmark, a CTA and the menu
+			   button; together they overran a 320px iPhone SE by 4px. Tightening the
+			   gutter and the button padding buys that back without dropping anything
+			   out of the bar. */
+			@media (max-width: 22.5rem) {
+				.shell { padding: 0 14px; }
+				nav { gap: 8px; }
+				.btn { padding: 0 12px; }
 			}
-
 		</style>
 	</head>
 
 	<body>
-		<div class="sky" aria-hidden="true">
-			<img src="hero-earth.jpg" alt="" />
-		</div>
+		<header>
+			<div class="shell bar">
+				<a class="brand" href="/">
+					<span class="mark" aria-hidden="true"></span>
+					<span>Aegix<small>FMEA Platform</small></span>
+				</a>
+				<nav>
+					<a class="hide-sm" href="#approach">Approach</a>
+					<a class="hide-sm" href="#platform">Platform</a>
+					<a class="hide-sm" href="#ecosystem">Ecosystem</a>
+					<a class="hide-sm" href="#industries">Industries</a>
+					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
+					<a class="btn btn-primary" href="#contact">Request a demo</a>
+					<button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+						<span class="sr-only">Menu</span>
+						<svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
+							<rect y="0" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="6" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+						</svg>
+					</button>
+				</nav>
+			</div>
+			<div class="nav-menu" id="nav-menu" hidden>
+				<div class="shell">
+					<a href="#approach">Approach</a>
+					<a href="#platform">Platform</a>
+					<a href="#ecosystem">Ecosystem</a>
+					<a href="#industries">Industries</a>
+					<a href="https://app.aegix.eu">Sign in</a>
+				</div>
+			</div>
+		</header>
 
-		<main>
+		<!-- ── Hero ─────────────────────────────────── -->
+		<section class="hero">
 			<div class="shell">
-				<div class="hero">
-					<p class="eyebrow">Aegix &middot; FMEA Platform</p>
+				<p class="eyebrow">Engineering intelligence for FMEA</p>
+				<h1>Your engineering data already contains the knowledge your <em>FMEA</em> needs.</h1>
+				<p class="sub">
+					Aegix combines a central engineering model with AI agents that carry
+					Design and Process FMEA from specification through to risk analysis and
+					improvement actions. Your experts review and validate every step.
+				</p>
+				<p class="kicker">Less time building the FMEA. More time thinking about the risk.</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="#contact">Request a demo</a>
+					<a class="btn btn-ghost" href="#platform">See Aegix in action</a>
+				</div>
+				<div class="chips">
+					<span class="chip">AI-assisted</span>
+					<span class="chip">AIAG &amp; VDA</span>
+					<span class="chip">DFMEA &amp; PFMEA</span>
+					<span class="chip">Requirements traceability</span>
+					<span class="chip">ALM integration</span>
+					<span class="chip">Human-in-the-loop</span>
+				</div>
+			</div>
 
-					<h1>FMEA, powered by AI, <em>validated by engineers</em>.</h1>
+			<div class="shot wide" style="margin-top:56px">
+				<div class="views" role="tablist" aria-label="Worksheet views">
+					<button type="button" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true" tabindex="0">All</button>
+					<button type="button" role="tab" id="tab-structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1">Structure &amp; Failure</button>
+					<button type="button" role="tab" id="tab-ratings" aria-controls="panel-ratings" aria-selected="false" tabindex="-1">Ratings &amp; Actions</button>
+				</div>
+				<div class="view-panel" id="panel-all" role="tabpanel" aria-labelledby="tab-all">
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-all.png" width="2700" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
+						</div>
+					</figure>
+				</div>
+				<div class="view-panel" id="panel-structure" role="tabpanel" aria-labelledby="tab-structure" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet · structure &amp; failure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-structure.png" width="2700" height="615" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
+						</div>
+					</figure>
+				</div>
+				<div class="view-panel" id="panel-ratings" role="tabpanel" aria-labelledby="tab-ratings" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/view-ratings.png" width="2700" height="1670" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
+						</div>
+					</figure>
+				</div>
+			</div>
+		</section>
 
-					<p class="claim">Faster. Smarter. Consistent.</p>
+		<!-- ── Blank table ──────────────────────────── -->
+		<section id="approach" class="alt">
+			<div class="shell">
+				<h2>Engineers spend hours moving knowledge that already exists.</h2>
+				<p class="lede">
+					The information needed for an FMEA already exists — spread across system
+					specifications, requirements, architecture documents, design descriptions,
+					previous FMEAs, test documentation and ALM systems. Engineers then spend hours
+					finding it, interpreting it and transferring it into another structure.
+				</p>
 
-					<div class="actions">
-						<!-- TODO: point this at a mailbox that exists before going live. -->
-						<a class="btn" href="mailto:hello@aegix.eu">Contact us</a>
+				<div class="flow-wrap">
+					<svg class="flow-svg" viewBox="0 0 980 300" role="img" aria-label="Engineering sources flow into Aegix and come out as FMEA structure">
+						<text class="lbl-sm" x="0" y="14">Engineering information</text>
+						<g>
+							<rect class="box" x="0" y="30" width="248" height="36" rx="8"/><text class="lbl" x="16" y="53">Specifications</text>
+							<rect class="box" x="0" y="74" width="248" height="36" rx="8"/><text class="lbl" x="16" y="97">Requirements</text>
+							<rect class="box" x="0" y="118" width="248" height="36" rx="8"/><text class="lbl" x="16" y="141">Existing FMEAs</text>
+							<rect class="box" x="0" y="162" width="248" height="36" rx="8"/><text class="lbl" x="16" y="185">Engineering documentation</text>
+							<rect class="box" x="0" y="206" width="248" height="36" rx="8"/><text class="lbl" x="16" y="229">ALM data</text>
+						</g>
+						<path class="line" d="M248 48 C 300 48, 320 136, 372 136"/>
+						<path class="line" d="M248 92 C 300 92, 324 136, 372 136"/>
+						<path class="line" d="M248 136 H 372"/>
+						<path class="line" d="M248 180 C 300 180, 324 136, 372 136"/>
+						<path class="line" d="M248 224 C 300 224, 320 136, 372 136"/>
+						<rect x="372" y="104" width="196" height="64" rx="12" fill="#0052cc"/>
+						<text class="hubtxt" x="470" y="134" text-anchor="middle">Aegix</text>
+						<text x="470" y="152" text-anchor="middle" font="500 11px Inter, sans-serif" fill="#bcd4fb" style="font:500 11px Inter,sans-serif">extract &middot; structure &middot; relate</text>
+						<path class="line" d="M568 136 C 620 136, 640 48, 692 48"/>
+						<path class="line" d="M568 136 C 620 136, 644 92, 692 92"/>
+						<path class="line" d="M568 136 H 692"/>
+						<path class="line" d="M568 136 C 620 136, 644 180, 692 180"/>
+						<path class="line" d="M568 136 C 620 136, 640 224, 692 224"/>
+						<text class="lbl-sm" x="692" y="14">Structured risk analysis</text>
+						<g>
+							<rect class="box" x="692" y="30" width="248" height="36" rx="8"/><text class="lbl" x="708" y="53">Functions</text>
+							<rect class="box" x="692" y="74" width="248" height="36" rx="8"/><text class="lbl" x="708" y="97">Failure modes</text>
+							<rect class="box" x="692" y="118" width="248" height="36" rx="8"/><text class="lbl" x="708" y="141">Causes &amp; effects</text>
+							<rect class="box" x="692" y="162" width="248" height="36" rx="8"/><text class="lbl" x="708" y="185">Controls &amp; risks</text>
+							<rect class="box" x="692" y="206" width="248" height="36" rx="8"/><text class="lbl" x="708" y="229">Actions</text>
+						</g>
+					</svg>
+				</div>
+
+				<p class="kicker">The analysis opens with its structure already drafted from your documents.</p>
+			</div>
+		</section>
+
+		<!-- ── AI suggests ──────────────────────────── -->
+		<section>
+			<div class="shell narrow">
+				<p class="eyebrow">Human-in-the-loop</p>
+				<h2>AI can suggest. Engineers decide.</h2>
+				<p class="lede">
+					Aegix is built to amplify engineering judgement. AI can identify relevant
+					information, propose relationships,
+					suggest potential failure modes and surface areas that may deserve attention.
+					Engineers review, challenge, modify and approve the analysis.
+				</p>
+				<div class="pipeline">
+					<span class="pill">AI identifies</span><span class="sep">&rarr;</span>
+					<span class="pill">Engineer evaluates</span><span class="sep">&rarr;</span>
+					<span class="pill">Team validates</span><span class="sep">&rarr;</span>
+					<span class="pill">Engineering decision</span>
+				</div>
+				<p class="kicker">Every suggestion waits for an engineer to accept it.</p>
+			</div>
+		</section>
+
+		<!-- ── Reasoning chain ──────────────────────── -->
+		<section class="alt">
+			<div class="shell split">
+				<div>
+					<p class="eyebrow">Traceability</p>
+					<h2>Connect the reasoning behind the FMEA.</h2>
+					<p class="lede">
+						An FMEA is a chain of engineering reasoning. Aegix keeps the links between
+					its steps, so a failure mode still points back at the requirement it
+					threatens and forward to the verification that covers it.</p>
+					<p class="kicker">The FMEA becomes part of the engineering lifecycle.</p>
+				</div>
+				<div class="spine">
+					<div class="sp"><div class="sp-k">Requirement</div><div class="sp-v">The system must maintain safe operating conditions.</div></div>
+					<div class="sp"><div class="sp-k">Function</div><div class="sp-v">Maintain operating conditions within defined limits.</div></div>
+					<div class="sp"><div class="sp-k">Failure mode</div><div class="sp-v">Operating condition exceeds the specified limit.</div></div>
+					<div class="sp"><div class="sp-k">Cause</div><div class="sp-v">Temperature sensing failure.</div></div>
+					<div class="sp"><div class="sp-k">Effect</div><div class="sp-v">Incorrect thermal control.</div></div>
+					<div class="sp"><div class="sp-k">Risk</div><div class="sp-v">Potential degradation or safety consequence.</div></div>
+					<div class="sp"><div class="sp-k">Mitigation</div><div class="sp-v">Diagnostic monitoring and protective strategy.</div></div>
+					<div class="sp"><div class="sp-k">Verification</div><div class="sp-v">Test, requirement and evidence.</div></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Four pillars ─────────────────────────── -->
+		<section id="platform">
+			<div class="shell">
+				<p class="eyebrow">How it works</p>
+				<h2>Understand. Structure. Reason. Trace.</h2>
+				<p class="lede">Aegix combines AI with a structured engineering model.</p>
+				<div class="grid four">
+					<div class="card"><div class="num">1</div><h3>Understand</h3><p>Extract relevant engineering information from requirements, specifications, documents and existing analyses.</p></div>
+					<div class="card"><div class="num">2</div><h3>Structure</h3><p>Turn unstructured information into engineering concepts and relationships — functions, failure modes, causes, effects, controls, actions.</p></div>
+					<div class="card"><div class="num">3</div><h3>Reason</h3><p>Assist engineers in identifying potential failure modes, relationships and gaps in the analysis.</p></div>
+					<div class="card"><div class="num">4</div><h3>Trace</h3><p>Connect risk analysis back to its engineering sources, and forward to mitigation, implementation and verification.</p></div>
+				</div>
+			</div>
+
+			<div class="shot" style="margin-top:48px">
+				<div class="views" role="tablist" aria-label="Structure views">
+					<button type="button" role="tab" id="tab-dfmea" aria-controls="panel-dfmea" aria-selected="true" tabindex="0">DFMEA</button>
+					<button type="button" role="tab" id="tab-pfmea" aria-controls="panel-pfmea" aria-selected="false" tabindex="-1">PFMEA</button>
+					<button type="button" role="tab" id="tab-diagram" aria-controls="panel-diagram" aria-selected="false" tabindex="-1">PFMEA diagram</button>
+				</div>
+				<div class="view-panel" id="panel-dfmea" role="tabpanel" aria-labelledby="tab-dfmea">
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / dfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/structure-dfmea.png" width="3520" height="2190" alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The system, its subsystems, and the requirement and failure modes on the selected function.</p>
+				</div>
+				<div class="view-panel" id="panel-pfmea" role="tabpanel" aria-labelledby="tab-pfmea" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/structure-pfmea.png" width="3520" height="1900" loading="lazy" alt="The PFMEA structure of a coolant pump assembly line in Aegix. The tree holds the process item and its process steps, each carrying its operation number from Op 10 to Op 50. The inspector shows the selected process function with the two control plan characteristics it has to hold and the two failure modes found for it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The same screen for a process FMEA: process item, process steps by operation number, and the control plan characteristics the line has to hold.</p>
+				</div>
+				<div class="view-panel" id="panel-diagram" role="tabpanel" aria-labelledby="tab-diagram" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure · diagram</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/structure-diagram.png" width="2000" height="1525" loading="lazy"
+							     alt="The same process structure drawn as a flow. The process item on the left feeds five process steps by operation number, and each step fans out to its work elements, every one tagged with the category it is analysed under: man, machine, material, method, environment or measurement. One work element is outlined in red and marked as a gap, having no function and no failure mode against it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The same process structure drawn as a diagram. Each step fans out to its work elements, tagged man, machine, material, method, environment or measurement. The one outlined in red has no function and no failure mode against it yet.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Risk, seen ─────────────────────── -->
+		<section class="alt">
+			<div class="shell narrow" style="text-align:center">
+				<p class="eyebrow">Seeing the whole programme</p>
+				<h2>Risk across the whole programme, on one screen.</h2>
+				<p class="lede" style="margin-left:auto;margin-right:auto">
+					Action Priority distribution, High AP coverage, overdue actions and the
+					risk profile — per worksheet, per project, or across the programme, with
+					the analysis one click away from the number.
+				</p>
+			</div>
+
+			<div class="shot" style="margin-top:44px">
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / analytics</span>
+					</div>
+					<div class="frame-body">
+						<img src="shots/analytics.png" width="2880" height="1640"
+						     alt="The Aegix analytics screen: high Action Priority without an action, overdue actions, safety-critical count and High AP coverage across the top; below them a severity-by-occurrence matrix, the Action Priority distribution, risk by worksheet, and the highest-priority risks listed in order." />
+					</div>
+				</figure>
+				<p class="shot-cap">Action priority across every worksheet, with high-AP coverage and overdue actions.</p>
+			</div>
+		</section>
+
+		<!-- ── Technology ───────────────────────────── -->
+		<section>
+			<div class="shell">
+				<p class="eyebrow">Technology</p>
+				<h2>An engineering model underneath the AI.</h2>
+				<div class="grid three">
+					<div class="feat"><h3>Knowledge extraction</h3><p>AI processes requirements, specifications, FMEAs and engineering documentation to identify relevant concepts and relationships.</p></div>
+					<div class="feat"><h3>Structured representation</h3><p>Information becomes a connected model that can support FMEA and risk analysis, rather than remaining unstructured text.</p></div>
+					<div class="feat"><h3>AI-assisted reasoning</h3><p>AI operates inside engineering context, generating suggestions and relationships for engineers to review.</p></div>
+					<div class="feat"><h3>Traceability</h3><p>Suggestions stay connected to the engineering information they came from.</p></div>
+					<div class="feat"><h3>Human-in-the-loop validation</h3><p>Engineers remain responsible for reviewing and approving the resulting analysis.</p></div>
+					<div class="feat"><h3>Where it runs</h3><p>Aegix runs in our cloud, or on your own infrastructure if your engineering data cannot leave it.</p></div>
+				</div>
+				<div class="pipeline">
+					<span class="pill">Engineering data</span><span class="sep">&rarr;</span>
+					<span class="pill">Knowledge extraction</span><span class="sep">&rarr;</span>
+					<span class="pill">Structured model</span><span class="sep">&rarr;</span>
+					<span class="pill">AI assistance</span><span class="sep">&rarr;</span>
+					<span class="pill">Engineer validation</span><span class="sep">&rarr;</span>
+					<span class="pill">Risk analysis</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Ecosystem ────────────────────────────── -->
+		<section id="ecosystem" class="alt">
+			<div class="shell">
+				<p class="eyebrow">Integrations</p>
+				<h2>Your FMEA belongs in the engineering ecosystem.</h2>
+				<p class="lede">
+					Aegix reads requirements from <b>Polarion</b> and writes back to it, and takes
+					the rest as files: specifications, existing FMEAs, drawings and control
+					plans in; Excel worksheets, PDF reports and action lists out.</p>
+
+				<div class="flow-wrap">
+					<svg class="flow-svg" viewBox="0 0 980 260" role="img" aria-label="Aegix reads from and writes back to engineering tools">
+						<text class="lbl-sm" x="0" y="14">What goes in</text>
+						<rect class="box" x="0" y="30" width="236" height="36" rx="8"/><text class="lbl" x="16" y="53">Polarion</text>
+						<rect class="box" x="0" y="74" width="236" height="36" rx="8"/><text class="lbl" x="16" y="97">Requirements documents</text>
+						<rect class="box" x="0" y="118" width="236" height="36" rx="8"/><text class="lbl" x="16" y="141">Specifications</text>
+						<rect class="box" x="0" y="162" width="236" height="36" rx="8"/><text class="lbl" x="16" y="185">Existing FMEAs</text>
+						<rect class="box" x="0" y="206" width="236" height="36" rx="8"/><text class="lbl" x="16" y="229">Drawings &amp; control plans</text>
+
+						<path class="line" d="M236 48 C 300 48, 320 120, 380 120"/>
+						<path class="line" d="M236 92 C 300 92, 330 120, 380 120"/>
+						<path class="line" d="M236 136 C 300 136, 330 120, 380 120"/>
+						<path class="line" d="M236 180 C 300 180, 330 120, 380 120"/>
+						<path class="line" d="M236 224 C 300 224, 320 120, 380 120"/>
+
+						<rect x="380" y="88" width="200" height="64" rx="12" fill="#0052cc"/>
+						<text class="hubtxt" x="480" y="118" text-anchor="middle">Aegix</text>
+						<text x="480" y="136" text-anchor="middle" style="font:500 11px Inter,sans-serif" fill="#bcd4fb">read &amp; write</text>
+
+						<path class="line" d="M580 120 C 640 120, 660 48, 720 48"/>
+						<path class="line" d="M580 120 C 640 120, 670 92, 720 92"/>
+						<path class="line" d="M580 120 C 640 120, 670 136, 720 136"/>
+						<path class="line" d="M580 120 C 640 120, 660 180, 720 180"/>
+
+						<text class="lbl-sm" x="720" y="14">What comes out</text>
+						<rect class="box" x="720" y="30" width="236" height="36" rx="8"/><text class="lbl" x="736" y="53">FMEA</text>
+						<rect class="box" x="720" y="74" width="236" height="36" rx="8"/><text class="lbl" x="736" y="97">Risk analysis</text>
+						<rect class="box" x="720" y="118" width="236" height="36" rx="8"/><text class="lbl" x="736" y="141">Actions</text>
+						<rect class="box" x="720" y="162" width="236" height="36" rx="8"/><text class="lbl" x="736" y="185">Excel &amp; PDF export</text>
+					</svg>
+				</div>
+
+				<p class="kicker">Requirements arrive carrying their Polarion id, and keep it.</p>
+			</div>
+
+			<div class="shot" style="margin-top:48px">
+				<figure class="frame" style="margin:0">
+					<div class="frame-bar">
+						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+						<span class="frame-path">app.aegix.eu / connected-sources</span>
+					</div>
+					<div class="frame-body">
+						<img src="shots/polarion.png" width="2880" height="1640"
+						     alt="A Polarion connection inside Aegix. The connector shows as connected with its server address and the linked Polarion project, and the panel below browses that project’s system requirements — each with its Polarion id, title, type and status, and a tick against the ones already pulled into the analysis." />
+					</div>
+				</figure>
+				<p class="shot-cap">Browsing the linked Polarion project. A tick marks the requirements already pulled into the analysis.</p>
+			</div>
+		</section>
+
+		<!-- ── Method ───────────────────────────────── -->
+		<section>
+			<div class="shell narrow">
+				<p class="eyebrow">Method</p>
+				<h2>The method you already follow, configured the way you follow it.</h2>
+				<p class="lede">
+					Aegix covers <b>design FMEA (DFMEA)</b> and <b>process FMEA (PFMEA)</b> on the AIAG &amp; VDA method,
+					which it ships with as a ready starting point. Your engineering team still
+					controls functions, failure modes, effects, causes, controls, risk
+					evaluation, actions, responsibilities, reviews and approval.</p>
+				<p class="lede">
+					Templates are configurable, so a team that uses different terminology,
+					different rating scales or a different worksheet layout can set that up
+					once and work the way it already works.</p>
+			</div>
+		</section>
+
+		<!-- ── Knowledge reuse ──────────────────────── -->
+		<section class="alt">
+			<div class="shell">
+				<p class="eyebrow">Knowledge reuse</p>
+				<h2>Every FMEA you have already written is an input.</h2>
+				<p class="lede">
+					Every FMEA contains engineering knowledge that took experienced engineers time
+					to create — and it usually stays trapped in previous projects, spreadsheets,
+					documents and individual teams.
+				</p>
+
+				<div class="flow-wrap">
+					<svg class="flow-svg" viewBox="0 0 980 212" role="img" aria-label="Knowledge from one project informs the next">
+						<text class="lbl-sm" x="0" y="14">Project A</text>
+						<rect class="box" x="0" y="30" width="248" height="36" rx="8"/><text class="lbl" x="16" y="53">Failure modes</text>
+						<rect class="box" x="0" y="74" width="248" height="36" rx="8"/><text class="lbl" x="16" y="97">Known causes</text>
+						<rect class="box" x="0" y="118" width="248" height="36" rx="8"/><text class="lbl" x="16" y="141">Existing controls</text>
+						<rect class="box" x="0" y="162" width="248" height="36" rx="8"/><text class="lbl" x="16" y="185">Previous analysis</text>
+
+						<path class="line" d="M248 48 C 300 48, 322 108, 372 108"/>
+						<path class="line" d="M248 92 C 300 92, 330 108, 372 108"/>
+						<path class="line" d="M248 136 C 300 136, 330 108, 372 108"/>
+						<path class="line" d="M248 180 C 300 180, 322 108, 372 108"/>
+
+						<rect x="372" y="76" width="196" height="64" rx="12" fill="#0052cc"/>
+						<text class="hubtxt" x="470" y="106" text-anchor="middle">Aegix</text>
+						<text x="470" y="124" text-anchor="middle" style="font:500 11px Inter,sans-serif" fill="#bcd4fb">relate &middot; suggest &middot; cite</text>
+
+						<path class="line" d="M568 108 C 620 108, 642 48, 692 48"/>
+						<path class="line" d="M568 108 C 620 108, 650 92, 692 92"/>
+						<path class="line" d="M568 108 C 620 108, 650 136, 692 136"/>
+						<path class="line" d="M568 108 C 620 108, 642 180, 692 180"/>
+
+						<text class="lbl-sm" x="692" y="14">Project B</text>
+						<rect class="box" x="692" y="30" width="248" height="36" rx="8"/><text class="lbl" x="708" y="53">Relevant knowledge</text>
+						<rect class="box" x="692" y="74" width="248" height="36" rx="8"/><text class="lbl" x="708" y="97">Potential failure modes</text>
+						<rect class="box" x="692" y="118" width="248" height="36" rx="8"/><text class="lbl" x="708" y="141">Reusable controls</text>
+						<rect class="box" x="692" y="162" width="248" height="36" rx="8"/><text class="lbl" x="708" y="185">New engineering context</text>
+					</svg>
+				</div>
+
+				<p class="kicker">Your previous engineering work becomes an asset for the next project.</p>
+			</div>
+		</section>
+
+		<!-- ── Comparison ───────────────────────────── -->
+		<section>
+			<div class="shell">
+				<p class="eyebrow">The difference</p>
+				<h2>Traditional FMEA, and the same steps in Aegix.</h2>
+				<div class="table-wrap">
+					<table>
+						<thead><tr><th>Traditional FMEA</th><th>With Aegix</th></tr></thead>
+						<tbody>
+							<tr><td>Search through documents</td><td>Extract relevant engineering information</td></tr>
+							<tr><td>Start from a blank table</td><td>Start from existing engineering knowledge</td></tr>
+							<tr><td>Manually transfer information</td><td>AI-assisted structuring</td></tr>
+							<tr><td>Discover gaps during reviews</td><td>Surface potential gaps earlier</td></tr>
+							<tr><td>FMEA isolated from engineering</td><td>Connected to requirements and ALM</td></tr>
+							<tr><td>Knowledge stays in projects</td><td>Knowledge becomes reusable</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<p class="kicker">The time it gives back goes into thinking about the risk.</p>
+			</div>
+		</section>
+
+		<!-- ── Industries ───────────────────────────── -->
+		<section id="industries" class="alt">
+			<div class="shell">
+				<p class="eyebrow">Who it's for</p>
+				<h2>Designed for complex engineering.</h2>
+				<p class="lede">For organisations developing complex and safety-critical products.</p>
+				<div class="grid five">
+					<div class="card"><h3>Automotive</h3><p>Functional safety, electrification, software-intensive systems and complex E/E architectures.</p></div>
+					<div class="card"><h3>Railway</h3><p>System complexity, safety requirements and long engineering lifecycles.</p></div>
+					<div class="card"><h3>Aerospace &amp; defence</h3><p>High-consequence systems where traceability and engineering judgement matter.</p></div>
+					<div class="card"><h3>Medical devices</h3><p>Structured risk analysis connected to product and verification information.</p></div>
+					<div class="card"><h3>Industrial systems</h3><p>Complex products where engineering knowledge spans multiple disciplines and tools.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Disciplines + accountability ─────────── -->
+		<section>
+			<div class="shell split">
+				<div>
+					<p class="eyebrow">Where it fits</p>
+					<h2>Engineering discipline first.</h2>
+					<div class="grid" style="margin-top:28px; gap:18px">
+						<div class="feat"><h3>Functional safety</h3><p>Connect FMEA with the broader safety engineering process.</p></div>
+						<div class="feat"><h3>Systems engineering</h3><p>Work with functions, architectures, interfaces and dependencies.</p></div>
+						<div class="feat"><h3>Requirements engineering</h3><p>Maintain relationships between requirements and risk analysis.</p></div>
+						<div class="feat"><h3>Verification &amp; validation</h3><p>Connect mitigations and controls with verification evidence.</p></div>
+						<div class="feat"><h3>ALM</h3><p>Bring FMEA closer to the systems where development happens.</p></div>
+					</div>
+				</div>
+				<div>
+					<p class="eyebrow">Accountability</p>
+					<h2>AI you can challenge.</h2>
+					<p class="lede">
+						Engineering AI should not simply give you an answer. It should give you
+						something you can examine.
+					</p>
+					<div class="spine" style="margin-top:28px">
+						<div class="sp"><div class="sp-k">Review</div><div class="sp-v">what the system proposes.</div></div>
+						<div class="sp"><div class="sp-k">Challenge</div><div class="sp-v">assumptions and relationships.</div></div>
+						<div class="sp"><div class="sp-k">Modify</div><div class="sp-v">the generated analysis.</div></div>
+						<div class="sp"><div class="sp-k">Trace</div><div class="sp-v">information back to its engineering context.</div></div>
+						<div class="sp"><div class="sp-k">Approve</div><div class="sp-v">the final engineering decision.</div></div>
 					</div>
 				</div>
 			</div>
-		</main>
+		</section>
+
+		<!-- ── Vision ───────────────────────────────── -->
+		<section class="dark">
+			<div class="shell split">
+				<div>
+					<span class="tag">Where this is going</span>
+					<h2>From AI-assisted FMEA to engineering intelligence.</h2>
+					<p class="lede">
+						FMEA is only the beginning. The same engineering intelligence can
+						eventually be applied continuously across the product lifecycle.
+					</p>
+					<p class="kicker">From analysing risk periodically, to continuously understanding how engineering changes affect risk.</p>
+				</div>
+				<div class="spine">
+					<div class="sp"><div class="sp-k">A requirement</div><div class="sp-v">changes.</div></div>
+					<div class="sp"><div class="sp-k">Aegix</div><div class="sp-v">identifies the affected function.</div></div>
+					<div class="sp"><div class="sp-k">Failure modes</div><div class="sp-v">related to it are identified.</div></div>
+					<div class="sp"><div class="sp-k">Mitigations</div><div class="sp-v">already in place are reviewed.</div></div>
+					<div class="sp"><div class="sp-k">Risk impact</div><div class="sp-v">is surfaced.</div></div>
+					<div class="sp"><div class="sp-k">The engineer</div><div class="sp-v">decides what needs to change.</div></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── XWARE ────────────────────────────────── -->
+		<section class="alt">
+			<div class="shell narrow">
+				<p class="eyebrow">Who builds it</p>
+				<h2>Built by engineers who understand the problem.</h2>
+				<p class="lede">
+					Aegix is developed by XWARE, an engineering company focused on complex software
+					and cyber-physical systems. Our work spans functional safety, cybersecurity,
+					systems engineering, requirements and ALM, verification and validation, and
+					AI-assisted engineering.
+				</p>
+				<p class="kicker">Aegix comes out of the engineering work XWARE already does.</p>
+			</div>
+		</section>
+
+		<!-- ── CTA ──────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<div class="cta" id="contact">
+					<h2>Start a conversation.</h2>
+					<p class="lede">
+						Ask a question, arrange a demo, or tell us what you would want to try
+						Aegix on.
+					</p>
+					<form class="form" id="demo-form" novalidate>
+						<!-- Honeypot: a bot fills this, a person never sees it and a copy never catches it. -->
+						<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+						<div class="form-grid">
+							<div class="field"><label for="f-name">Name</label>
+								<input id="f-name" name="name" type="text" maxlength="120" required autocomplete="name" aria-describedby="e-name" />
+								<p class="err" id="e-name">Tell us who you are.</p></div>
+							<div class="field"><label for="f-email">Work email</label>
+								<input id="f-email" name="email" type="email" maxlength="254" required autocomplete="email" aria-describedby="e-email" />
+								<p class="err" id="e-email">We need an address that can reply.</p></div>
+							<div class="field"><label for="f-company">Company</label>
+								<input id="f-company" name="company" type="text" maxlength="160" required autocomplete="organization" aria-describedby="e-company" />
+								<p class="err" id="e-company">Which organisation is this for?</p></div>
+							<div class="field"><label for="f-subject">Subject</label>
+								<input id="f-subject" name="subject" type="text" maxlength="160" required aria-describedby="e-subject" />
+								<p class="err" id="e-subject">A few words on what this is about.</p></div>
+							<div class="field wide"><label for="f-message">Message</label>
+								<textarea id="f-message" name="message" maxlength="3000" required aria-describedby="e-message"></textarea>
+								<p class="err" id="e-message">Tell us a little about what you need.</p></div>
+						</div>
+						<div class="actions">
+							<button class="btn btn-primary" type="submit" id="f-submit">Send message</button>
+						</div>
+						<p class="form-note">Or write to <a href="mailto:hello@aegix.eu">hello@aegix.eu</a>.</p>
+						<p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<section class="credits">
+			<div class="shell">
+				<p>
+					Aegix is a product of XWARE, developed with a grant from Innoviris.
+					XWARE is a partner of hub.brussels.
+				</p>
+				<div class="credits-logos">
+					<a href="https://xware-engineering.com" target="_blank" rel="noopener noreferrer">
+						<img class="l-xware" src="logos/xware.jpg" width="981" height="196" alt="XWARE" />
+					</a>
+					<a href="https://innoviris.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-innoviris" src="logos/innoviris.png" width="616" height="233" alt="Funded by innoviris.brussels" />
+					</a>
+					<a href="https://software.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-software" src="logos/software-brussels.png" width="768" height="161" alt="hub.brussels" />
+					</a>
+				</div>
+			</div>
+		</section>
 
 		<footer>
 			<div class="shell foot">
@@ -336,65 +1042,174 @@
 				</span>
 			</div>
 		</footer>
-
-
-
+	
 		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
 			<p>We use analytics to understand how this page is used.</p>
 			<div class="consent-actions">
 				<button type="button" id="consent-decline">Decline</button>
-				<button type="button" id="consent-accept" class="accept">Accept</button>
+				<button type="button" id="consent-accept">Accept</button>
 			</div>
 		</div>
 
-		<script>
-			// Nothing is injected until Accept: no cookie, no request, nothing
-			// recorded. A tag loaded "paused" still calls home.
-			(function () {
-				var KEY = 'aegix-analytics-consent';
-				var banner = document.getElementById('consent');
-				var stored = null;
-				try {
-					stored = localStorage.getItem(KEY);
-				} catch (e) {}
+	<script>
+		// Tab switching for the worksheet views, with the arrow-key behaviour a
+		// tablist is expected to have. No library: three buttons and a hidden
+		// attribute do not need one.
+		(function () {
+			document.querySelectorAll('.views').forEach(function (list) {
+			var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+			function select(tab, focus) {
+				tabs.forEach(function (t) {
+					var on = t === tab;
+					t.setAttribute('aria-selected', on ? 'true' : 'false');
+					t.tabIndex = on ? 0 : -1;
+					var panel = document.getElementById(t.getAttribute('aria-controls'));
+					if (panel) panel.hidden = !on;
+				});
+				if (focus) tab.focus();
+			}
+			list.addEventListener('click', function (e) {
+				var tab = e.target.closest('[role="tab"]');
+				if (tab) select(tab, false);
+			});
+			list.addEventListener('keydown', function (e) {
+				var i = tabs.indexOf(document.activeElement);
+				if (i < 0) return;
+				if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+					e.preventDefault();
+					select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
+				} else if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
+				else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+			});
+			});
+		})();
+	</script>
 
-				function start() {
-					(function (c, l, a, r, i, t, y) {
-						c[a] =
-							c[a] ||
-							function () {
-								(c[a].q = c[a].q || []).push(arguments);
-							};
-						t = l.createElement(r);
-						t.async = 1;
-						t.src = 'https://www.clarity.ms/tag/' + i;
-						y = l.getElementsByTagName(r)[0];
-						y.parentNode.insertBefore(t, y);
-					})(window, document, 'clarity', 'script', 'yt1vdwre6g');
-				}
+	<script>
+		// Demo request form. Posts to Web3Forms, the same service the XWARE site
+		// uses. The access key is not a secret -- it travels from the browser on
+		// every submit and identifies the destination inbox, nothing more.
+		(function () {
+			var ACCESS_KEY = '67f03824-0402-4505-bae0-a7855fdd9a06';
+			var form = document.getElementById('demo-form');
+			if (!form) return;
+			document.querySelectorAll('a[href="#contact"]').forEach(function (a) {
+				a.addEventListener('click', function () {
+					var subj = document.getElementById('f-subject');
+					if (subj && !subj.value) subj.value = a.textContent.trim();
+				});
+			});
+			var status = document.getElementById('f-status');
+			var submit = document.getElementById('f-submit');
 
-				function remember(value) {
-					try {
-						localStorage.setItem(KEY, value);
-					} catch (e) {}
-				}
+			function setError(input, on) {
+				input.setAttribute('aria-invalid', on ? 'true' : 'false');
+				var err = document.getElementById('e-' + input.id.slice(2));
+				if (err) err.setAttribute('data-show', on ? '1' : '0');
+			}
+			function validate() {
+				var ok = true, first = null;
+				['f-name', 'f-email', 'f-company', 'f-subject', 'f-message'].forEach(function (id) {
+					var el = document.getElementById(id);
+					var bad = !el.value.trim() || (el.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));
+					setError(el, bad);
+					if (bad && !first) first = el;
+					if (bad) ok = false;
+				});
+				if (first) first.focus();
+				return ok;
+			}
+			function say(state, text) {
+				status.hidden = false;
+				status.setAttribute('data-state', state);
+				status.textContent = text;
+			}
 
-				if (stored === 'granted') {
-					start();
-				} else if (stored !== 'denied') {
-					banner.hidden = false;
-					document.getElementById('consent-accept').addEventListener('click', function () {
-						remember('granted');
-						banner.hidden = true;
-						start();
+			form.addEventListener('submit', function (e) {
+				e.preventDefault();
+				if (!validate()) return;
+				submit.disabled = true;
+				submit.textContent = 'Sending…';
+				var data = new FormData(form);
+				data.append('access_key', ACCESS_KEY);
+				data.append('from_name', 'aegix.eu — ' + (data.get('company') || 'contact form'));
+				fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+					.then(function (r) { return r.json(); })
+					.then(function (res) {
+						if (res.success) {
+							form.querySelector('.form-grid').hidden = true;
+							form.querySelector('.actions').hidden = true;
+							say('success', 'Thank you. We have your request and will come back to arrange a time.');
+						} else {
+							say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
+							submit.disabled = false;
+							submit.textContent = 'Send message';
+						}
+					})
+					.catch(function () {
+						say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
+						submit.disabled = false;
+						submit.textContent = 'Send message';
 					});
-					document.getElementById('consent-decline').addEventListener('click', function () {
-						remember('denied');
-						banner.hidden = true;
-					});
-				}
-			})();
-		</script>
+			});
+		})();
+	</script>
 
-	</body>
+	<script>
+		// Analytics, carried over from the holding page. Nothing is injected until
+		// Accept: no cookie, no request, nothing recorded. A tag loaded "paused"
+		// still calls home, which is why the tag itself waits.
+		(function () {
+			var KEY = 'aegix-analytics-consent';
+			var banner = document.getElementById('consent');
+			if (!banner) return;
+			var stored = null;
+			try { stored = localStorage.getItem(KEY); } catch (e) {}
+
+			function start() {
+				(function (c, l, a, r, i, t, y) {
+					c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+					t = l.createElement(r); t.async = 1;
+					t.src = 'https://www.clarity.ms/tag/' + i;
+					y = l.getElementsByTagName(r)[0];
+					y.parentNode.insertBefore(t, y);
+				})(window, document, 'clarity', 'script', 'yt1vdwre6g');
+			}
+			function remember(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+			if (stored === 'granted') {
+				start();
+			} else if (stored !== 'denied') {
+				banner.hidden = false;
+				document.getElementById('consent-accept').addEventListener('click', function () {
+					remember('granted'); banner.hidden = true; start();
+				});
+				document.getElementById('consent-decline').addEventListener('click', function () {
+					remember('denied'); banner.hidden = true;
+				});
+			}
+		})();
+
+		// Mobile disclosure. Closing on link click matters because every entry
+		// but "Sign in" is an in-page anchor: without it the panel would stay
+		// open over the section it just jumped to.
+		(function () {
+			var toggle = document.getElementById('nav-toggle');
+			var menu = document.getElementById('nav-menu');
+			if (!toggle || !menu) return;
+			function set(open) {
+				menu.hidden = !open;
+				toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			}
+			toggle.addEventListener('click', function () { set(menu.hidden); });
+			menu.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape' && !menu.hidden) { set(false); toggle.focus(); }
+			});
+			window.addEventListener('resize', function () {
+				if (window.innerWidth > 960 && !menu.hidden) set(false);
+			});
+		})();
+	</script>
+</body>
 </html>
