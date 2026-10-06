@@ -273,7 +273,6 @@
 			.form-status { margin-top: 18px; padding: 14px 16px; border-radius: 12px; font-size: 0.9375rem; }
 			.form-status[data-state="success"] { background: #0f3d2b; color: #a8e6c4; border: 1px solid #1c6b4a; }
 			.form-status[data-state="error"] { background: #4a1414; color: #ffc9c9; border: 1px solid #7d2626; }
-			.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 			/* Cookie notice, carried over from the holding page this replaces. A bar
 			   at the foot rather than a modal, and refusing is the same weight as
@@ -830,15 +829,14 @@
 		<section>
 			<div class="shell">
 				<div class="cta" id="contact">
-					<h2>Bring your engineering data.</h2>
+					<h2>Start a conversation.</h2>
 					<p class="lede">
-						Give us a specification, a requirements set or an existing FMEA. We'll show
-						you how Aegix extracts the engineering knowledge, structures the analysis
-						and helps your team identify what deserves attention.
+						Ask a question, arrange a demo, or tell us what you would want to try
+						Aegix on. We typically respond within 24–48 hours.
 					</p>
 					<form class="form" id="demo-form" novalidate>
-						<!-- Honeypot: a bot fills this, a person never sees it. -->
-						<div class="hp" aria-hidden="true"><label>Leave this empty<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></label></div>
+						<!-- Honeypot: a bot fills this, a person never sees it and a copy never catches it. -->
+						<input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
 						<div class="form-grid">
 							<div class="field"><label for="f-name">Name</label>
 								<input id="f-name" name="name" type="text" maxlength="120" required autocomplete="name" aria-describedby="e-name" />
@@ -849,20 +847,15 @@
 							<div class="field"><label for="f-company">Company</label>
 								<input id="f-company" name="company" type="text" maxlength="160" required autocomplete="organization" aria-describedby="e-company" />
 								<p class="err" id="e-company">Which organisation is this for?</p></div>
-							<div class="field"><label for="f-role">Role</label>
-								<input id="f-role" name="role" type="text" maxlength="120" autocomplete="organization-title" placeholder="Optional" /></div>
-							<div class="field wide"><label for="f-interest">What you want to look at</label>
-								<select id="f-interest" name="interest">
-									<option>DFMEA and PFMEA</option>
-									<option>DFMEA</option>
-									<option>PFMEA</option>
-									<option>Connecting Aegix to Polarion</option>
-								</select></div>
-							<div class="field wide"><label for="f-message">Anything we should know</label>
-								<textarea id="f-message" name="message" maxlength="3000" placeholder="Optional. A sentence about the product or process you would bring is enough."></textarea></div>
+							<div class="field"><label for="f-subject">Subject</label>
+								<input id="f-subject" name="subject" type="text" maxlength="160" required placeholder="How can we help?" aria-describedby="e-subject" />
+								<p class="err" id="e-subject">A few words on what this is about.</p></div>
+							<div class="field wide"><label for="f-message">Message</label>
+								<textarea id="f-message" name="message" maxlength="3000" required aria-describedby="e-message"></textarea>
+								<p class="err" id="e-message">Tell us a little about what you need.</p></div>
 						</div>
 						<div class="actions">
-							<button class="btn btn-primary" type="submit" id="f-submit">Request a demo</button>
+							<button class="btn btn-primary" type="submit" id="f-submit">Send message</button>
 						</div>
 						<p class="form-note">We read these ourselves. You can also write to <a href="mailto:hello@aegix.eu">hello@aegix.eu</a>.</p>
 						<p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
@@ -934,6 +927,12 @@
 			var ACCESS_KEY = '67f03824-0402-4505-bae0-a7855fdd9a06';
 			var form = document.getElementById('demo-form');
 			if (!form) return;
+			document.querySelectorAll('a[href="#contact"]').forEach(function (a) {
+				a.addEventListener('click', function () {
+					var subj = document.getElementById('f-subject');
+					if (subj && !subj.value) subj.value = a.textContent.trim();
+				});
+			});
 			var status = document.getElementById('f-status');
 			var submit = document.getElementById('f-submit');
 
@@ -944,7 +943,7 @@
 			}
 			function validate() {
 				var ok = true, first = null;
-				['f-name', 'f-email', 'f-company'].forEach(function (id) {
+				['f-name', 'f-email', 'f-company', 'f-subject', 'f-message'].forEach(function (id) {
 					var el = document.getElementById(id);
 					var bad = !el.value.trim() || (el.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));
 					setError(el, bad);
@@ -967,8 +966,7 @@
 				submit.textContent = 'Sending…';
 				var data = new FormData(form);
 				data.append('access_key', ACCESS_KEY);
-				data.append('subject', 'Aegix demo request — ' + (data.get('company') || ''));
-				data.append('from_name', 'aegix.eu');
+				data.append('from_name', 'aegix.eu — ' + (data.get('company') || 'contact form'));
 				fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
 					.then(function (r) { return r.json(); })
 					.then(function (res) {
@@ -979,13 +977,13 @@
 						} else {
 							say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
 							submit.disabled = false;
-							submit.textContent = 'Request a demo';
+							submit.textContent = 'Send message';
 						}
 					})
 					.catch(function () {
 						say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
 						submit.disabled = false;
-						submit.textContent = 'Request a demo';
+						submit.textContent = 'Send message';
 					});
 			});
 		})();
