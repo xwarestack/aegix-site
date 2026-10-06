@@ -241,6 +241,20 @@
 			td:last-child { font-weight: 600; }
 
 			/* ── CTA ──────────────────────────────────── */
+			/* Credits band: who builds Aegix, who funded it, which cluster XWARE
+			   belongs to. Three different relationships, so the sentence carries
+			   them and the marks stay unlabelled. Full colour, full opacity: the
+			   funder's mark is a grant condition, not decoration. The XWARE JPEG
+			   has a #fdfdfd ground, so this band stays on white, never .alt. */
+			.credits { border-top: 1px solid var(--border-faint); padding: 40px 0 44px; }
+			.credits p { margin: 0 auto; max-width: 68ch; text-align: center; font-size: 13px; line-height: 1.65; color: var(--subtle-fg); }
+			.credits-logos { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px 54px; }
+			.credits-logos a { display: inline-flex; align-items: center; border-radius: 4px; }
+			.credits-logos img { display: block; width: auto; }
+			.credits-logos .l-xware { height: 24px; }
+			.credits-logos .l-innoviris { height: 44px; }
+			.credits-logos .l-software { height: 40px; }
+
 			.cta { background: var(--ink); color: #fff; border-radius: 18px; padding: 54px 34px; text-align: center; position: relative; overflow: hidden; }
 			.cta::before { content: ''; position: absolute; inset: auto -20% -60% -20%; height: 80%; background: radial-gradient(50% 60% at 50% 50%, rgb(0 82 204 / .35), transparent 70%); }
 			.cta > * { position: relative; }
@@ -864,11 +878,30 @@
 			</div>
 		</section>
 
+		<section class="credits">
+			<div class="shell">
+				<p>
+					Aegix is built by XWARE and has been funded by the Brussels Capital
+					Region &ndash; Innoviris. XWARE is a member of software.brussels, the
+					software cluster of hub.brussels.
+				</p>
+				<div class="credits-logos">
+					<a href="https://xware-engineering.com" target="_blank" rel="noopener noreferrer">
+						<img class="l-xware" src="logos/xware.jpg" width="981" height="196" alt="XWARE" />
+					</a>
+					<a href="https://innoviris.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-innoviris" src="logos/innoviris.png" width="616" height="233" alt="Funded by innoviris.brussels" />
+					</a>
+					<a href="https://software.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-software" src="logos/software-brussels.png" width="768" height="161" alt="hub.brussels software cluster" />
+					</a>
+				</div>
+			</div>
+		</section>
+
 		<footer>
 			<div class="shell foot">
 				<span>&copy; 2026 XWARE</span>
-				<!-- TODO: replace with the innoviris.brussels mark. -->
-				<span>Funded by innoviris.brussels</span>
 				<span class="foot-links">
 					<a href="https://app.aegix.eu">Sign in</a>
 					<a href="mailto:hello@aegix.eu">hello@aegix.eu</a>
