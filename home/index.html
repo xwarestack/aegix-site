@@ -27,6 +27,77 @@
 		<meta name="twitter:description" content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions." />
 		<meta name="twitter:image" content="https://aegix.eu/home/og.png" />
 
+		<!-- Structured data. The Organization block mirrors the one published at
+		     xware-engineering.com and shares its @id, so search engines and
+		     assistants resolve one entity instead of two. No offers and no
+		     aggregateRating: there is no public pricing and there are no reviews,
+		     and inventing either is a manual action waiting to happen. -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "Organization",
+					"@id": "https://xware-engineering.com/#organization",
+					"name": "XWARE",
+					"url": "https://xware-engineering.com",
+					"logo": "https://xware-engineering.com/images/xware-logo.jpg",
+					"description": "Engineering consultancy for safety-critical systems",
+					"foundingDate": "2021",
+					"email": "hello@aegix.eu",
+					"address": [
+						{ "@type": "PostalAddress", "addressLocality": "Brussels", "addressCountry": "Belgium" },
+						{ "@type": "PostalAddress", "addressLocality": "Ia\u0219i", "addressCountry": "Romania" }
+					],
+					"sameAs": [
+						"https://www.linkedin.com/company/xware-technology",
+						"https://github.com/xwarestack"
+					]
+				},
+				{
+					"@type": "WebSite",
+					"@id": "https://aegix.eu/#website",
+					"url": "https://aegix.eu/",
+					"name": "Aegix",
+					"inLanguage": "en",
+					"publisher": { "@id": "https://xware-engineering.com/#organization" }
+				},
+				{
+					"@type": "SoftwareApplication",
+					"@id": "https://aegix.eu/#aegix",
+					"name": "Aegix",
+					"alternateName": "Aegix FMEA",
+					"applicationCategory": "BusinessApplication",
+					"applicationSubCategory": "FMEA software",
+					"operatingSystem": "Web browser",
+					"url": "https://aegix.eu/home/",
+					"description": "Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions.",
+					"inLanguage": "en",
+					"image": "https://aegix.eu/home/og.png",
+					"publisher": { "@id": "https://xware-engineering.com/#organization" },
+					"author": { "@id": "https://xware-engineering.com/#organization" },
+					"isAccessibleForFree": false,
+					"featureList": [
+						"Design FMEA (DFMEA)",
+						"Process FMEA (PFMEA)",
+						"AIAG-VDA seven-step method",
+						"Action Priority rating",
+						"Structure, function and failure analysis",
+						"Requirements traceability",
+						"Polarion ALM integration",
+						"AI-assisted generation with human review",
+						"Configurable FMEA templates"
+					],
+					"funder": {
+						"@type": "Organization",
+						"name": "Innoviris",
+						"url": "https://innoviris.brussels"
+					}
+				}
+			]
+		}
+		</script>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link

@@ -1,5 +1,38 @@
 User-agent: *
 Allow: /
 
+# Assistant and answer-engine crawlers, named explicitly. "*" already permits
+# them; these lines exist so the intent is on the record and a future
+# disallow has to be a deliberate edit rather than a side effect.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 # The holding page at / carries its own noindex until /home replaces it.
 Sitemap: https://aegix.eu/sitemap.xml

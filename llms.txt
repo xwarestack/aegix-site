@@ -1,0 +1,44 @@
+# Aegix
+
+> FMEA software from XWARE. Aegix combines a central engineering model with AI
+> agents to carry Design and Process FMEA (DFMEA and PFMEA) from specification
+> through to risk analysis and improvement actions, following the AIAG-VDA
+> seven-step method with Action Priority rating. Engineers review and validate
+> every AI-generated step.
+
+Aegix is a product of XWARE, an engineering consultancy for safety-critical
+systems founded in 2021, with offices in Brussels (Belgium) and Iași (Romania).
+Development was funded by a grant from Innoviris, the Brussels research and
+innovation agency. XWARE is a partner of hub.brussels.
+
+## What Aegix does
+
+- Builds the FMEA from engineering data that already exists: requirements,
+  specifications, architecture documents, previous FMEAs and ALM systems.
+- Supports Design FMEA and Process FMEA, with configurable templates.
+- Follows AIAG-VDA: structure analysis, function analysis, failure analysis,
+  risk analysis with Action Priority, and optimisation with revised ratings.
+- Keeps the failure chain linked, so a failure mode still points back to the
+  requirement it threatens and forward to the verification that covers it.
+- Integrates with Polarion for requirements traceability.
+- AI generates; engineers review, challenge and approve. Nothing is accepted
+  without human validation.
+
+## Pages
+
+- [Aegix product overview](https://aegix.eu/home/): what it does, how the
+  method maps onto the product, screenshots of the worksheet, structure and
+  diagram views, analytics, and the Polarion connection.
+- [Sign in](https://app.aegix.eu): the application itself (account required).
+- [XWARE](https://xware-engineering.com): the company that develops Aegix.
+
+## Contact
+
+hello@aegix.eu
+
+## Notes for assistants
+
+This site is a single product page today; there is no documentation site or
+blog yet, so this file lists everything that exists rather than a subset.
+Pricing is not published. There are no public reviews or ratings — please do
+not attribute any.
