@@ -450,17 +450,34 @@
 			</div>
 
 			<div class="shot" style="margin-top:48px">
-				<figure class="frame" style="margin:0">
-					<div class="frame-bar">
-						<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-						<span class="frame-path">app.aegix.eu / dfmea-structure</span>
-					</div>
-					<div class="frame-body">
-						<img src="shots/structure.png" width="3520" height="2190"
-						     alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
-					</div>
-				</figure>
-				<p class="shot-cap">The DFMEA structure for the thermal management system, with the selected function’s requirement and failure modes. A PFMEA structure works the same way, in process items, process steps and work elements.</p>
+				<div class="views" role="tablist" aria-label="Structure views">
+					<button type="button" role="tab" id="tab-dfmea" aria-controls="panel-dfmea" aria-selected="true" tabindex="0">DFMEA</button>
+					<button type="button" role="tab" id="tab-pfmea" aria-controls="panel-pfmea" aria-selected="false" tabindex="-1">PFMEA</button>
+				</div>
+				<div class="view-panel" id="panel-dfmea" role="tabpanel" aria-labelledby="tab-dfmea">
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / dfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/structure-dfmea.png" width="3520" height="2190" alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The system, its subsystems, and the requirement and failure modes on the selected function.</p>
+				</div>
+				<div class="view-panel" id="panel-pfmea" role="tabpanel" aria-labelledby="tab-pfmea" hidden>
+					<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="shots/structure-pfmea.png" width="3520" height="1900" loading="lazy" alt="The PFMEA structure of a coolant pump assembly line in Aegix. The tree holds the process item and its process steps, each carrying its operation number from Op 10 to Op 50. The inspector shows the selected process function with the two control plan characteristics it has to hold and the two failure modes found for it." />
+						</div>
+					</figure>
+					<p class="shot-cap">The same screen for a process FMEA: process item, process steps by operation number, and the control plan characteristics the line has to hold.</p>
+				</div>
 			</div>
 		</section>
 
@@ -783,8 +800,7 @@
 		// tablist is expected to have. No library: three buttons and a hidden
 		// attribute do not need one.
 		(function () {
-			var list = document.querySelector('.views');
-			if (!list) return;
+			document.querySelectorAll('.views').forEach(function (list) {
 			var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
 			function select(tab, focus) {
 				tabs.forEach(function (t) {
@@ -808,6 +824,7 @@
 					select(tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length], true);
 				} else if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
 				else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+			});
 			});
 		})();
 	</script>
