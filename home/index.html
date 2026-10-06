@@ -125,6 +125,10 @@
 			   readable, which the 71rem text column cannot do. These sit wider than
 			   the prose and fall back to the viewport on a laptop. */
 			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
+			/* The three worksheet views share one capture width, so they render at
+			   one scale. Giving them a wider container than the prose keeps that
+			   shared scale readable on a large screen. */
+			.shot.wide { max-width: 120rem; }
 			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: 0.875rem; color: var(--subtle-fg); }
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
 
@@ -298,7 +302,7 @@
 				</div>
 			</div>
 
-			<div class="shot" style="margin-top:56px">
+			<div class="shot wide" style="margin-top:56px">
 				<div class="views" role="tablist" aria-label="Worksheet views">
 					<button type="button" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true" tabindex="0">All</button>
 					<button type="button" role="tab" id="tab-structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1">Structure &amp; Failure</button>
@@ -311,7 +315,7 @@
 							<span class="frame-path">app.aegix.eu / worksheet</span>
 						</div>
 						<div class="frame-body">
-							<img src="shots/view-all.png" width="2960" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
+							<img src="shots/view-all.png" width="2700" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
 						</div>
 					</figure>
 				</div>
@@ -322,7 +326,7 @@
 							<span class="frame-path">app.aegix.eu / worksheet · structure &amp; failure</span>
 						</div>
 						<div class="frame-body">
-							<img src="shots/view-structure.png" width="4320" height="1215" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
+							<img src="shots/view-structure.png" width="2700" height="615" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
 						</div>
 					</figure>
 				</div>
@@ -333,7 +337,7 @@
 							<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
 						</div>
 						<div class="frame-body">
-							<img src="shots/view-ratings.png" width="3040" height="1620" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
+							<img src="shots/view-ratings.png" width="2700" height="1670" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
 						</div>
 					</figure>
 				</div>
