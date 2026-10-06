@@ -248,6 +248,52 @@
 			.cta .lede { margin: 16px auto 0; max-width: 52ch; color: #a7b0bd; }
 			.cta .actions { justify-content: center; }
 			.cta .btn-ghost { background: transparent; border-color: #39414d; color: #fff; }
+
+			/* Demo request form. It sits on the dark band, so the fields carry their
+			   own light surface rather than inheriting the section's text colour. */
+			.form { margin: 28px auto 0; max-width: 46rem; text-align: left; }
+			.form-grid { display: grid; gap: 14px; }
+			@media (min-width: 40rem) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .wide { grid-column: 1 / -1; } }
+			.field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: .08em;
+				text-transform: uppercase; color: #9aa4b2; margin-bottom: 6px; }
+			.field input, .field select, .field textarea {
+				width: 100%; font: inherit; font-size: 0.9375rem; color: var(--fg);
+				background: #fff; border: 1px solid #39414d; border-radius: 10px; padding: 11px 13px;
+			}
+			.field textarea { min-height: 110px; resize: vertical; }
+			.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+				outline: 2px solid var(--brand); outline-offset: 1px; border-color: var(--brand);
+			}
+			.field input[aria-invalid="true"], .field select[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #ff8f8f; }
+			.field .err { display: none; margin-top: 5px; font-size: 0.8125rem; }
+			.field .err[data-show="1"] { display: block; color: #ffb3b3; }
+			.form .actions { justify-content: center; margin-top: 22px; }
+			.form-note { margin-top: 14px; text-align: center; font-size: 0.8125rem; color: #8b94a3; }
+			.form-note a { color: #cfe0fb; }
+			.form-status { margin-top: 18px; padding: 14px 16px; border-radius: 12px; font-size: 0.9375rem; }
+			.form-status[data-state="success"] { background: #0f3d2b; color: #a8e6c4; border: 1px solid #1c6b4a; }
+			.form-status[data-state="error"] { background: #4a1414; color: #ffc9c9; border: 1px solid #7d2626; }
+			.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+			/* Cookie notice, carried over from the holding page this replaces. A bar
+			   at the foot rather than a modal, and refusing is the same weight as
+			   agreeing. `[hidden]` is restated because the author `display: flex`
+			   would otherwise beat the browser's own rule and leave it on screen. */
+			.consent {
+				position: fixed; inset: auto 0 0 0; z-index: 50;
+				display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center;
+				gap: 6px 14px; padding: 12px 20px;
+				background: var(--ink); color: #c6cdd8; font-size: 0.8125rem; line-height: 1.5;
+			}
+			.consent[hidden] { display: none; }
+			.consent p { margin: 0; }
+			.consent-actions { display: flex; gap: 14px; }
+			.consent button {
+				font: inherit; font-weight: 600; padding: 0; border: 0; background: none;
+				cursor: pointer; color: #fff; text-decoration: underline; text-underline-offset: 3px;
+			}
+			.consent button:hover { color: var(--brand-weak, #cfe0fb); }
+			.consent button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 			.cta .btn-ghost:hover { border-color: #737c8a; }
 
 			footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: 13.5px; color: var(--subtle-fg); }
@@ -273,7 +319,7 @@
 					<a class="hide-sm" href="#ecosystem">Ecosystem</a>
 					<a class="hide-sm" href="#industries">Industries</a>
 					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
-					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
+					<a class="btn btn-primary" href="#contact">Request a demo</a>
 				</nav>
 			</div>
 		</header>
@@ -289,7 +335,7 @@
 				</p>
 				<p class="kicker">Less time building the FMEA. More time thinking about the risk.</p>
 				<div class="actions">
-					<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
+					<a class="btn btn-primary" href="#contact">Request a demo</a>
 					<a class="btn btn-ghost" href="#platform">See Aegix in action</a>
 				</div>
 				<div class="chips">
@@ -783,17 +829,44 @@
 		<!-- ── CTA ──────────────────────────────────── -->
 		<section>
 			<div class="shell">
-				<div class="cta">
+				<div class="cta" id="contact">
 					<h2>Bring your engineering data.</h2>
 					<p class="lede">
 						Give us a specification, a requirements set or an existing FMEA. We'll show
 						you how Aegix extracts the engineering knowledge, structures the analysis
 						and helps your team identify what deserves attention.
 					</p>
-					<div class="actions">
-						<a class="btn btn-primary" href="mailto:hello@aegix.eu?subject=Aegix%20demo">Request a demo</a>
-						<a class="btn btn-ghost" href="mailto:hello@aegix.eu?subject=Talk%20to%20an%20engineer">Talk to an engineer</a>
-					</div>
+					<form class="form" id="demo-form" novalidate>
+						<!-- Honeypot: a bot fills this, a person never sees it. -->
+						<div class="hp" aria-hidden="true"><label>Leave this empty<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" /></label></div>
+						<div class="form-grid">
+							<div class="field"><label for="f-name">Name</label>
+								<input id="f-name" name="name" type="text" maxlength="120" required autocomplete="name" aria-describedby="e-name" />
+								<p class="err" id="e-name">Tell us who you are.</p></div>
+							<div class="field"><label for="f-email">Work email</label>
+								<input id="f-email" name="email" type="email" maxlength="254" required autocomplete="email" aria-describedby="e-email" />
+								<p class="err" id="e-email">We need an address that can reply.</p></div>
+							<div class="field"><label for="f-company">Company</label>
+								<input id="f-company" name="company" type="text" maxlength="160" required autocomplete="organization" aria-describedby="e-company" />
+								<p class="err" id="e-company">Which organisation is this for?</p></div>
+							<div class="field"><label for="f-role">Role</label>
+								<input id="f-role" name="role" type="text" maxlength="120" autocomplete="organization-title" placeholder="Optional" /></div>
+							<div class="field wide"><label for="f-interest">What you want to look at</label>
+								<select id="f-interest" name="interest">
+									<option>DFMEA and PFMEA</option>
+									<option>DFMEA</option>
+									<option>PFMEA</option>
+									<option>Connecting Aegix to Polarion</option>
+								</select></div>
+							<div class="field wide"><label for="f-message">Anything we should know</label>
+								<textarea id="f-message" name="message" maxlength="3000" placeholder="Optional. A sentence about the product or process you would bring is enough."></textarea></div>
+						</div>
+						<div class="actions">
+							<button class="btn btn-primary" type="submit" id="f-submit">Request a demo</button>
+						</div>
+						<p class="form-note">We read these ourselves. You can also write to <a href="mailto:hello@aegix.eu">hello@aegix.eu</a>.</p>
+						<p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
+					</form>
 				</div>
 			</div>
 		</section>
@@ -811,6 +884,14 @@
 			</div>
 		</footer>
 	
+		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
+			<p>We use analytics to understand how this page is used.</p>
+			<div class="consent-actions">
+				<button type="button" id="consent-decline">Decline</button>
+				<button type="button" id="consent-accept">Accept</button>
+			</div>
+		</div>
+
 	<script>
 		// Tab switching for the worksheet views, with the arrow-key behaviour a
 		// tablist is expected to have. No library: three buttons and a hidden
@@ -842,6 +923,107 @@
 				else if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
 			});
 			});
+		})();
+	</script>
+
+	<script>
+		// Demo request form. Posts to Web3Forms, the same service the XWARE site
+		// uses. The access key is not a secret -- it travels from the browser on
+		// every submit and identifies the destination inbox, nothing more.
+		(function () {
+			var ACCESS_KEY = '67f03824-0402-4505-bae0-a7855fdd9a06';
+			var form = document.getElementById('demo-form');
+			if (!form) return;
+			var status = document.getElementById('f-status');
+			var submit = document.getElementById('f-submit');
+
+			function setError(input, on) {
+				input.setAttribute('aria-invalid', on ? 'true' : 'false');
+				var err = document.getElementById('e-' + input.id.slice(2));
+				if (err) err.setAttribute('data-show', on ? '1' : '0');
+			}
+			function validate() {
+				var ok = true, first = null;
+				['f-name', 'f-email', 'f-company'].forEach(function (id) {
+					var el = document.getElementById(id);
+					var bad = !el.value.trim() || (el.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value));
+					setError(el, bad);
+					if (bad && !first) first = el;
+					if (bad) ok = false;
+				});
+				if (first) first.focus();
+				return ok;
+			}
+			function say(state, text) {
+				status.hidden = false;
+				status.setAttribute('data-state', state);
+				status.textContent = text;
+			}
+
+			form.addEventListener('submit', function (e) {
+				e.preventDefault();
+				if (!validate()) return;
+				submit.disabled = true;
+				submit.textContent = 'Sending…';
+				var data = new FormData(form);
+				data.append('access_key', ACCESS_KEY);
+				data.append('subject', 'Aegix demo request — ' + (data.get('company') || ''));
+				data.append('from_name', 'aegix.eu');
+				fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+					.then(function (r) { return r.json(); })
+					.then(function (res) {
+						if (res.success) {
+							form.querySelector('.form-grid').hidden = true;
+							form.querySelector('.actions').hidden = true;
+							say('success', 'Thank you. We have your request and will come back to arrange a time.');
+						} else {
+							say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
+							submit.disabled = false;
+							submit.textContent = 'Request a demo';
+						}
+					})
+					.catch(function () {
+						say('error', 'We could not send that. Please try again, or write to hello@aegix.eu.');
+						submit.disabled = false;
+						submit.textContent = 'Request a demo';
+					});
+			});
+		})();
+	</script>
+
+	<script>
+		// Analytics, carried over from the holding page. Nothing is injected until
+		// Accept: no cookie, no request, nothing recorded. A tag loaded "paused"
+		// still calls home, which is why the tag itself waits.
+		(function () {
+			var KEY = 'aegix-analytics-consent';
+			var banner = document.getElementById('consent');
+			if (!banner) return;
+			var stored = null;
+			try { stored = localStorage.getItem(KEY); } catch (e) {}
+
+			function start() {
+				(function (c, l, a, r, i, t, y) {
+					c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+					t = l.createElement(r); t.async = 1;
+					t.src = 'https://www.clarity.ms/tag/' + i;
+					y = l.getElementsByTagName(r)[0];
+					y.parentNode.insertBefore(t, y);
+				})(window, document, 'clarity', 'script', 'yt1vdwre6g');
+			}
+			function remember(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+
+			if (stored === 'granted') {
+				start();
+			} else if (stored !== 'denied') {
+				banner.hidden = false;
+				document.getElementById('consent-accept').addEventListener('click', function () {
+					remember('granted'); banner.hidden = true; start();
+				});
+				document.getElementById('consent-decline').addEventListener('click', function () {
+					remember('denied'); banner.hidden = true;
+				});
+			}
 		})();
 	</script>
 </body>
