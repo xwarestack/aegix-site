@@ -34,10 +34,20 @@
 				--brand: #0052cc;
 				--brand-hover: #0747a6;
 				--brand-faint: #eaf1fd;
-				--high: #b3261e; --high-bg: #fdecea;
-				--med: #8a5a00;  --med-bg: #fdf3e0;
-				--low: #1b5e3f;  --low-bg: #e8f5ee;
 				--mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+				/* Type scale. Six steps and two fluid heads; every font-size on the
+				   page resolves to one of these. rem throughout, so a reader who has
+				   raised their browser font size scales with it -- px sizes do not.
+				   0.75rem (12px) is the floor, matching the product's design system. */
+				--t-xs: 0.75rem;     /* 12px - eyebrows, labels, chips, table heads */
+				--t-sm: 0.8125rem;   /* 13px - captions, errors, footer, consent */
+				--t-md: 0.875rem;    /* 14px - nav, buttons, tabs, card and table body */
+				--t-lg: 0.9375rem;   /* 15px - form fields, chain values */
+				--t-xl: 1.0625rem;   /* 17px - ledes, kickers, h3, wordmark */
+				--t-2xl: 1.25rem;    /* 20px - hero sub only */
+				--t-h2: clamp(1.6rem, 1.15rem + 1.6vw, 2.35rem);
+				--t-h1: clamp(2rem, 1.2rem + 2.7vw, 3.1rem);
 			}
 
 			* { box-sizing: border-box; }
@@ -45,7 +55,7 @@
 			body {
 				margin: 0; background: var(--bg); color: var(--fg);
 				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-				font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+				font-size: 1rem; line-height: 1.6; -webkit-font-smoothing: antialiased;
 			}
 
 			.shell { width: 100%; max-width: 71rem; margin: 0 auto; padding: 0 20px; }
@@ -59,27 +69,27 @@
 			.dark .kicker { color: #fff; }
 
 			h1, h2, h3 { letter-spacing: -0.026em; text-wrap: balance; margin: 0; }
-			h2 { font-size: clamp(1.6rem, 1.15rem + 1.6vw, 2.35rem); line-height: 1.14; }
-			h3 { font-size: 1.0625rem; line-height: 1.35; }
+			h2 { font-size: var(--t-h2); line-height: 1.14; }
+			h3 { font-size: var(--t-xl); line-height: 1.35; }
 			p { margin: 0; }
 			a { color: var(--brand); }
 
-			.eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand); margin: 0 0 14px; }
-			.lede { margin-top: 16px; max-width: 60ch; font-size: 1.0625rem; color: var(--muted-fg); }
-			.kicker { margin-top: 26px; font-size: 1.125rem; font-weight: 600; max-width: 56ch; letter-spacing: -0.01em; }
+			.eyebrow { font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand); margin: 0 0 14px; }
+			.lede { margin-top: 16px; max-width: 60ch; font-size: var(--t-xl); color: var(--muted-fg); }
+			.kicker { margin-top: 26px; font-size: var(--t-xl); font-weight: 600; max-width: 56ch; letter-spacing: -0.01em; }
 
 			/* ── Header ───────────────────────────────── */
 			header { position: sticky; top: 0; z-index: 40; background: rgb(255 255 255 / 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-faint); }
 			.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
-			.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
-			.mark { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 17px; font-weight: 700; }
-			.brand small { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle-fg); line-height: 1; margin-top: 2px; }
-			nav { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: 500; }
+			.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: var(--t-xl); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+			.mark { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: var(--t-xl); font-weight: 700; }
+			.brand small { display: block; font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle-fg); line-height: 1; margin-top: 2px; }
+			nav { display: flex; align-items: center; gap: 20px; font-size: var(--t-md); font-weight: 500; }
 			nav a { color: var(--muted-fg); text-decoration: none; }
 			nav a:hover { color: var(--fg); }
 			@media (max-width: 60rem) { nav .hide-sm { display: none; } }
 
-			.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 8px; font-size: 14.5px; font-weight: 600; text-decoration: none; border: 1px solid transparent; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease; }
+			.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 8px; font: inherit; font-size: var(--t-md); font-weight: 600; text-decoration: none; border: 1px solid transparent; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease; }
 			.btn-primary { background: var(--brand); color: #fff; }
 			.btn-primary:hover { background: var(--brand-hover); }
 			.btn-ghost { border-color: var(--border); color: var(--fg); background: #fff; }
@@ -96,9 +106,9 @@
 			}
 			.hero-grid { position: relative; display: grid; gap: 52px; align-items: center; }
 			@media (min-width: 64rem) { .hero-grid { grid-template-columns: 0.95fr 1.05fr; gap: 56px; } }
-			.hero h1 { font-size: clamp(2rem, 1.2rem + 2.7vw, 3.1rem); line-height: 1.07; }
+			.hero h1 { font-size: var(--t-h1); line-height: 1.07; }
 			.hero h1 em { font-style: normal; color: var(--brand); }
-			.hero .sub { margin-top: 20px; max-width: 54ch; font-size: 1.125rem; color: var(--muted-fg); }
+			.hero .sub { margin-top: 20px; max-width: 54ch; font-size: var(--t-2xl); color: var(--muted-fg); }
 			/* The hero copy is centred because the product shot under it is wider than
 			   the text column; left-aligned copy over a wider image reads as a
 			   misalignment rather than a composition. */
@@ -107,7 +117,7 @@
 			.hero .sub, .hero .kicker { margin-inline: auto; }
 			.hero .actions, .hero .chips { justify-content: center; }
 			.chips { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 7px; }
-			.chip { font-size: 12px; font-weight: 600; color: var(--muted-fg); border: 1px solid var(--border); background: #fff; padding: 5px 11px; border-radius: 999px; }
+			.chip { font-size: var(--t-xs); font-weight: 600; color: var(--muted-fg); border: 1px solid var(--border); background: #fff; padding: 5px 11px; border-radius: 999px; }
 
 			/* ── Product frame ────────────────────────── */
 			.frame {
@@ -117,7 +127,7 @@
 			.frame-bar { display: flex; align-items: center; gap: 8px; padding: 9px 13px; background: var(--bg-soft); border-bottom: 1px solid var(--border-faint); }
 			.frame-dots { display: flex; gap: 5px; }
 			.frame-dots i { width: 9px; height: 9px; border-radius: 50%; background: #d3d8df; display: block; }
-			.frame-path { font-family: var(--mono); font-size: 11px; color: var(--subtle-fg); }
+			.frame-path { font-family: var(--mono); font-size: var(--t-xs); color: var(--subtle-fg); }
 			.frame-body { padding: 0; }
 			.frame-body img { display: block; width: 100%; height: auto; }
 
@@ -129,7 +139,7 @@
 			   one scale. Giving them a wider container than the prose keeps that
 			   shared scale readable on a large screen. */
 			.shot.wide { max-width: 120rem; }
-			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: 0.875rem; color: var(--subtle-fg); }
+			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: var(--t-md); color: var(--subtle-fg); }
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
 
 			/* View switcher. It mirrors the control inside the product, because the
@@ -139,7 +149,7 @@
 			   `display` would otherwise beat the UA stylesheet. */
 			.views { display: flex; justify-content: center; gap: 4px; margin: 0 auto 16px; flex-wrap: wrap; }
 			.views button {
-				font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--muted-fg);
+				font: inherit; font-size: var(--t-md); font-weight: 600; color: var(--muted-fg);
 				background: transparent; border: 1px solid transparent; border-radius: 8px;
 				padding: 7px 14px; cursor: pointer;
 			}
@@ -159,27 +169,6 @@
 				.frame-body img { width: 860px; max-width: none; }
 			}
 
-			.ws-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border-faint); }
-			.ws-id { font-family: var(--mono); font-size: 11.5px; color: var(--brand); font-weight: 500; }
-			.ws-tag { font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--subtle-fg); }
-
-			.row { display: grid; grid-template-columns: 112px 1fr; gap: 12px; padding: 9px 14px; align-items: baseline; }
-			.row + .row { border-top: 1px solid var(--border-faint); }
-			.row-k { font-size: 9.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--subtle-fg); }
-			.row-v { font-size: 13.5px; font-weight: 500; }
-			.row-v .code { font-family: var(--mono); font-size: 11px; color: var(--brand); margin-right: 6px; }
-
-			.scores { display: flex; border-top: 1px solid var(--border-faint); background: var(--bg-soft); }
-			.score { flex: 1; padding: 9px 6px; text-align: center; }
-			.score + .score { border-left: 1px solid var(--border-faint); }
-			.score b { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .09em; color: var(--subtle-fg); }
-			.score span { display: block; margin-top: 1px; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
-			.score.ap { flex: 1.35; background: var(--high-bg); }
-			.score.ap b, .score.ap span { color: var(--high); }
-			.score.ap.ok { background: var(--low-bg); }
-			.score.ap.ok b, .score.ap.ok span { color: var(--low); }
-			.ws-foot { padding: 9px 14px; border-top: 1px solid var(--border-faint); font-size: 11.5px; color: var(--subtle-fg); }
-
 			/* ── Flow (SVG) ───────────────────────────── */
 			.flow-wrap { margin-top: 44px; border: 1px solid var(--border); border-radius: 14px; background: #fff; padding: 26px 22px; overflow-x: auto; }
 			.alt .flow-wrap { background: #fff; }
@@ -196,15 +185,18 @@
 			.sp { position: relative; padding: 13px 0; }
 			.sp::before { content: ''; position: absolute; left: -30px; top: 19px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 2px solid var(--brand); }
 			.dark .sp::before { background: var(--ink); }
-			.sp-k { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
-			.sp-v { margin-top: 2px; font-size: 15.5px; color: var(--muted-fg); }
+			.sp-k { font-size: var(--t-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
+			.sp-v { margin-top: 2px; font-size: var(--t-lg); color: var(--muted-fg); }
 			.dark .sp-v { color: #a7b0bd; }
+			/* --brand is tuned for white; on --ink it lands at 2.8:1. Use the same
+			   lighter blue the .tag label already uses on this ground. */
+			.dark .sp-k { color: #76acff; }
 
 			/* ── Pipeline ─────────────────────────────── */
 			.pipeline { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 9px 11px; }
-			.pill { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: 13px; font-weight: 600; }
+			.pill { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: var(--t-sm); font-weight: 600; }
 			.dark .pill { background: #151b23; border-color: #262e39; color: #e6eaf0; }
-			.pipeline .sep { color: var(--subtle-fg); }
+			.pipeline .sep { color: var(--subtle-fg); font-size: var(--t-sm); }
 
 			/* ── Grids ────────────────────────────────── */
 			.grid { margin-top: 42px; display: grid; gap: 24px 30px; }
@@ -212,29 +204,20 @@
 			@media (min-width: 66rem) { .grid.three { grid-template-columns: repeat(3, 1fr); } .grid.four { grid-template-columns: repeat(4, 1fr); } .grid.five { grid-template-columns: repeat(5, 1fr); } }
 
 			.card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
-			.card p { margin-top: 7px; font-size: 14px; color: var(--muted-fg); }
-			.num { width: 28px; height: 28px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+			.card p { margin-top: 7px; font-size: var(--t-md); color: var(--muted-fg); }
+			.num { width: 28px; height: 28px; border-radius: 8px; background: var(--brand); color: #fff; display: grid; place-items: center; font-size: var(--t-sm); font-weight: 700; margin-bottom: 14px; }
 			.feat { padding-left: 16px; border-left: 2px solid var(--brand-faint); }
-			.feat h3 { font-size: 1rem; }
-			.feat p { margin-top: 7px; font-size: 14.5px; color: var(--muted-fg); }
+			.feat p { margin-top: 7px; font-size: var(--t-md); color: var(--muted-fg); }
 
 			/* ── Split section ────────────────────────── */
 			.split { display: grid; gap: 44px; align-items: center; }
 			@media (min-width: 64rem) { .split { grid-template-columns: 1fr 1fr; gap: 56px; } .split.rev > :first-child { order: 2; } }
 
-			/* ── Matrix ───────────────────────────────── */
-			.matrix { border: 1px solid var(--border); border-radius: 12px; background: #fff; padding: 18px; }
-			.mx { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
-			.mx i { aspect-ratio: 1; border-radius: 3px; display: block; }
-			.mx-legend { margin-top: 12px; display: flex; gap: 14px; font-size: 11.5px; color: var(--subtle-fg); }
-			.mx-legend span { display: inline-flex; align-items: center; gap: 6px; }
-			.mx-legend em { width: 9px; height: 9px; border-radius: 2px; font-style: normal; }
-
 			/* ── Table ────────────────────────────────── */
 			.table-wrap { margin-top: 38px; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
-			table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 34rem; }
+			table { width: 100%; border-collapse: collapse; font-size: var(--t-md); min-width: 34rem; }
 			th, td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--border-faint); vertical-align: top; }
-			thead th { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); background: var(--bg-soft); }
+			thead th { font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle-fg); background: var(--bg-soft); }
 			thead th:last-child { color: var(--brand); }
 			tbody tr:last-child td { border-bottom: 0; }
 			td:first-child { color: var(--subtle-fg); }
@@ -249,7 +232,7 @@
 			   Stays on white: the XWARE JPEG has a #fdfdfd ground that
 			   vanishes on #ffffff but shows as a pale box on --bg-soft. */
 			.credits { border-top: 1px solid var(--border-faint); padding: 40px 0 44px; }
-			.credits p { margin: 0 auto; max-width: 62ch; text-align: center; text-wrap: balance; font-size: 13px; line-height: 1.65; color: var(--subtle-fg); }
+			.credits p { margin: 0 auto; max-width: 62ch; text-align: center; text-wrap: balance; font-size: var(--t-sm); line-height: 1.65; color: var(--subtle-fg); }
 			.credits-logos { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px 62px; }
 			.credits-logos a { display: inline-flex; align-items: center; border-radius: 4px; }
 			.credits-logos img { display: block; width: auto; }
@@ -270,10 +253,10 @@
 			.form { margin: 28px auto 0; max-width: 46rem; text-align: left; }
 			.form-grid { display: grid; gap: 14px; }
 			@media (min-width: 40rem) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .wide { grid-column: 1 / -1; } }
-			.field label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: .08em;
+			.field label { display: block; font-size: var(--t-xs); font-weight: 700; letter-spacing: .08em;
 				text-transform: uppercase; color: #9aa4b2; margin-bottom: 6px; }
 			.field input, .field select, .field textarea {
-				width: 100%; font: inherit; font-size: 0.9375rem; color: var(--fg);
+				width: 100%; font: inherit; font-size: var(--t-lg); color: var(--fg);
 				background: #fff; border: 1px solid #39414d; border-radius: 10px; padding: 11px 13px;
 			}
 			.field textarea { min-height: 110px; resize: vertical; }
@@ -281,12 +264,12 @@
 				outline: 2px solid var(--brand); outline-offset: 1px; border-color: var(--brand);
 			}
 			.field input[aria-invalid="true"], .field select[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #ff8f8f; }
-			.field .err { display: none; margin-top: 5px; font-size: 0.8125rem; }
+			.field .err { display: none; margin-top: 5px; font-size: var(--t-sm); }
 			.field .err[data-show="1"] { display: block; color: #ffb3b3; }
 			.form .actions { justify-content: center; margin-top: 22px; }
-			.form-note { margin-top: 14px; text-align: center; font-size: 0.8125rem; color: #8b94a3; }
+			.form-note { margin-top: 14px; text-align: center; font-size: var(--t-sm); color: #8b94a3; }
 			.form-note a { color: #cfe0fb; }
-			.form-status { margin-top: 18px; padding: 14px 16px; border-radius: 12px; font-size: 0.9375rem; }
+			.form-status { margin-top: 18px; padding: 14px 16px; border-radius: 12px; font-size: var(--t-lg); }
 			.form-status[data-state="success"] { background: #0f3d2b; color: #a8e6c4; border: 1px solid #1c6b4a; }
 			.form-status[data-state="error"] { background: #4a1414; color: #ffc9c9; border: 1px solid #7d2626; }
 
@@ -298,7 +281,7 @@
 				position: fixed; inset: auto 0 0 0; z-index: 50;
 				display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center;
 				gap: 6px 14px; padding: 12px 20px;
-				background: var(--ink); color: #c6cdd8; font-size: 0.8125rem; line-height: 1.5;
+				background: var(--ink); color: #c6cdd8; font-size: var(--t-sm); line-height: 1.5;
 			}
 			.consent[hidden] { display: none; }
 			.consent p { margin: 0; }
@@ -308,16 +291,22 @@
 				cursor: pointer; color: #fff; text-decoration: underline; text-underline-offset: 3px;
 			}
 			.consent button:hover { color: var(--brand-weak, #cfe0fb); }
+			/* A brand-blue ring is invisible on a brand-blue button over --ink, and
+			   fails the 3:1 WCAG 2.2 asks of a focus indicator. White on dark, as
+			   the consent bar already does. */
+			.dark a:focus-visible, .dark .btn:focus-visible,
+			.cta a:focus-visible, .cta .btn:focus-visible,
+			.cta .field input:focus-visible, .cta .field textarea:focus-visible { outline-color: #fff; }
 			.consent button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 			.cta .btn-ghost:hover { border-color: #737c8a; }
 
-			footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: 13.5px; color: var(--subtle-fg); }
+			footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: var(--t-sm); color: var(--subtle-fg); }
 			.foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
 			.foot a { color: var(--muted-fg); text-decoration: none; }
 			.foot a:hover { color: var(--fg); }
 			.foot-links { display: flex; flex-wrap: wrap; gap: 18px; }
 
-			.tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #76acff; border: 1px solid #2b3542; padding: 4px 11px; border-radius: 999px; margin-bottom: 18px; }
+			.tag { display: inline-block; font-size: var(--t-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #76acff; border: 1px solid #2b3542; padding: 4px 11px; border-radius: 999px; margin-bottom: 18px; }
 		</style>
 	</head>
 
