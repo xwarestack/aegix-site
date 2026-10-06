@@ -8,7 +8,24 @@
 			name="description"
 			content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions."
 		/>
-		<meta name="robots" content="noindex, nofollow" />
+		<link rel="canonical" href="https://aegix.eu/home/" />
+
+		<!-- A link to this page is the first thing most people will see of it,
+		     so the card is part of the page, not an afterthought. -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Aegix" />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:url" content="https://aegix.eu/home/" />
+		<meta property="og:title" content="Aegix — Engineering intelligence for FMEA" />
+		<meta property="og:description" content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions." />
+		<meta property="og:image" content="https://aegix.eu/home/og.png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="The Aegix FMEA worksheet, showing the failure chain with ratings and action priority." />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Aegix — Engineering intelligence for FMEA" />
+		<meta name="twitter:description" content="Aegix combines a central engineering model with AI agents to carry Design and Process FMEA from specification to risk analysis and improvement actions." />
+		<meta name="twitter:image" content="https://aegix.eu/home/og.png" />
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -87,7 +104,25 @@
 			nav { display: flex; align-items: center; gap: 20px; font-size: var(--t-md); font-weight: 500; }
 			nav a { color: var(--muted-fg); text-decoration: none; }
 			nav a:hover { color: var(--fg); }
-			@media (max-width: 60rem) { nav .hide-sm { display: none; } }
+			/* Below 60rem the section links collapse into a disclosure. They used
+			   to simply vanish, which also took "Sign in" with them -- a customer on
+			   a phone had no way into the app except a 16px link in the footer. */
+			.nav-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; padding: 0; background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--muted-fg); cursor: pointer; }
+			.nav-toggle:hover { border-color: var(--muted-fg); color: var(--fg); }
+			.nav-menu { border-top: 1px solid var(--border-faint); background: #fff; }
+			.nav-menu[hidden] { display: none; }
+			.nav-menu .shell { display: flex; flex-direction: column; padding-block: 4px 12px; }
+			.nav-menu a { display: flex; align-items: center; min-height: 48px; font-size: var(--t-md); font-weight: 500; color: var(--muted-fg); text-decoration: none; border-bottom: 1px solid var(--border-faint); }
+			.nav-menu a:last-child { border-bottom: 0; color: var(--brand); font-weight: 600; }
+			.nav-menu a:hover { color: var(--fg); }
+			.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+			@media (max-width: 60rem) {
+				nav .hide-sm { display: none; }
+				.nav-toggle { display: inline-flex; }
+			}
+			/* Never leave it open behind a desktop layout after a resize. */
+			@media (min-width: 60.0625rem) { .nav-menu { display: none; } }
 
 			.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 8px; font: inherit; font-size: var(--t-md); font-weight: 600; text-decoration: none; border: 1px solid transparent; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease; }
 			.btn-primary { background: var(--brand); color: #fff; }
@@ -307,6 +342,16 @@
 			.foot-links { display: flex; flex-wrap: wrap; gap: 18px; }
 
 			.tag { display: inline-block; font-size: var(--t-xs); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #76acff; border: 1px solid #2b3542; padding: 4px 11px; border-radius: 999px; margin-bottom: 18px; }
+			/* Touch targets. This block sits last on purpose: .btn, .views button
+			   and the footer links are all defined further down than the nav
+			   media query, so an override placed up there loses the cascade at
+			   equal specificity. 44px is the floor; these sat at 40, 38 and 16. */
+			@media (max-width: 60rem) {
+				.btn { height: 44px; }
+				.views button { min-height: 44px; }
+				footer .foot-links a { display: inline-flex; align-items: center; min-height: 44px; }
+				.form-note a { display: inline-block; padding-block: 6px; }
+			}
 		</style>
 	</head>
 
@@ -324,7 +369,24 @@
 					<a class="hide-sm" href="#industries">Industries</a>
 					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
 					<a class="btn btn-primary" href="#contact">Request a demo</a>
+					<button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+						<span class="sr-only">Menu</span>
+						<svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
+							<rect y="0" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="6" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+						</svg>
+					</button>
 				</nav>
+			</div>
+			<div class="nav-menu" id="nav-menu" hidden>
+				<div class="shell">
+					<a href="#approach">Approach</a>
+					<a href="#platform">Platform</a>
+					<a href="#ecosystem">Ecosystem</a>
+					<a href="#industries">Industries</a>
+					<a href="https://app.aegix.eu">Sign in</a>
+				</div>
 			</div>
 		</header>
 
@@ -1045,6 +1107,27 @@
 					remember('denied'); banner.hidden = true;
 				});
 			}
+		})();
+
+		// Mobile disclosure. Closing on link click matters because every entry
+		// but "Sign in" is an in-page anchor: without it the panel would stay
+		// open over the section it just jumped to.
+		(function () {
+			var toggle = document.getElementById('nav-toggle');
+			var menu = document.getElementById('nav-menu');
+			if (!toggle || !menu) return;
+			function set(open) {
+				menu.hidden = !open;
+				toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			}
+			toggle.addEventListener('click', function () { set(menu.hidden); });
+			menu.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape' && !menu.hidden) { set(false); toggle.focus(); }
+			});
+			window.addEventListener('resize', function () {
+				if (window.innerWidth > 960 && !menu.hidden) set(false);
+			});
 		})();
 	</script>
 </body>

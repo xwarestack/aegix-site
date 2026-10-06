@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# The holding page at / carries its own noindex until /home replaces it.
+Sitemap: https://aegix.eu/sitemap.xml
