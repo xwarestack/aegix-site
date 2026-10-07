@@ -1044,10 +1044,10 @@
 		</footer>
 	
 		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
-			<p>We use analytics to understand how this page is used.</p>
+			<p>We use analytics to understand how this page is used. You can opt out.</p>
 			<div class="consent-actions">
-				<button type="button" id="consent-decline">Decline</button>
-				<button type="button" id="consent-accept">Accept</button>
+				<button type="button" id="consent-decline">Opt out</button>
+				<button type="button" id="consent-accept">OK</button>
 			</div>
 		</div>
 
@@ -1177,15 +1177,29 @@
 			}
 			function remember(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
-			if (stored === 'granted') {
+			// Opt-out, by the site owner's decision: analytics run on arrival and
+			// stop only if the visitor opts out. "denied" is the one state that
+			// prevents loading, and it persists across visits.
+			function stop() {
+				// Clarity's own revocation call. It cannot unload the script that
+				// has already run, so the stored flag is what keeps it off next time.
+				try { if (window.clarity) window.clarity('consent', false); } catch (e) {}
+			}
+
+			if (stored !== 'denied') {
 				start();
-			} else if (stored !== 'denied') {
+			}
+
+			if (stored === null) {
+				// Shown once, to tell the visitor it is already running and how to
+				// stop it. A returning visitor who has chosen either way never sees
+				// it again.
 				banner.hidden = false;
 				document.getElementById('consent-accept').addEventListener('click', function () {
-					remember('granted'); banner.hidden = true; start();
+					remember('granted'); banner.hidden = true;
 				});
 				document.getElementById('consent-decline').addEventListener('click', function () {
-					remember('denied'); banner.hidden = true;
+					remember('denied'); banner.hidden = true; stop();
 				});
 			}
 		})();
