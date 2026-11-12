@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Process FMEA software (PFMEA) | Aegix</title>
+		<meta name="description" content="Process FMEA on the AIAG & VDA method, built on your process flow: process steps by operation number, work elements by 4M, control plan characteristics, and gaps shown before the review." />
+		<link rel="canonical" href="https://aegix.eu/pfmea/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Aegix" />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:url" content="https://aegix.eu/pfmea/" />
+		<meta property="og:title" content="Process FMEA software (PFMEA) | Aegix" />
+		<meta property="og:description" content="Process FMEA on the AIAG & VDA method, built on your process flow: process steps by operation number, work elements by 4M, control plan characteristics, and gaps shown before the review." />
+		<meta property="og:image" content="https://aegix.eu/og.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Process FMEA software (PFMEA) | Aegix" />
+		<meta name="twitter:description" content="Process FMEA on the AIAG & VDA method, built on your process flow: process steps by operation number, work elements by 4M, control plan characteristics, and gaps shown before the review." />
+		<meta name="twitter:image" content="https://aegix.eu/og.png" />
+		<link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232F55E4'/%3E%3Crect x='14' y='7' width='4' height='18' rx='2' fill='white'/%3E%3C/svg%3E"
+		/>
+
+		<link rel="stylesheet" href="/site.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="shell bar">
+				<a class="brand" href="/">
+					<span class="mark" aria-hidden="true"></span>
+					<span>Aegix<small>FMEA Platform</small></span>
+				</a>
+				<nav>
+					<a class="hide-sm" href="/dfmea/">DFMEA</a>
+					<a class="hide-sm" href="/pfmea/" aria-current="page">PFMEA</a>
+					<a class="hide-sm" href="/#platform">How it works</a>
+					<a class="hide-sm" href="/#ecosystem">Integrations</a>
+					<a class="hide-sm" href="/#industries">Industries</a>
+					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
+					<a class="btn btn-primary" href="/#contact">Request a demo</a>
+					<button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+						<span class="sr-only">Menu</span>
+						<svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
+							<rect y="0" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="6" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+						</svg>
+					</button>
+				</nav>
+			</div>
+			<div class="nav-menu" id="nav-menu" hidden>
+				<div class="shell">
+					<a href="/dfmea/">DFMEA</a>
+					<a href="/pfmea/" aria-current="page">PFMEA</a>
+					<a href="/#platform">How it works</a>
+					<a href="/#ecosystem">Integrations</a>
+					<a href="/#industries">Industries</a>
+					<a href="https://app.aegix.eu">Sign in</a>
+				</div>
+			</div>
+		</header>
+
+		<!-- ── Hero ─────────────────────────────────── -->
+		<section class="hero">
+			<div class="shell">
+				<p class="eyebrow">Process FMEA</p>
+				<h1>Process FMEA built on your <em>process flow</em>.</h1>
+				<p class="sub">
+					Aegix structures the PFMEA as process item, process steps by operation
+					number and work elements, links each step to the characteristics it has
+					to hold, and shows where the analysis still has gaps.
+				</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="/#contact">Request a demo</a>
+					<a class="btn btn-ghost" href="/dfmea/">See Design FMEA</a>
+				</div>
+			</div>
+			<div class="shot" style="margin-top:56px">
+				<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="/shots/structure-pfmea.png" width="3520" height="1900" alt="The PFMEA structure of a coolant pump assembly line in Aegix. The tree holds the process item and its process steps, each carrying its operation number from Op 10 to Op 50. The inspector shows the selected process function with the two control plan characteristics it has to hold and the two failure modes found for it." />
+						</div>
+					</figure>
+				<p class="shot-cap">Process item, process steps by operation number, and the control plan characteristics the selected step has to hold.</p>
+			</div>
+		</section>
+
+		<!-- ── Steps ────────────────────────────────── -->
+		<section id="method" class="alt">
+			<div class="shell">
+				<p class="eyebrow">The method</p>
+				<h2>From the process flow to the failure chain, step by step.</h2>
+				<p class="lede">
+					Aegix follows the AIAG &amp; VDA steps for a process analysis. Each step
+					starts from what the previous one produced, so nothing is entered twice.
+				</p>
+				<div class="grid five">
+					<div class="card"><div class="num">1</div><h3>Structure</h3><p>Process item, process steps by operation number, and the work elements of each step.</p></div>
+					<div class="card"><div class="num">2</div><h3>Functions</h3><p>What each step and work element has to achieve, with the characteristics it has to hold.</p></div>
+					<div class="card"><div class="num">3</div><h3>Failures</h3><p>The failure mode at the step, its effect on the product and its cause at the work element.</p></div>
+					<div class="card"><div class="num">4</div><h3>Risk</h3><p>Severity, occurrence and detection, and the Action Priority they give.</p></div>
+					<div class="card"><div class="num">5</div><h3>Optimisation</h3><p>Prevention and detection actions with an owner and a due date, then the new ratings.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── 4M ───────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<p class="eyebrow">Work elements</p>
+				<h2>Every step, broken down by what can go wrong.</h2>
+				<p class="lede">
+					Each process step fans out to its work elements, tagged by the category
+					they are analysed under. A work element with no function or failure mode
+					stands out, so a gap shows before the review, not during it.
+				</p>
+				<div class="grid three">
+					<div class="feat"><h3>Man</h3><p>The operator and the skills the step depends on.</p></div>
+					<div class="feat"><h3>Machine</h3><p>Equipment, tools and fixtures.</p></div>
+					<div class="feat"><h3>Material</h3><p>Parts and materials entering the step.</p></div>
+					<div class="feat"><h3>Method</h3><p>The work instruction and the sequence.</p></div>
+					<div class="feat"><h3>Environment</h3><p>Conditions around the step, such as temperature and cleanliness.</p></div>
+					<div class="feat"><h3>Measurement</h3><p>Gauges and checks that confirm the result.</p></div>
+				</div>
+			</div>
+			<div class="shot" style="margin-top:48px">
+				<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure / diagram</span>
+						</div>
+						<div class="frame-body">
+							<img src="/shots/structure-diagram.png" width="2000" height="1525" loading="lazy" alt="The same process structure drawn as a flow. The process item on the left feeds five process steps by operation number, and each step fans out to its work elements, every one tagged with the category it is analysed under: man, machine, material, method, environment or measurement. One work element is outlined in red and marked as a gap, having no function and no failure mode against it." />
+						</div>
+					</figure>
+				<p class="shot-cap">The process structure as a diagram. The work element outlined in red has no function and no failure mode against it yet.</p>
+			</div>
+		</section>
+
+		<!-- ── Control plan ─────────────────────────── -->
+		<section class="alt">
+			<div class="shell split">
+				<div>
+					<p class="eyebrow">Control plan</p>
+					<h2>The characteristics each step has to hold, in the analysis.</h2>
+					<p class="lede">
+						Product and process characteristics sit on the process function that has
+						to hold them, so a failure mode is analysed against the characteristic
+						it puts at risk.
+					</p>
+					<p class="kicker">The PFMEA and the control plan describe the same line.</p>
+				</div>
+				<div class="spine">
+					<div class="sp"><div class="sp-k">Process step</div><div class="sp-v">Op 10, press the impeller onto the shaft.</div></div>
+					<div class="sp"><div class="sp-k">Function</div><div class="sp-v">Seat the impeller at the specified depth.</div></div>
+					<div class="sp"><div class="sp-k">Characteristic</div><div class="sp-v">Press-in depth within tolerance.</div></div>
+					<div class="sp"><div class="sp-k">Failure mode</div><div class="sp-v">Impeller not fully seated.</div></div>
+					<div class="sp"><div class="sp-k">Cause</div><div class="sp-v">Press force set too low.</div></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── AI ───────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<p class="eyebrow">Human in the loop</p>
+				<h2>AI drafts the process analysis. Your engineers own it.</h2>
+				<p class="lede">
+					From your process documents, AI agents draft the functions and the
+					failure modes. Each draft waits for an engineer to
+					accept, change or reject it.
+				</p>
+				<div class="pipeline">
+					<span class="pill">Process documents</span><span class="sep">&rarr;</span>
+					<span class="pill">AI drafts</span><span class="sep">&rarr;</span>
+					<span class="pill">Engineer reviews</span><span class="sep">&rarr;</span>
+					<span class="pill pill-end">Part of the PFMEA</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── CTA ──────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<div class="cta">
+					<h2>See it on an FMEA like yours.</h2>
+					<p class="lede">
+						A guided walkthrough with our engineers, on a sample project. Ask a
+						question first if you prefer.
+					</p>
+					<div class="actions">
+						<a class="btn btn-primary" href="/#contact">Request a demo</a>
+						<a class="btn btn-ghost" href="/dfmea/">See Design FMEA</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section class="credits">
+			<div class="shell">
+				<p>
+					Aegix is a product of XWARE, developed with a grant from Innoviris.
+					XWARE is a partner of hub.brussels.
+				</p>
+				<div class="credits-logos">
+					<a href="https://xware-engineering.com" target="_blank" rel="noopener noreferrer">
+						<img class="l-xware" src="/logos/xware.jpg" width="981" height="196" alt="XWARE" />
+					</a>
+					<a href="https://innoviris.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-innoviris" src="/logos/innoviris.png" width="616" height="233" alt="Funded by innoviris.brussels" />
+					</a>
+					<a href="https://software.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-software" src="/logos/software-brussels.png" width="768" height="161" alt="hub.brussels" />
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div class="shell foot">
+				<span>&copy; 2026 XWARE</span>
+				<span class="foot-links">
+					<a href="https://app.aegix.eu">Sign in</a>
+					<a href="mailto:hello@aegix.eu">hello@aegix.eu</a>
+				</span>
+			</div>
+		</footer>
+	
+		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
+			<p>We use analytics to understand how this page is used. You can opt out.</p>
+			<div class="consent-actions">
+				<button type="button" id="consent-decline">Opt out</button>
+				<button type="button" id="consent-accept">OK</button>
+			</div>
+		</div>
+
+
+
+	<script src="/site.js"></script>
+</body>
+</html>

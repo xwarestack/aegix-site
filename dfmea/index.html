@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Design FMEA software (DFMEA) | Aegix</title>
+		<meta name="description" content="Design FMEA on the AIAG & VDA method, built from your requirements and architecture. AI drafts functions and failure modes, engineers approve, and every failure mode stays linked to its requirement." />
+		<link rel="canonical" href="https://aegix.eu/dfmea/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Aegix" />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:url" content="https://aegix.eu/dfmea/" />
+		<meta property="og:title" content="Design FMEA software (DFMEA) | Aegix" />
+		<meta property="og:description" content="Design FMEA on the AIAG & VDA method, built from your requirements and architecture. AI drafts functions and failure modes, engineers approve, and every failure mode stays linked to its requirement." />
+		<meta property="og:image" content="https://aegix.eu/og.png" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Design FMEA software (DFMEA) | Aegix" />
+		<meta name="twitter:description" content="Design FMEA on the AIAG & VDA method, built from your requirements and architecture. AI drafts functions and failure modes, engineers approve, and every failure mode stays linked to its requirement." />
+		<meta name="twitter:image" content="https://aegix.eu/og.png" />
+		<link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232F55E4'/%3E%3Crect x='14' y='7' width='4' height='18' rx='2' fill='white'/%3E%3C/svg%3E"
+		/>
+
+		<link rel="stylesheet" href="/site.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="shell bar">
+				<a class="brand" href="/">
+					<span class="mark" aria-hidden="true"></span>
+					<span>Aegix<small>FMEA Platform</small></span>
+				</a>
+				<nav>
+					<a class="hide-sm" href="/dfmea/" aria-current="page">DFMEA</a>
+					<a class="hide-sm" href="/pfmea/">PFMEA</a>
+					<a class="hide-sm" href="/#platform">How it works</a>
+					<a class="hide-sm" href="/#ecosystem">Integrations</a>
+					<a class="hide-sm" href="/#industries">Industries</a>
+					<a class="hide-sm" href="https://app.aegix.eu">Sign in</a>
+					<a class="btn btn-primary" href="/#contact">Request a demo</a>
+					<button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+						<span class="sr-only">Menu</span>
+						<svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true" focusable="false">
+							<rect y="0" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="6" width="18" height="2" rx="1" fill="currentColor"/>
+							<rect y="12" width="18" height="2" rx="1" fill="currentColor"/>
+						</svg>
+					</button>
+				</nav>
+			</div>
+			<div class="nav-menu" id="nav-menu" hidden>
+				<div class="shell">
+					<a href="/dfmea/" aria-current="page">DFMEA</a>
+					<a href="/pfmea/">PFMEA</a>
+					<a href="/#platform">How it works</a>
+					<a href="/#ecosystem">Integrations</a>
+					<a href="/#industries">Industries</a>
+					<a href="https://app.aegix.eu">Sign in</a>
+				</div>
+			</div>
+		</header>
+
+		<!-- ── Hero ─────────────────────────────────── -->
+		<section class="hero">
+			<div class="shell">
+				<p class="eyebrow">Design FMEA</p>
+				<h1>Design FMEA that starts from your <em>requirements</em>.</h1>
+				<p class="sub">
+					Aegix builds the DFMEA structure from the requirements and specifications
+					you already have, drafts functions and failure modes for your engineers
+					to review, and keeps every failure mode linked to the requirement it
+					threatens.
+				</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="/#contact">Request a demo</a>
+					<a class="btn btn-ghost" href="/pfmea/">See Process FMEA</a>
+				</div>
+			</div>
+			<div class="shot" style="margin-top:56px">
+				<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / dfmea-structure</span>
+						</div>
+						<div class="frame-body">
+							<img src="/shots/structure-dfmea.png" width="3520" height="2190" alt="The DFMEA structure of a thermal management system in Aegix. A tree on the left holds the system, its function, five subsystems and an interface, each with its artifact code. The inspector on the right shows the selected function: its description, the requirement it has to meet with the Polarion item that requirement came from, and the six failure modes found for it." />
+						</div>
+					</figure>
+				<p class="shot-cap">The system, its subsystems and an interface, with the requirement and the failure modes on the selected function.</p>
+			</div>
+		</section>
+
+		<!-- ── Steps ────────────────────────────────── -->
+		<section id="method" class="alt">
+			<div class="shell">
+				<p class="eyebrow">The method</p>
+				<h2>From the architecture to the failure chain, step by step.</h2>
+				<p class="lede">
+					Aegix follows the AIAG &amp; VDA steps for a design analysis. Each step
+					starts from what the previous one produced, so nothing is entered twice.
+				</p>
+				<div class="grid five">
+					<div class="card"><div class="num">1</div><h3>Structure</h3><p>System, subsystems, components and the interfaces between them.</p></div>
+					<div class="card"><div class="num">2</div><h3>Functions</h3><p>What each element has to do, with the requirement it has to meet.</p></div>
+					<div class="card"><div class="num">3</div><h3>Failures</h3><p>The failure mode of the focus element, its effect one level up and its cause one level down.</p></div>
+					<div class="card"><div class="num">4</div><h3>Risk</h3><p>Severity, occurrence and detection, and the Action Priority they give.</p></div>
+					<div class="card"><div class="num">5</div><h3>Optimisation</h3><p>Prevention and detection actions with an owner and a due date, then the new ratings.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Requirements ─────────────────────────── -->
+		<section>
+			<div class="shell split">
+				<div>
+					<p class="eyebrow">Requirements</p>
+					<h2>Every failure mode knows which requirement it threatens.</h2>
+					<p class="lede">
+						Requirements come from your ALM, such as Codebeamer or Polarion, and keep
+						their id. Each function carries the requirement it meets, so a failure
+						mode points back to it, and forward to the verification that covers it.
+					</p>
+					<p class="kicker">When a requirement changes, you can see which part of the DFMEA depends on it.</p>
+				</div>
+				<div class="spine">
+					<div class="sp"><div class="sp-k">Requirement</div><div class="sp-v">Coolant outlet temperature stays below 95 °C at the continuous duty point.</div></div>
+					<div class="sp"><div class="sp-k">Function</div><div class="sp-v">Keep the powertrain within its thermal operating window.</div></div>
+					<div class="sp"><div class="sp-k">Failure mode</div><div class="sp-v">Coolant outlet temperature exceeds the limit.</div></div>
+					<div class="sp"><div class="sp-k">Cause</div><div class="sp-v">Temperature sensing failure.</div></div>
+					<div class="sp"><div class="sp-k">Verification</div><div class="sp-v">The test that covers the requirement.</div></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── Worksheet ────────────────────────────── -->
+		<section class="alt">
+			<div class="shell">
+				<p class="eyebrow">The worksheet</p>
+				<h2>The AIAG &amp; VDA form, with nothing to copy across.</h2>
+				<p class="lede">
+					Next higher level, focus element and next lower level, their functions,
+					then effect, failure mode and cause, the ratings, the Action Priority and
+					the actions. The worksheet is filled from the structure, not typed twice.
+				</p>
+			</div>
+			<div class="shot pan" style="margin-top:44px">
+				<figure class="frame" style="margin:0">
+						<div class="frame-bar">
+							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+							<span class="frame-path">app.aegix.eu / worksheet</span>
+						</div>
+						<div class="frame-body" tabindex="0" role="region" aria-label="worksheet">
+							<img src="/shots/view-all.png" width="2700" height="625" loading="lazy" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
+						</div>
+					</figure>
+				<p class="pan-hint">Scroll sideways to see the whole worksheet.</p>
+			</div>
+		</section>
+
+		<!-- ── AI ───────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<p class="eyebrow">Human in the loop</p>
+				<h2>AI drafts the design analysis. Your engineers own it.</h2>
+				<p class="lede">
+					From your specifications and architecture documents, AI agents draft the
+					structure, the functions and the failure modes. Each draft waits for an
+					engineer to accept, change or reject it.
+				</p>
+				<div class="pipeline">
+					<span class="pill">Specifications</span><span class="sep">&rarr;</span>
+					<span class="pill">AI drafts</span><span class="sep">&rarr;</span>
+					<span class="pill">Engineer reviews</span><span class="sep">&rarr;</span>
+					<span class="pill pill-end">Part of the DFMEA</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- ── CTA ──────────────────────────────────── -->
+		<section>
+			<div class="shell">
+				<div class="cta">
+					<h2>See it on an FMEA like yours.</h2>
+					<p class="lede">
+						A guided walkthrough with our engineers, on a sample project. Ask a
+						question first if you prefer.
+					</p>
+					<div class="actions">
+						<a class="btn btn-primary" href="/#contact">Request a demo</a>
+						<a class="btn btn-ghost" href="/pfmea/">See Process FMEA</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		<section class="credits">
+			<div class="shell">
+				<p>
+					Aegix is a product of XWARE, developed with a grant from Innoviris.
+					XWARE is a partner of hub.brussels.
+				</p>
+				<div class="credits-logos">
+					<a href="https://xware-engineering.com" target="_blank" rel="noopener noreferrer">
+						<img class="l-xware" src="/logos/xware.jpg" width="981" height="196" alt="XWARE" />
+					</a>
+					<a href="https://innoviris.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-innoviris" src="/logos/innoviris.png" width="616" height="233" alt="Funded by innoviris.brussels" />
+					</a>
+					<a href="https://software.brussels" target="_blank" rel="noopener noreferrer">
+						<img class="l-software" src="/logos/software-brussels.png" width="768" height="161" alt="hub.brussels" />
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div class="shell foot">
+				<span>&copy; 2026 XWARE</span>
+				<span class="foot-links">
+					<a href="https://app.aegix.eu">Sign in</a>
+					<a href="mailto:hello@aegix.eu">hello@aegix.eu</a>
+				</span>
+			</div>
+		</footer>
+	
+		<div class="consent" id="consent" role="region" aria-label="Cookie notice" hidden>
+			<p>We use analytics to understand how this page is used. You can opt out.</p>
+			<div class="consent-actions">
+				<button type="button" id="consent-decline">Opt out</button>
+				<button type="button" id="consent-accept">OK</button>
+			</div>
+		</div>
+
+
+
+	<script src="/site.js"></script>
+</body>
+</html>

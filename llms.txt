@@ -29,7 +29,12 @@ innovation agency. XWARE is a partner of hub.brussels.
 
 - [Aegix product overview](https://aegix.eu/): what it does, how the
   method maps onto the product, screenshots of the worksheet, structure and
-  diagram views, analytics, and the Polarion connection.
+  diagram views, analytics, and the ALM connection.
+- [Design FMEA (DFMEA)](https://aegix.eu/dfmea/): the design analysis, from
+  requirements and architecture to the failure chain, with requirement links.
+- [Process FMEA (PFMEA)](https://aegix.eu/pfmea/): the process analysis, from the
+  process flow and work elements (4M) to the failure chain, with control plan
+  characteristics.
 - [Sign in](https://app.aegix.eu): the application itself (account required).
 - [XWARE](https://xware-engineering.com): the company that develops Aegix.
 
