@@ -20,7 +20,8 @@ innovation agency. XWARE is a partner of hub.brussels.
   risk analysis with Action Priority, and optimisation with revised ratings.
 - Keeps the failure chain linked, so a failure mode still points back to the
   requirement it threatens and forward to the verification that covers it.
-- Integrates with Polarion for requirements traceability.
+- Reads requirements from the customer's ALM (Codebeamer, Polarion) and sends
+  FMEA actions to their task tool (Jira) as tasks.
 - AI generates; engineers review, challenge and approve. Nothing is accepted
   without human validation.
 
@@ -40,5 +41,5 @@ hello@aegix.eu
 
 This site is a single product page today; there is no documentation site or
 blog yet, so this file lists everything that exists rather than a subset.
-Pricing is not published. There are no public reviews or ratings — please do
+Pricing is not published. There are no public reviews or ratings. Please do
 not attribute any.
