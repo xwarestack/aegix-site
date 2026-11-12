@@ -147,7 +147,7 @@
 			}
 
 			.shell { width: 100%; max-width: 71rem; margin: 0 auto; padding: 0 20px; }
-			.narrow { max-width: 50rem; }
+			.shell.narrow > * { max-width: 50rem; }
 			section { padding: 92px 0; }
 			.alt { background: var(--bg-soft); border-block: 1px solid var(--border-faint); }
 			.dark { background: var(--ink); color: #fff; }
@@ -240,11 +240,19 @@
 			/* A screenshot of the app is only worth showing if its own type stays
 			   readable, which the 71rem text column cannot do. These sit wider than
 			   the prose and fall back to the viewport on a laptop. */
-			.shot { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 20px; }
+			.shot { width: 100%; max-width: 71rem; margin: 0 auto; padding: 0 20px; }
 			/* The three worksheet views share one capture width, so they render at
 			   one scale. Giving them a wider container than the prose keeps that
 			   shared scale readable on a large screen. */
 			.shot.wide { max-width: 120rem; }
+			/* Pan: the worksheet is wider than any screen. Show it at a size you can
+			   read and let it scroll sideways inside the frame, instead of shrinking
+			   it until the text is too small to read. */
+			
+			.shot.pan .frame-body { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+			.shot.pan .frame-body:focus-visible { outline: 2px solid var(--brand); outline-offset: -2px; }
+			.shot.pan .frame-body img { width: 1900px; max-width: none; }
+			.pan-hint { margin: 10px auto 0; text-align: center; font-size: var(--t-sm, 13px); color: var(--subtle-fg); }
 			.shot-cap { margin: 14px auto 0; max-width: 64ch; text-align: center; font-size: var(--t-md); color: var(--subtle-fg); }
 			.shot-cap b { color: var(--muted-fg); font-weight: 600; }
 
@@ -270,9 +278,9 @@
 			   Below the breakpoint the frame keeps the image at a readable size and
 			   pans inside its own box, so the page itself never scrolls sideways. */
 			@media (max-width: 60rem) {
-				.shot { padding: 0 16px; }
 				.frame-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 				.frame-body img { width: 860px; max-width: none; }
+				.shot.pan .frame-body img { width: 1200px; }
 			}
 
 			/* ── Flow (SVG) ───────────────────────────── */
@@ -429,7 +437,7 @@
 			   gutter and the button padding buys that back without dropping anything
 			   out of the bar. */
 			@media (max-width: 22.5rem) {
-				.shell { padding: 0 14px; }
+				.shell, .shot { padding: 0 14px; }
 				nav { gap: 8px; }
 				.btn { padding: 0 12px; }
 			}
@@ -496,11 +504,11 @@
 				</div>
 			</div>
 
-			<div class="shot wide" style="margin-top:56px">
+			<div class="shot pan" style="margin-top:56px">
 				<div class="views" role="tablist" aria-label="Worksheet views">
 					<button type="button" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true" tabindex="0">All</button>
-					<button type="button" role="tab" id="tab-structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1">Structure &amp; Failure</button>
-					<button type="button" role="tab" id="tab-ratings" aria-controls="panel-ratings" aria-selected="false" tabindex="-1">Ratings &amp; Actions</button>
+					<button type="button" role="tab" id="tab-structure" aria-controls="panel-structure" aria-selected="false" tabindex="-1">Structure &amp; failure</button>
+					<button type="button" role="tab" id="tab-ratings" aria-controls="panel-ratings" aria-selected="false" tabindex="-1">Ratings &amp; actions</button>
 				</div>
 				<div class="view-panel" id="panel-all" role="tabpanel" aria-labelledby="tab-all">
 					<figure class="frame" style="margin:0">
@@ -508,7 +516,7 @@
 							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
 							<span class="frame-path">app.aegix.eu / worksheet</span>
 						</div>
-						<div class="frame-body">
+						<div class="frame-body" tabindex="0" role="region" aria-label="Worksheet, all columns">
 							<img src="shots/view-all.png" width="2700" height="625" alt="A complete AIAG-VDA DFMEA worksheet in Aegix, with every column group side by side: structure analysis, function analysis, failure analysis, the severity, occurrence and detection ratings with the action priority they produce, and optimisation with the linked actions and re-rated values." />
 						</div>
 					</figure>
@@ -517,9 +525,9 @@
 					<figure class="frame" style="margin:0">
 						<div class="frame-bar">
 							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-							<span class="frame-path">app.aegix.eu / worksheet · structure &amp; failure</span>
+							<span class="frame-path">app.aegix.eu / worksheet / structure &amp; failure</span>
 						</div>
-						<div class="frame-body">
+						<div class="frame-body" tabindex="0" role="region" aria-label="Worksheet, structure and failure">
 							<img src="shots/view-structure.png" width="2700" height="615" loading="lazy" alt="The same worksheet narrowed to structure and failure: the next higher element, the focus element and the next lower element, each of their functions, and then the failure effect, failure mode and failure cause." />
 						</div>
 					</figure>
@@ -528,13 +536,14 @@
 					<figure class="frame" style="margin:0">
 						<div class="frame-bar">
 							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-							<span class="frame-path">app.aegix.eu / worksheet · ratings &amp; actions</span>
+							<span class="frame-path">app.aegix.eu / worksheet / ratings &amp; actions</span>
 						</div>
-						<div class="frame-body">
+						<div class="frame-body" tabindex="0" role="region" aria-label="Worksheet, ratings and actions">
 							<img src="shots/view-ratings.png" width="2700" height="1670" loading="lazy" alt="The same worksheet in its ratings view. Each row collapses the chain into one identification cell — the next higher element, the focus element, its function, then the failure effect, failure mode and failure cause, each tagged on its own line — leaving the ratings, the action priority, the linked actions and the re-rated values beside it." />
 						</div>
 					</figure>
 				</div>
+				<p class="pan-hint">Scroll sideways to see the whole worksheet.</p>
 			</div>
 		</section>
 
@@ -548,6 +557,14 @@
 					previous FMEAs, test documentation and ALM systems. Engineers then spend hours
 					finding it, interpreting it and transferring it into another structure.
 				</p>
+				<div class="grid three">
+					<div class="feat"><h3>Effort</h3><p>Gathering information, building the analysis and keeping the FMEA maintained take significant engineering time.</p></div>
+					<div class="feat"><h3>Scarce expertise</h3><p>Critical knowledge rests with experienced engineers whose time is limited.</p></div>
+					<div class="feat"><h3>Keeping it current</h3><p>Designs and processes keep changing, and the analysis has to follow them.</p></div>
+					<div class="feat"><h3>Consistency</h3><p>Different methods, terms and disconnected teams make analyses hard to compare.</p></div>
+					<div class="feat"><h3>Scattered information</h3><p>Requirements, drawings and process information sit across documents and tools.</p></div>
+					<div class="feat"><h3>Lost lessons</h3><p>Previous FMEAs and lessons learned are hard to find and apply to the next project.</p></div>
+				</div>
 
 				<div class="flow-wrap">
 					<svg class="flow-svg" viewBox="0 0 980 300" role="img" aria-label="Engineering sources flow into Aegix and come out as FMEA structure">
@@ -566,7 +583,7 @@
 						<path class="line" d="M248 224 C 300 224, 320 136, 372 136"/>
 						<rect x="372" y="104" width="196" height="64" rx="12" fill="#0052cc"/>
 						<text class="hubtxt" x="470" y="134" text-anchor="middle">Aegix</text>
-						<text x="470" y="152" text-anchor="middle" font="500 11px Inter, sans-serif" fill="#bcd4fb" style="font:500 11px Inter,sans-serif">extract &middot; structure &middot; relate</text>
+						<text x="470" y="152" text-anchor="middle" font="500 11px Inter, sans-serif" fill="#bcd4fb" style="font:500 11px Inter,sans-serif">extract, structure, relate</text>
 						<path class="line" d="M568 136 C 620 136, 640 48, 692 48"/>
 						<path class="line" d="M568 136 C 620 136, 644 92, 692 92"/>
 						<path class="line" d="M568 136 H 692"/>
@@ -681,7 +698,7 @@
 					<figure class="frame" style="margin:0">
 						<div class="frame-bar">
 							<span class="frame-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-							<span class="frame-path">app.aegix.eu / pfmea-structure · diagram</span>
+							<span class="frame-path">app.aegix.eu / pfmea-structure / diagram</span>
 						</div>
 						<div class="frame-body">
 							<img src="shots/structure-diagram.png" width="2000" height="1525" loading="lazy"
@@ -695,13 +712,18 @@
 
 		<!-- ── Risk, seen ─────────────────────── -->
 		<section class="alt">
-			<div class="shell narrow" style="text-align:center">
+			<div class="shell narrow">
 				<p class="eyebrow">Seeing the whole programme</p>
 				<h2>Risk across the whole programme, on one screen.</h2>
-				<p class="lede" style="margin-left:auto;margin-right:auto">
+				<p class="lede">
 					Action Priority distribution, High AP coverage, overdue actions and the
 					risk profile — per worksheet, per project, or across the programme, with
 					the analysis one click away from the number.
+				</p>
+				<p class="lede">
+					High-priority risks that still have no action stand out. Every action has
+					an owner, a priority, a due date and a status, and stays linked to the
+					risk it answers.
 				</p>
 			</div>
 
@@ -723,15 +745,16 @@
 		<!-- ── Technology ───────────────────────────── -->
 		<section>
 			<div class="shell">
-				<p class="eyebrow">Technology</p>
-				<h2>An engineering model underneath the AI.</h2>
+				<p class="eyebrow">What Aegix does</p>
+				<h2>Less effort. More confidence.</h2>
+				<p class="lede">An engineering model underneath the AI, and an engineer in charge of every step.</p>
 				<div class="grid three">
-					<div class="feat"><h3>Knowledge extraction</h3><p>AI processes requirements, specifications, FMEAs and engineering documentation to identify relevant concepts and relationships.</p></div>
-					<div class="feat"><h3>Structured representation</h3><p>Information becomes a connected model that can support FMEA and risk analysis, rather than remaining unstructured text.</p></div>
-					<div class="feat"><h3>AI-assisted reasoning</h3><p>AI operates inside engineering context, generating suggestions and relationships for engineers to review.</p></div>
-					<div class="feat"><h3>Traceability</h3><p>Suggestions stay connected to the engineering information they came from.</p></div>
-					<div class="feat"><h3>Human-in-the-loop validation</h3><p>Engineers remain responsible for reviewing and approving the resulting analysis.</p></div>
-					<div class="feat"><h3>Where it runs</h3><p>Aegix runs in our cloud, or on your own infrastructure if your engineering data cannot leave it.</p></div>
+					<div class="feat"><h3>Drafts from your data</h3><p>AI agents draft the structure, functions, failure modes and worksheet rows from your requirements, specifications and documents.</p></div>
+					<div class="feat"><h3>Engineers decide</h3><p>Every suggestion waits for an engineer to review, change or accept it. Nothing enters the analysis on its own.</p></div>
+					<div class="feat"><h3>One connected model</h3><p>Product structure, functions, requirements and failures live in one model, rather than in unstructured text.</p></div>
+					<div class="feat"><h3>Information in one place</h3><p>Specifications, requirements, drawings, control plans and existing FMEAs all become inputs to the same analysis.</p></div>
+					<div class="feat"><h3>One method for every team</h3><p>Every team follows the same steps on the same AIAG &amp; VDA template, with Action Priority worked out the same way.</p></div>
+					<div class="feat"><h3>Where it runs</h3><p>Aegix runs on Microsoft Azure in the EU, with each company&rsquo;s data kept apart from every other company&rsquo;s. It can also run in your company&rsquo;s own Azure tenant, so your engineering data stays inside it.</p></div>
 				</div>
 				<div class="pipeline">
 					<span class="pill">Engineering data</span><span class="sep">&rarr;</span>
@@ -847,7 +870,7 @@
 
 						<rect x="372" y="76" width="196" height="64" rx="12" fill="#0052cc"/>
 						<text class="hubtxt" x="470" y="106" text-anchor="middle">Aegix</text>
-						<text x="470" y="124" text-anchor="middle" style="font:500 11px Inter,sans-serif" fill="#bcd4fb">relate &middot; suggest &middot; cite</text>
+						<text x="470" y="124" text-anchor="middle" style="font:500 11px Inter,sans-serif" fill="#bcd4fb">relate and suggest</text>
 
 						<path class="line" d="M568 108 C 620 108, 642 48, 692 48"/>
 						<path class="line" d="M568 108 C 620 108, 650 92, 692 92"/>
@@ -981,7 +1004,8 @@
 					<h2>Start a conversation.</h2>
 					<p class="lede">
 						Ask a question, arrange a demo, or tell us what you would want to try
-						Aegix on.
+						Aegix on. A demo is a guided walkthrough with our engineers, on a
+						sample project.
 					</p>
 					<form class="form" id="demo-form" novalidate>
 						<!-- Honeypot: a bot fills this, a person never sees it and a copy never catches it. -->
