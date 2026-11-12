@@ -342,3 +342,22 @@ footer { border-top: 1px solid var(--border-faint); padding: 34px 0; font-size: 
 
 /* The page you are on, in the menu. */
 nav a[aria-current="page"], .nav-menu a[aria-current="page"] { color: var(--brand); }
+
+/* Footer Cookies button, styled as the links beside it. */
+.foot-cookies { font: inherit; color: var(--muted-fg); background: none; border: 0; padding: 0; cursor: pointer; }
+.foot-cookies:hover { color: var(--fg); }
+.consent a { color: #fff; }
+
+/* Legal pages: one readable column. */
+.legal { padding-top: 64px; }
+.legal h1 { font-size: var(--t-h2); line-height: 1.14; }
+.legal .draft { margin-top: 16px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-soft); font-size: var(--t-md); color: var(--muted-fg); max-width: 70ch; }
+.legal h2 { margin-top: 40px; font-size: var(--t-h3); }
+.legal p, .legal li { margin-top: 12px; max-width: 70ch; font-size: var(--t-lg); line-height: 1.7; color: var(--muted-fg); }
+.legal ul { padding-left: 20px; margin: 0; }
+.legal .back { display: inline-block; margin-top: 44px; font-weight: 600; text-decoration: none; }
+
+/* FAQ: question and answer pairs, two columns on wide screens. */
+.faq { margin-top: 36px; display: grid; gap: 28px 48px; }
+@media (min-width: 60rem) { .faq { grid-template-columns: 1fr 1fr; } }
+.faq-item p { margin-top: 8px; font-size: var(--t-lg); line-height: 1.6; color: var(--muted-fg); }

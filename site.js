@@ -98,17 +98,20 @@
 		});
 	})();
 
-	// Analytics, carried over from the holding page. Nothing is injected until
-	// Accept: no cookie, no request, nothing recorded. A tag loaded "paused"
-	// still calls home, which is why the tag itself waits.
+	// Analytics, opt-in as on finix.xware.be: nothing is loaded until the
+	// visitor accepts. No cookie, no request, nothing recorded before that.
+	// The Cookies button in the footer reopens the bar to change the choice.
 	(function () {
 		var KEY = 'aegix-analytics-consent';
 		var banner = document.getElementById('consent');
 		if (!banner) return;
 		var stored = null;
 		try { stored = localStorage.getItem(KEY); } catch (e) {}
+		var started = false;
 
 		function start() {
+			if (started) return;
+			started = true;
 			(function (c, l, a, r, i, t, y) {
 				c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
 				t = l.createElement(r); t.async = 1;
@@ -118,32 +121,28 @@
 			})(window, document, 'clarity', 'script', 'yt1vdwre6g');
 		}
 		function remember(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-
-		// Opt-out, by the site owner's decision: analytics run on arrival and
-		// stop only if the visitor opts out. "denied" is the one state that
-		// prevents loading, and it persists across visits.
 		function stop() {
-			// Clarity's own revocation call. It cannot unload the script that
-			// has already run, so the stored flag is what keeps it off next time.
+			// Clarity's own revocation call, then its two cookies go. The script
+			// that already ran stays until the page is left; the stored choice
+			// keeps it from loading again.
 			try { if (window.clarity) window.clarity('consent', false); } catch (e) {}
-		}
-
-		if (stored !== 'denied') {
-			start();
-		}
-
-		if (stored === null) {
-			// Shown once, to tell the visitor it is already running and how to
-			// stop it. A returning visitor who has chosen either way never sees
-			// it again.
-			banner.hidden = false;
-			document.getElementById('consent-accept').addEventListener('click', function () {
-				remember('granted'); banner.hidden = true;
-			});
-			document.getElementById('consent-decline').addEventListener('click', function () {
-				remember('denied'); banner.hidden = true; stop();
+			['_clck', '_clsk'].forEach(function (name) {
+				document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname.replace(/^www\./, '.');
+				document.cookie = name + '=; Max-Age=0; path=/';
 			});
 		}
+
+		if (stored === 'granted') start();
+		if (stored === null) banner.hidden = false;
+
+		document.getElementById('consent-accept').addEventListener('click', function () {
+			remember('granted'); banner.hidden = true; start();
+		});
+		document.getElementById('consent-decline').addEventListener('click', function () {
+			remember('denied'); banner.hidden = true; stop();
+		});
+		var settings = document.getElementById('cookie-settings');
+		if (settings) settings.addEventListener('click', function () { banner.hidden = false; });
 	})();
 
 	// Mobile disclosure. Closing on link click matters because every entry
