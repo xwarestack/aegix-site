@@ -1,6 +1,6 @@
 # Aegix
 
-> FMEA software from XWARE. Aegix combines a central engineering model with AI
+> FMEA (failure mode and effects analysis) software from XWARE. Aegix combines a central engineering model with AI
 > agents to carry Design and Process FMEA (DFMEA and PFMEA) from specification
 > through to risk analysis and improvement actions, following the AIAG-VDA
 > seven-step method with Action Priority rating. Engineers review and validate
